@@ -4,6 +4,13 @@ import { Router } from '@angular/router';
 import { VehiculePersonnel } from 'src/app/models/vehicule-personnel';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
+
+/**
+ * 
+ * Component de création d'un nouveau Véhicule Personnel
+ * (associé à un ou plusieurs collaborateurs)
+ * 
+ */
 @Component({
   selector: 'app-new-vehicule-personnel',
   templateUrl: './new-vehicule-personnel.component.html',
@@ -17,6 +24,10 @@ export class NewVehiculePersonnelComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder, private router:Router, private vehiculePersonnelService: VehiculePersonnelService) { }
 
+  /**
+   * Initialisation du formulaire avec les validateurs
+   * 
+   */
   ngOnInit(): void {
     this.vehiculePersonnelForm = this.formBuilder.group({
       immatriculation: [null, Validators.required],
@@ -27,6 +38,13 @@ export class NewVehiculePersonnelComponent implements OnInit{
     })
   }
 
+  /**
+   * Soumission du formulaire et appel du service pour le post
+   * du vehicule personnel en BDD. 
+   * Note: Le collaborateurId est fixé à 1 en attendant l'implémantation de la fonctionnalité
+   * de création d'un collaborateur
+   * 
+   */
   onSubmitForm(){
     this.vehiculePersonnelToCreate.immatriculation = this.vehiculePersonnelForm.value.immatriculation;
     this.vehiculePersonnelToCreate.marque = this.vehiculePersonnelForm.value.marque;
