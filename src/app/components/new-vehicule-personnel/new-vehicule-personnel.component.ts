@@ -1,9 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { VehiculePersonnel } from 'src/app/models/vehicule-personnel';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
+/**
+ * Validateur personnalisé permettant de renvoyer une erreur si
+ * la limite de places fixée par le propriétaire
+ * du véhicule est supérieure au nombre de places du véhicule
+ * 
+ * @param control 
+ * @returns ValidationsErros ou null 
+ */
+const limitePlacesValidator : ValidatorFn = (control: AbstractControl) : ValidationErrors | null => {
+    const places = control.get('places')?.value;
+    const limitePlaces = control.get('limitePlaces')?.value;
+    if (places !== null && limitePlaces !== null && places > limitePlaces){
+      return null
+    } else{
+      return {'invalidLimitePlaces' : true}
+    }
+}
 
 /**
  * 
@@ -30,12 +47,13 @@ export class NewVehiculePersonnelComponent implements OnInit{
    */
   ngOnInit(): void {
     this.vehiculePersonnelForm = this.formBuilder.group({
-      immatriculation: [null, Validators.required],
+      immatriculation: [null, [Validators.required, Validators.pattern('[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}')]],
       marque: [null, Validators.required],
       modele: [null, Validators.required],
       places: [null, Validators.required],
-      limitePlaces: [null, Validators.required],
-    })
+      limitePlaces: [null, Validators.required]
+    },
+    {validators: [limitePlacesValidator]})
   }
 
   /**
@@ -54,5 +72,9 @@ export class NewVehiculePersonnelComponent implements OnInit{
     this.vehiculePersonnelToCreate.collaborateursId = [1]
     this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).subscribe();
   }
+
+  
+
+
 
 }

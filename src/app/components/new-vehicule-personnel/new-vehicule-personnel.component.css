@@ -1,0 +1,7 @@
+input,label{
+    display: block;
+}
+
+.alert-message{
+    color: red
+}

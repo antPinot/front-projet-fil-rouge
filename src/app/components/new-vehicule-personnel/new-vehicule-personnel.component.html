@@ -1,23 +1,33 @@
-<form [formGroup]="vehiculePersonnelForm">
-    <div>
-        <label for="immatriculation">Immatriculation</label>
-        <input type="text" id="immatriculation" formControlName="immatriculation">
-    </div>
-    <div>
-        <label for="marque">Marque</label>
-        <input type="text" id="marque" formControlName="marque">
-    </div>
-    <div>
-        <label for="modele">Modèle</label>
-        <input type="text" id="modele" formControlName="modele">
-    </div>
-    <div>
-        <label for="places">Places</label>
-        <input type="text" id="places" formControlName="places">
-    </div>
-    <div>
-        <label for="limitePlaces">Limite de places</label>
-        <input type="text" id="limitePlaces" formControlName="limitePlaces">
-    </div>
-    <button type="submit" (click)="onSubmitForm()">Créer véhicule</button>
-</form>
+<div class="container">
+    <form [formGroup]="vehiculePersonnelForm" class="form-group">
+        <div>
+            <label for="immatriculation">Immatriculation</label>
+            <input type="text" id="immatriculation" formControlName="immatriculation">
+            <div *ngIf="vehiculePersonnelForm.get('immatriculation')?.hasError('pattern')" class="alert-message">Entrez une immatriculation au format AA-123-AA</div>
+            <div *ngIf="vehiculePersonnelForm.get('immatriculation')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="marque">Marque</label>
+            <input type="text" id="marque" formControlName="marque">
+            <div *ngIf="vehiculePersonnelForm.get('marque')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="modele">Modèle</label>
+            <input type="text" id="modele" formControlName="modele">
+            <div *ngIf="vehiculePersonnelForm.get('modele')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="places">Places</label>
+            <input type="text" id="places" formControlName="places">
+            <div *ngIf="vehiculePersonnelForm.get('places')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="limitePlaces">Limite de places</label>
+            <input type="text" id="limitePlaces" formControlName="limitePlaces">
+            <div *ngIf="vehiculePersonnelForm.get('limitePlaces')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+            <div *ngIf="vehiculePersonnelForm.errors?.['invalidLimitePlaces']" class="alert-message">Entrez une limite de places inférieure au nombre de places</div>
+        </div>
+        <button type="submit" (click)="onSubmitForm()" [disabled]="vehiculePersonnelForm.invalid">Créer véhicule</button>
+        
+    </form>
+</div>
