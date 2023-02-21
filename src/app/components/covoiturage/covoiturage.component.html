@@ -1,0 +1,100 @@
+<h2>formulaire creation covoiturage</h2>
+
+<div>
+
+    <form [formGroup]="covoiturageForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label>Date de départ</label>
+            <input type="date" formControlName="dateDepart">
+            <div *ngIf="covoiturageForm.get('dateDepart')?.invalid && covoiturageForm.get('dateDepart')?.touched"
+                class="error">
+                La date de départ est requise
+            </div>
+        </div>
+        <div>
+            <label>Places restantes</label>
+            <input type="number" formControlName="placesRestantes">
+            <div *ngIf="covoiturageForm.get('placesRestantes')?.invalid && covoiturageForm.get('placesRestantes')?.touched"
+                class="error">
+                Le nombre de places restantes est requis
+            </div>
+        </div>
+        <div>
+            <label>Nombre de personnes</label>
+            <input type="number" formControlName="nbPersonnes">
+            <div *ngIf="covoiturageForm.get('nbPersonnes')?.invalid && covoiturageForm.get('nbPersonnes')?.touched"
+                class="error">
+                Le nombre de personnes est requis
+            </div>
+        </div>
+        <div>
+            <label>Durée de trajet (en minutes)</label>
+            <input type="number" formControlName="dureeTrajet">
+            <div *ngIf="covoiturageForm.get('dureeTrajet')?.invalid && covoiturageForm.get('dureeTrajet')?.touched"
+                class="error">
+                La durée de trajet est requise
+            </div>
+        </div>
+        <div>
+            <label>Distance (en km)</label>
+            <input type="number" formControlName="distance">
+            <div *ngIf="covoiturageForm.get('distance')?.invalid && covoiturageForm.get('distance')?.touched"
+                class="error">
+                La distance est requise
+            </div>
+        </div>
+        <div>
+            <label>Organisateur</label>
+            <input type="number" formControlName="organisateur">
+            <div *ngIf="covoiturageForm.get('organisateur')?.invalid && covoiturageForm.get('organisateur')?.touched"
+                class="error">
+                L'organisateur est requis
+            </div>
+        </div>
+        <div>
+            <label>Véhicule personnel</label>
+            <input type="number" formControlName="vehiculePersonnel">
+            <div *ngIf="covoiturageForm.get('vehiculePersonnel')?.invalid && covoiturageForm.get('vehiculePersonnel')?.touched"
+                class="error">
+                Le véhicule personnel est requis
+            </div>
+        </div>
+        <div formGroupName="adresse">
+            <div>
+                <label>Voie</label>
+                <input type="text" formControlName="voie">
+                <div *ngIf="covoiturageForm.get('adresse.voie')?.invalid && covoiturageForm.get('adresse.voie')?.touched"
+                    class="error">
+                    La voie est requise
+                </div>
+            </div>
+            <div>
+                <label>Ville</label>
+                <input type="text" formControlName="ville">
+                <div *ngIf="covoiturageForm.get('adresse.ville')?.invalid && covoiturageForm.get('adresse.ville')?.touched"
+                    class="error">
+                    La ville est invalide
+                </div>
+            </div>
+            <div>
+                <label>Departement</label>
+                <input type="text" formControlName="departement">
+                <div *ngIf="covoiturageForm.get('adresse.departement')?.invalid && covoiturageForm.get('adresse.departement')?.touched"
+                    class="error">
+                    Le departement est invalide
+                </div>
+            </div>
+
+            <div>
+                <label>Pays</label>
+                <input type="text" formControlName="pays">
+                <div *ngIf="covoiturageForm.get('adresse.pays')?.invalid && covoiturageForm.get('adresse.pays')?.touched"
+                    class="error">
+                    Le pays est invalide
+                </div>
+            </div>
+            <button type="submit" [disabled]="covoiturageForm.valid">Submit</button>
+        </div>
+   </form>
+</div>
+
