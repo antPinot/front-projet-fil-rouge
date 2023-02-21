@@ -4,23 +4,23 @@
             Date de depart : {{reservationCovoiturage.dateDepart}}
         </div>
         <div class="col">
-            Places restantes : {{reservationCovoiturage.placesRestantes}}
+            Adresse de départ : {{reservationCovoiturage.adresseDepart?.numero}}  {{reservationCovoiturage.adresseDepart?.complementNumero}} {{reservationCovoiturage.adresseDepart?.voie}} {{reservationCovoiturage.adresseDepart?.ville}}
         </div>
         <div class="col">
-            nbPersonnes : {{reservationCovoiturage.nbPersonnes}}
+            Adresse d'arrivée : {{reservationCovoiturage.adresseArrivee?.numero}}  {{reservationCovoiturage.adresseArrivee?.complementNumero}} {{reservationCovoiturage.adresseArrivee?.voie}} {{reservationCovoiturage.adresseArrivee?.ville}}
         </div>
         <div class="col">
-            Durée du trajet : {{reservationCovoiturage.dureeTrajet}}
+            PlacesRestantes : {{reservationCovoiturage.placesRestantes}}
         </div>
-        <div class="col">
+<!--         <div class="col">
             Distance : {{reservationCovoiturage.distance}}
         </div>
-        <!--<div class="col">
+        <div class="col">
             <button (click)="onDelete(vehiculePersonnel.id)">Supprimer</button>
-        </div> -->
-        <div>
-            <button mat-button></button>
-            <button (click)="displayDetails(reservationCovoiturage)">Afficher les détails</button>
+        </div>  -->
+        <div class="col">
+            <button mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
         </div>
+        
     </div>
 </div>

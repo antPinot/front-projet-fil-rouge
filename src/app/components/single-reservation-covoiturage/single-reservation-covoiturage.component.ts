@@ -11,8 +11,10 @@ export class SingleReservationCovoiturageComponent {
   @Input()
   reservationCovoiturage!: Covoiturage
 
-  displayDetails(covoiturage:Covoiturage){
-    
+  detailsToDisplay: boolean = false;
+
+  displayDetails(){
+    this.detailsToDisplay = true;
   }
 
 }
