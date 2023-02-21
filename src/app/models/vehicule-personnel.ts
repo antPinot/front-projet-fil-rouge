@@ -4,6 +4,6 @@ export interface VehiculePersonnel {
     marque?: string,
     modele?: string,
     places?: number,
-    limitePlaces?: number,
+    limitePlace?: number,
     collaborateursId?: number[]
 }

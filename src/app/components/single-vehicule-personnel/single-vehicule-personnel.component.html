@@ -1,0 +1,22 @@
+<div *ngIf="vehiculePersonnel" class="container border border-dark rounded m-3 p-2">
+    <div class="row">
+        <div class="col">
+            Immatriculation : {{vehiculePersonnel.immatriculation}}
+        </div>
+        <div class="col">
+            Marque : {{vehiculePersonnel.marque}}
+        </div>
+        <div class="col">
+            Modèle : {{vehiculePersonnel.modele}}
+        </div>
+        <div class="col">
+            Places : {{vehiculePersonnel.places}}
+        </div>
+        <div class="col">
+            Limite de places : {{vehiculePersonnel.limitePlace}}
+        </div>
+        <div class="col">
+            <button (click)="onDelete(vehiculePersonnel.id)">Supprimer</button>
+        </div>
+    </div>
+</div>
