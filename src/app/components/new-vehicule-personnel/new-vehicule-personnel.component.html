@@ -27,7 +27,7 @@
             <div *ngIf="vehiculePersonnelForm.get('limitePlaces')?.hasError('required')" class="alert-message">Ce champ est requis</div>
             <div *ngIf="vehiculePersonnelForm.errors?.['invalidLimitePlaces']" class="alert-message">Entrez une limite de places inférieure au nombre de places</div>
         </div>
-        <button type="submit" (click)="onSubmitForm()" [disabled]="vehiculePersonnelForm.invalid">Créer véhicule</button>
-        
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()" [disabled]="vehiculePersonnelForm.invalid">Créer véhicule</button>
     </form>
+    <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de vos véhicules</button>
 </div>

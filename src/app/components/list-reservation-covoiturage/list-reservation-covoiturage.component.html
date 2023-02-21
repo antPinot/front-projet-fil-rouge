@@ -1,0 +1,7 @@
+<div>
+    <button (click)="enCours()">En Cours</button>
+</div>
+<div>
+    <button (click)="historique()">Historique</button>
+</div>
+<app-single-reservation-covoiturage *ngFor="let reservationCovoiturage of listReservationCovoiturage$ | async " [reservationCovoiturage]="reservationCovoiturage"></app-single-reservation-covoiturage>

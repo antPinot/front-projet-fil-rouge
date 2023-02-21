@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { VehiculePersonnel } from 'src/app/models/vehicule-personnel';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
@@ -70,7 +71,10 @@ export class NewVehiculePersonnelComponent implements OnInit{
     this.vehiculePersonnelToCreate.places = this.vehiculePersonnelForm.value.places;
     this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlaces;
     this.vehiculePersonnelToCreate.collaborateursId = [1]
-    this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).subscribe();
+    console.log(this.vehiculePersonnelToCreate)
+    this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).pipe(
+      tap((vehiculeCreated) => this.vehiculePersonnelService.vehiculePersonnelListByCollaborateurId$.value.push(vehiculeCreated))
+    ).subscribe();
     this.router.navigateByUrl('vehicule-personnel/list')
   }
 

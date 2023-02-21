@@ -1,0 +1,26 @@
+<div *ngIf="reservationCovoiturage" class="container border border-dark rounded m-3 p-2">
+    <div class="row">
+        <div class="col">
+            Date de depart : {{reservationCovoiturage.dateDepart}}
+        </div>
+        <div class="col">
+            Places restantes : {{reservationCovoiturage.placesRestantes}}
+        </div>
+        <div class="col">
+            nbPersonnes : {{reservationCovoiturage.nbPersonnes}}
+        </div>
+        <div class="col">
+            Durée du trajet : {{reservationCovoiturage.dureeTrajet}}
+        </div>
+        <div class="col">
+            Distance : {{reservationCovoiturage.distance}}
+        </div>
+        <!--<div class="col">
+            <button (click)="onDelete(vehiculePersonnel.id)">Supprimer</button>
+        </div> -->
+        <div>
+            <button mat-button></button>
+            <button (click)="displayDetails(reservationCovoiturage)">Afficher les détails</button>
+        </div>
+    </div>
+</div>

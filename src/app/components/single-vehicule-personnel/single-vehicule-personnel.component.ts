@@ -12,12 +12,18 @@ import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.se
   templateUrl: './single-vehicule-personnel.component.html',
   styleUrls: ['./single-vehicule-personnel.component.css']
 })
-export class SingleVehiculePersonnelComponent {
+export class SingleVehiculePersonnelComponent implements OnInit{
 
   constructor(private vehiculePersonnelService: VehiculePersonnelService) { }
 
   @Input()
   vehiculePersonnel!: VehiculePersonnel
+
+  ngOnInit(): void {
+    console.log(this.vehiculePersonnel);
+  }
+
+
 
   /**
    * Méthode de suppression d'un véhicule 
