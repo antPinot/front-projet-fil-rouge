@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Covoiturage } from 'src/app/models/covoiturage';
+import { CovoiturageService } from 'src/app/services/covoiturage.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-covoiturage',
@@ -11,11 +13,19 @@ export class CovoiturageComponent implements OnInit{
 
   covoiturageForm!:FormGroup ;
 
+  covoiturage$ = this._covoiturageService.covoiturage$; //initialisation de covoiturages$
+
   /**  constructor injecte formBuilder
+   * 
+   * ici dans le constructor ajouter Covoiturageservice
  */
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private _covoiturageService: CovoiturageService) {}
+   
 
   ngOnInit(){
+
+    this._covoiturageService.findAll().subscribe();
+
     this.covoiturageForm = this.fb.group({
       dateDepart: ['', Validators.required],
       placesRestantes: [0, Validators.required],
@@ -35,6 +45,9 @@ export class CovoiturageComponent implements OnInit{
         pays: ['', Validators.required],
       })
     });
+
+
+    /**appel au service */
   }
 
 
@@ -48,10 +61,34 @@ export class CovoiturageComponent implements OnInit{
       distance: formData.distance,
       organisateur: formData.organisateur,
       vehiculePersonnel: formData.vehiculePersonnel,
-      adresse: formData.adresse
+      adresse: formData.adresse,
+      id: undefined
     };
     console.log(covoiturage);
   }
+
+
+  /**methode supprime un covoiturage */
+  deleteCovoiturage(covoiturage: Covoiturage){
+    if(covoiturage.id){
+      this._covoiturageService.deleteOne(covoiturage.id).subscribe();
+    }
+  }
+
+  /**methode edit un covoiturage */
+  editerCovoiturage(covoiturage: Covoiturage) {
+    if (covoiturage.id) {
+      this._covoiturageService.editOne(covoiturage.id).subscribe(
+        (result: any) => {
+          console.log("Covoiturage mis à jour avec succès : ", result);
+        },
+        (error: any) => {
+          console.log("Erreur lors de la mise à jour du covoiturage : ", error);
+        }
+      );
+    }
+  }
+  
 
 
 }
