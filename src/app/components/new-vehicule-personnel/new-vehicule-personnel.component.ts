@@ -68,7 +68,7 @@ export class NewVehiculePersonnelComponent implements OnInit{
     this.vehiculePersonnelToCreate.marque = this.vehiculePersonnelForm.value.marque;
     this.vehiculePersonnelToCreate.modele = this.vehiculePersonnelForm.value.modele;
     this.vehiculePersonnelToCreate.places = this.vehiculePersonnelForm.value.places;
-    this.vehiculePersonnelToCreate.limitePlaces = this.vehiculePersonnelForm.value.limitePlaces;
+    this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlaces;
     this.vehiculePersonnelToCreate.collaborateursId = [1]
     this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).subscribe();
   }
