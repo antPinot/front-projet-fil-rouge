@@ -1,0 +1,58 @@
+<div class="form">
+    <form [formGroup]="vSForm" class="form-group">
+
+        <div>
+            <label for="immatriculation">Immatriculation</label>
+            <input type="text" id="immatriculation" formControlName="immatriculation">
+            <div *ngIf="vSForm.get('immatriculation')?.invalid && vSForm.get('immatriculation')?.touched" class="error">
+                L'immatriculation est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="marque">Marque</label>
+            <input type="text" id="marque" formControlName="marque">
+            <div *ngIf="vSForm.get('marque')?.invalid && vSForm.get('marque')?.touched" class="error">
+                La marque est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="modele">Modèle</label>
+            <input type="text" id="modele" formControlName="modele">
+            <div *ngIf="vSForm.get('modele')?.invalid && vSForm.get('modele')?.touched" class="error">
+                Le modèle est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="places">Places</label>
+            <input type="number" id="places" formControlName="places">
+            <div *ngIf="vSForm.get('places')?.invalid && vSForm.get('places')?.touched" class="error">
+                Le nombre de places est requis
+            </div>
+        </div>
+
+        <div>
+            <input type="radio" id="disponible" value=1>
+            <label for="disponible">Disponible</label>
+            <input type="radio" id="indisponible" value=0>
+            <label for="indisponible">Indisponible</label>
+        </div>
+
+        <div>
+            <label for="statut">Statut</label>
+            <select id="statut">
+                <option value="1" selected>En service</option>
+                <option value="0" >En attente</option>
+                <option value="-1">Hors service</option>
+              </select>
+            <div *ngIf="vSForm.get('statut')?.invalid && vSForm.get('statut')?.touched" class="error">
+              Le statut est requis
+          </div>
+        </div>
+
+        <button type="submit" (click)="onSubmit()" [disabled]="vSForm.invalid">Créer véhicule de service</button>
+        
+    </form>
+</div>
