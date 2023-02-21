@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Covoiturage } from 'src/app/models/covoiturage';
 import { CovoiturageService } from 'src/app/services/covoiturage.service';
@@ -10,7 +10,9 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   styleUrls: ['./covoiturage.component.css']
 })
 export class CovoiturageComponent implements OnInit{
+  
 
+  @Input()
   covoiturageForm!:FormGroup ;
 
   covoiturage$ = this._covoiturageService.covoiturage$; //initialisation de covoiturages$
@@ -65,6 +67,7 @@ export class CovoiturageComponent implements OnInit{
       id: undefined
     };
     console.log(covoiturage);
+    this._covoiturageService.createOne(covoiturage).subscribe();
   }
 
 
