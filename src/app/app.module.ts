@@ -20,6 +20,8 @@ import { MaterialModuleModule } from './material-module/material.module';
 import { DetailReservationCovoiturageComponent } from './components/detail-reservation-covoiturage/detail-reservation-covoiturage.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 
+import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
+import { SingleCovoiturageComponent } from './components/single-covoiturage/single-covoiturage.component';
  
 @NgModule({
   declarations: [
