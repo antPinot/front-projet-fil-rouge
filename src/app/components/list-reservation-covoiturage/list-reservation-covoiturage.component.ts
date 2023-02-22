@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
 @Component({
@@ -13,11 +13,11 @@ export class ListReservationCovoiturageComponent{
   constructor(private reservationCovoiturageService: ReservationCovoiturageService){}
 
   enCours(): void {
-    this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(4,'en-cours').subscribe();
+    this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(2,'en-cours').subscribe();
   }
 
   historique(): void {
-    this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(4,'historique').subscribe();
+    this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(2,'historique').subscribe();
   }
 
 }

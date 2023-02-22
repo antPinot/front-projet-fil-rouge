@@ -10,5 +10,5 @@ export interface Covoiturage {
     organisateurId?: number,
     vehiculePersonnelId?: number,
     adresseDepart?: Adresse,
-    adresseArrivee?: Adresse
+    adresseArrivee?: Adresse,
 }
