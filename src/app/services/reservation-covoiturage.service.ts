@@ -19,8 +19,8 @@ export class ReservationCovoiturageService {
       tap((reservations) => this.listReservationCovoiturage$.next(reservations)));
   }
 
-  getCovoiturageByDateDepart(dateDepart : string): Observable<Covoiturage[]>{
-    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/criteres?collaborateurId=7&adresseDepart=none&adresseArrivee=none&dateDepart=${dateDepart}`)
+  getCovoiturageByDateDepart(collaborateurId: number, dateDepart : string): Observable<Covoiturage[]>{
+    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/criteres?collaborateurId=${collaborateurId}&adresseDepart=none&adresseArrivee=none&dateDepart=${dateDepart}`)
     .pipe(
       tap((covoituragesByDateDepart) => this.listCovoiturageByDateDepart$.next(covoituragesByDateDepart))
     );

@@ -24,7 +24,7 @@ export class SearchCovoiturageComponent implements OnInit {
   }
 
   onSearch(){
-    this.reservationCovoiturageService.getCovoiturageByDateDepart(this.searchForm.value.searchDateDepart).subscribe();
+    this.reservationCovoiturageService.getCovoiturageByDateDepart(2, this.searchForm.value.searchDateDepart).subscribe();
   }
 
 

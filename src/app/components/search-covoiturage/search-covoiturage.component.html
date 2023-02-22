@@ -1,1 +1,12 @@
-<p>search-covoiturage works!</p>
+<form [formGroup]="searchForm">
+    <label for="searchDateDepart">Date de départ</label>
+    <input type="text" id="searchDateDepart" formControlName="searchDateDepart">
+    <div *ngIf="searchForm.get('searchDateDepart')?.hasError('invalidDate')">Entrez une date valide</div>
+    <button type="submit" (click)="onSearch()" [disabled]="searchForm.invalid">Rechercher</button>
+</form>
+
+<app-single-covoiturage *ngFor="let covoiturage of searchResults$ | async" [covoituragePersonnel]="covoiturage"></app-single-covoiturage>
+
+<div>
+    <button mat-raised-button color="primary" routerLink="../list">Revenir à la liste de mes réservations</button>
+</div>
