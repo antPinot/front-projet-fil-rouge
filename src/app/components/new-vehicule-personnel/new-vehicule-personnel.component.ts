@@ -71,6 +71,7 @@ export class NewVehiculePersonnelComponent implements OnInit{
     this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlaces;
     this.vehiculePersonnelToCreate.collaborateursId = [1]
     this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).subscribe();
+    this.router.navigateByUrl('vehicule-personnel/list')
   }
 
   
