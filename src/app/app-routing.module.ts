@@ -4,6 +4,7 @@ import { CovoiturageComponent } from './components/covoiturage/covoiturage.compo
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
 import { ListVehiculePersonnelComponent } from './components/list-vehicule-personnel/list-vehicule-personnel.component';
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
+import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 import { VehiculeServiceComponent } from './components/vehicule-service/vehicule-service.component';
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   {path: 'vehicule-personnel/list', component: ListVehiculePersonnelComponent},
   {path: 'vehicule-service/create', component: VehiculeServiceComponent},
   {path: 'covoiturage/create', component: CovoiturageComponent},
-  {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent}
+  {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
+  {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent}
 ];
 
 @NgModule({

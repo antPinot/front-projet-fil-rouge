@@ -36,4 +36,8 @@ export class SingleReservationCovoiturageComponent implements OnInit{
     },)
   }
 
+  onDelete(){
+    
+  }
+
 }

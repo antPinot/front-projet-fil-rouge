@@ -19,7 +19,10 @@
             <button (click)="onDelete(vehiculePersonnel.id)">Supprimer</button>
         </div>  -->
         <div class="col">
-            <button mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
+            <div class="container">
+                <button class="row" mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
+                <button class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+            </div> 
         </div>
         
     </div>

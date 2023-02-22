@@ -18,6 +18,7 @@ import { ListReservationCovoiturageComponent } from './components/list-reservati
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModuleModule } from './material-module/material.module';
 import { DetailReservationCovoiturageComponent } from './components/detail-reservation-covoiturage/detail-reservation-covoiturage.component';
+import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 
  
 @NgModule({
@@ -31,7 +32,8 @@ import { DetailReservationCovoiturageComponent } from './components/detail-reser
     NewReservationCovoiturageComponent,
     SingleReservationCovoiturageComponent,
     ListReservationCovoiturageComponent,
-    DetailReservationCovoiturageComponent
+    DetailReservationCovoiturageComponent,
+    SearchCovoiturageComponent
   ],
   imports: [
     BrowserModule,
