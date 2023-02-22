@@ -10,7 +10,7 @@ export class CovoiturageListComponent implements OnInit {
 
 
 
-  covoiturageList$ = this._covoiturageService.covoiturageList$; //initialisation de covoiturages$
+  covoiturageList$ = this._covoiturageService.covoiturageListByCollaborateurId$; //initialisation de covoiturages$
   
   constructor(private _covoiturageService: CovoiturageListService){}
 

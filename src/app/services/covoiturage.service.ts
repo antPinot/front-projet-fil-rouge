@@ -34,7 +34,9 @@ export class CovoiturageService {
       })
     );
   }
-    
+  getCovoiturages$(): Observable<Covoiturage[]> {
+    return this.covoiturages$.asObservable();
+  }
 /***/
 createOne(covoiturage: Covoiturage): Observable<Covoiturage> {
   return this._http.post<Covoiturage>(this._baseUrl, covoiturage)

@@ -35,4 +35,10 @@ export class SingleCovoiturageComponent {
     }
   }
 
+  editerCovoiturage(covoiturage:Covoiturage){
+    if(covoiturage.id){
+      this.covoiturageService.editOne(covoiturage.id).subscribe();
+    }
+  }
+
 }

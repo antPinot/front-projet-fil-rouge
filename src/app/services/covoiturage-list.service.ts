@@ -12,7 +12,7 @@ export class CovoiturageListService {
   private _baseUrl = 'http://localhost:8080/rest/covoiturage-list';  
 
   covoiturageListByCollaborateurId$ = new BehaviorSubject<Covoiturage[]>([])
-  covoiturageList$: any;
+  
 
   constructor(private http:HttpClient) { }
 

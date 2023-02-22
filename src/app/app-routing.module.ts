@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'vehicule-personnel/list', component: ListVehiculePersonnelComponent},
   {path: 'vehicule-service/create', component: VehiculeServiceComponent},
   {path: 'covoiturage/create', component: CovoiturageComponent},
+  {path: 'covoiturages/:id/edit', component: CovoiturageListComponent},
   {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent},
   {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
   {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent}
