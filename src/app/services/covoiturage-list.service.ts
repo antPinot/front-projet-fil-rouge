@@ -26,7 +26,7 @@ export class CovoiturageListService {
    * @returns 
    */
   getCovoiturageListByCollaborateurId(collaborateurId : number): Observable<Covoiturage[]>{
-    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage-list/collaborateur/${collaborateurId}`).pipe(
+    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/annonces/${collaborateurId}?statut=En-cours`).pipe(
       tap((covoituragePersonnel: Covoiturage[]) => this.covoiturageListByCollaborateurId$.next(covoituragePersonnel)));
   }
 

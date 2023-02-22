@@ -35,7 +35,9 @@ import { SingleCovoiturageComponent } from './components/single-covoiturage/sing
     SingleReservationCovoiturageComponent,
     ListReservationCovoiturageComponent,
     DetailReservationCovoiturageComponent,
-    SearchCovoiturageComponent
+    SearchCovoiturageComponent,
+    CovoiturageListComponent ,
+    SingleCovoiturageComponent
   ],
   imports: [
     BrowserModule,
