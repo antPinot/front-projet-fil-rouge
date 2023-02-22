@@ -8,13 +8,14 @@ import { Covoiturage } from '../models/covoiturage';
   providedIn: 'root'
 })
 export class CovoiturageService {
- 
+
 
   private _baseUrl = 'http://localhost:8080/rest/covoiturage';
 
   public covoiturages$= new BehaviorSubject<Covoiturage[]>([]);
 
   public covoiturage$  = new BehaviorSubject<Covoiturage>({}); ////pour la methode findOne
+  covoiturageList$: any;
 
   /**utiliser httpclient */
   constructor(private _http:HttpClient) {}

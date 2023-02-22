@@ -74,8 +74,8 @@ export class CovoiturageComponent implements OnInit{
       distance: formData.distance,
       organisateurId: formData.organisateur,
       vehiculePersonnelId: formData.vehiculePersonnel,
-      adresseDepart: formData.adresse,
-      adresseArrivee: formData.adresse,
+      adresseDepart: formData.adresseDepart,
+      adresseArrivee: formData.adresseArrivee,
       id: undefined
     };
     console.log(covoiturage);

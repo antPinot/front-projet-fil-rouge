@@ -11,6 +11,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { ListVehiculePersonnelComponent } from './components/list-vehicule-personnel/list-vehicule-personnel.component';
 import { SingleVehiculePersonnelComponent } from './components/single-vehicule-personnel/single-vehicule-personnel.component';
+import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
+import { SingleCovoiturageComponent } from './components/single-covoiturage/single-covoiturage.component';
  
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { SingleVehiculePersonnelComponent } from './components/single-vehicule-p
     NewVehiculePersonnelComponent,
     ListVehiculePersonnelComponent,
     SingleVehiculePersonnelComponent,
+    CovoiturageListComponent,
+    SingleCovoiturageComponent,
   ],
   imports: [
     BrowserModule,
