@@ -61,14 +61,6 @@
         </div>
         <div formGroupName="adresseDepart">
             <div>
-                <label>Numéro</label>
-                <input type="text" formControlName="numero">
-            </div>
-            <div>
-                <label>Complément Numéro</label>
-                <input type="text" formControlName="complementNumero">
-            </div>
-            <div>
                 <label>Voie</label>
                 <input type="text" formControlName="voie">
                 <div *ngIf="covoiturageForm.get('adresseDepart.voie')?.invalid && covoiturageForm.get('adresseDepart.voie')?.touched"
@@ -82,14 +74,6 @@
                 <div *ngIf="covoiturageForm.get('adresseDepart.ville')?.invalid && covoiturageForm.get('adresseDepart.ville')?.touched"
                     class="error">
                     La ville est invalide
-                </div>
-            </div>
-            <div>
-                <label>Code Postal</label>
-                <input type="text" formControlName="codePostal">
-                <div *ngIf="covoiturageForm.get('adresseDepart.codePostal')?.invalid && covoiturageForm.get('adresseDepart.codePostal')?.touched"
-                    class="error">
-                    Le code postal est invalide
                 </div>
             </div>
             <div>
@@ -110,15 +94,10 @@
                 </div>
             </div>
         </div>
+
+
+
         <div formGroupName="adresseArrivee">
-            <div>
-                <label>Numéro</label>
-                <input type="text" formControlName="numero">
-            </div>
-            <div>
-                <label>Complément Numéro</label>
-                <input type="text" formControlName="complementNumero">
-            </div>
             <div>
                 <label>Voie</label>
                 <input type="text" formControlName="voie">
@@ -160,8 +139,39 @@
                     Le pays est invalide
                 </div>
             </div>
-            <button type="submit" [disabled]="covoiturageForm.valid">Submit</button>
         </div>
+        <button type="submit" [disabled]="covoiturageForm.valid">Submit</button>
    </form>
 </div>
+
+
+<!--  Liste des covoiturages    JUSTE UN EXEMPLE     -->
+<main>
+    <section class='covoiturage-list-container'>
+        <ul class='covoiturage-list'>
+            <li id='covoiturage-abcd1234'>
+                <input
+                    type='text' 
+                    class='covoiturage1' 
+                    name='task' 
+                    value='covoiturage1' 
+                    disabled
+                >
+                <button class='edit'>Edit</button>
+                <button class='delete'>Delete</button>
+            </li>
+            <li id='covoiturage-dcbf3251'>
+                <input
+                    type='text' 
+                    class='task' 
+                    name='task' 
+                    value='covoiturage2' 
+                    disabled
+                >
+                <button class='edit' (click)="editerCovoiturage(covoiturage.id)">Edit</button>
+                <button class='delete' (click)="deleteCovoiturage(covoiturage.id)" >Delete</button>
+            </li>
+        </ul>
+    </section>
+</main>
 

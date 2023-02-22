@@ -55,6 +55,17 @@ export class CovoiturageComponent implements OnInit{
         ville: ['', Validators.required],
         departement:['', Validators.required],
         pays: ['', Validators.required],
+      }),
+
+
+      adresseArrivee: this.fb.group({
+        Numero:[0, Validators.required],
+        complementNumero:['',Validators.required],
+        voie:['',Validators.required],
+        codePostal:[0, Validators.required],
+        ville:['', Validators.required],
+        departement:['', Validators.required],
+        pays: ['', Validators.required],
       })
     });
 
@@ -90,6 +101,10 @@ export class CovoiturageComponent implements OnInit{
   }
 
   /**methode edit un covoiturage */
+
+  @Input()
+  covoiturage!: Covoiturage;
+  
   editerCovoiturage(covoiturage: Covoiturage) {
     if (covoiturage.id) {
       this._covoiturageService.editOne(covoiturage.id).subscribe(
