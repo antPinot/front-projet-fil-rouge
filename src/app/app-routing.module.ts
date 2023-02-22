@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
@@ -13,10 +14,15 @@ const routes: Routes = [
   {path: 'vehicule-personnel/list', component: ListVehiculePersonnelComponent},
   {path: 'vehicule-service/create', component: VehiculeServiceComponent},
   {path: 'covoiturage/create', component: CovoiturageComponent},
-  {path: 'covoiturages/:id/edit', component: CovoiturageListComponent},
   {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent},
   {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
-  {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent}
+  {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent},
+
+  {
+    path: 'covoiturage/:id/edit', 
+    component: CovoiturageDetailsComponent
+  } //faire loadchildrenRouting
+
 ];
 
 @NgModule({
