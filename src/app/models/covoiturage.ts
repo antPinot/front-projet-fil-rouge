@@ -1,4 +1,5 @@
 import { Adresse } from "./adresse";
+import { Collaborateur } from "./collaborateur.model";
 
 export interface Covoiturage {
     id?: any;
@@ -11,4 +12,5 @@ export interface Covoiturage {
     vehiculePersonnelId?: number,
     adresseDepart?: Adresse,
     adresseArrivee?: Adresse,
+    collaborateurs?: Collaborateur[]
 }

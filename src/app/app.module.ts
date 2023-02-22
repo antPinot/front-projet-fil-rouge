@@ -1,8 +1,5 @@
- 
-
-import { HttpClientModule } from '@angular/common/http';
+ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,13 +13,15 @@ import { NewReservationCovoiturageComponent } from './components/new-reservation
 import { SingleReservationCovoiturageComponent } from './components/single-reservation-covoiturage/single-reservation-covoiturage.component';
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModuleModule } from './material-module/material.module';
+import { MaterialModule } from './material-module/material.module';
 import { DetailReservationCovoiturageComponent } from './components/detail-reservation-covoiturage/detail-reservation-covoiturage.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { SingleCovoiturageComponent } from './components/single-covoiturage/single-covoiturage.component';
 import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
  
 @NgModule({
   declarations: [
@@ -39,7 +38,8 @@ import { CovoiturageDetailsComponent } from './components/covoiturage-details/co
     SearchCovoiturageComponent,
     CovoiturageListComponent ,
     SingleCovoiturageComponent,
-    CovoiturageDetailsComponent
+    CovoiturageDetailsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +47,9 @@ import { CovoiturageDetailsComponent } from './components/covoiturage-details/co
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModuleModule
+    MaterialModule
   ],
-  providers: [CovoiturageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@
     <button type="submit" (click)="onSearch()" [disabled]="searchForm.invalid">Rechercher</button>
 </form>
 
-<app-single-covoiturage *ngFor="let covoiturage of searchResults$ | async" [covoituragePersonnel]="covoiturage"></app-single-covoiturage>
+<app-single-reservation-covoiturage *ngFor="let covoiturage of searchResults$ | async" [reservationCovoiturage]="covoiturage"></app-single-reservation-covoiturage>
 
 <div>
     <button mat-raised-button color="primary" routerLink="../list">Revenir à la liste de mes réservations</button>

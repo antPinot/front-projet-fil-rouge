@@ -20,8 +20,9 @@
         </div>  -->
         <div class="col">
             <div class="container">
-                <button class="row" mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
-                <button class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+                <button *ngIf="!reservable" class="row" mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
+                <button *ngIf="enCours && !reservable" class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+                <button *ngIf="reservable" class="row mt-3" mat-raised-button color="success" (click)="displayDetails()">Réserver</button>
             </div> 
         </div>
         
