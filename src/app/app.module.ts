@@ -17,6 +17,7 @@ import { SingleReservationCovoiturageComponent } from './components/single-reser
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModuleModule } from './material-module/material.module';
+import { DetailReservationCovoiturageComponent } from './components/detail-reservation-covoiturage/detail-reservation-covoiturage.component';
 
  
 @NgModule({
@@ -29,7 +30,8 @@ import { MaterialModuleModule } from './material-module/material.module';
     VehiculeServiceComponent,
     NewReservationCovoiturageComponent,
     SingleReservationCovoiturageComponent,
-    ListReservationCovoiturageComponent
+    ListReservationCovoiturageComponent,
+    DetailReservationCovoiturageComponent
   ],
   imports: [
     BrowserModule,
