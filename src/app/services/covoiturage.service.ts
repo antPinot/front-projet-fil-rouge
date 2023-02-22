@@ -28,7 +28,7 @@ export class CovoiturageService {
     .pipe(
       tap(covoiturages =>this.covoiturages$.next(covoiturages)),
       catchError(error => {
-        console.error('Error fetching todos', error);
+        console.error('Error fetching covoiturages', error);
         return of([]);
       })
     );

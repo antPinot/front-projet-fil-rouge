@@ -37,12 +37,23 @@ export class CovoiturageComponent implements OnInit{
       organisateur: [0, Validators.required],
       vehiculePersonnel: [0, Validators.required],
 
-      adresse: this.fb.group({
+      adresseDepart: this.fb.group({
         Numero: [0, Validators.required],
         complementNumero: ['', Validators.required],
         voie:['', Validators.required],
         codePostal: [0, Validators.required],
         ville: ['', Validators.required],
+        departement:['', Validators.required],
+        pays: ['', Validators.required],
+      }),
+
+
+      adresseArrivee: this.fb.group({
+        Numero:[0, Validators.required],
+        complementNumero:['',Validators.required],
+        voie:['',Validators.required],
+        codePostal:[0, Validators.required],
+        ville:['', Validators.required],
         departement:['', Validators.required],
         pays: ['', Validators.required],
       })
@@ -61,9 +72,10 @@ export class CovoiturageComponent implements OnInit{
       nbPersonnes: formData.nbPersonnes,
       dureeTrajet: formData.dureeTrajet,
       distance: formData.distance,
-      organisateur: formData.organisateur,
-      vehiculePersonnel: formData.vehiculePersonnel,
-      adresse: formData.adresse,
+      organisateurId: formData.organisateur,
+      vehiculePersonnelId: formData.vehiculePersonnel,
+      adresseDepart: formData.adresse,
+      adresseArrivee: formData.adresse,
       id: undefined
     };
     console.log(covoiturage);
@@ -79,6 +91,10 @@ export class CovoiturageComponent implements OnInit{
   }
 
   /**methode edit un covoiturage */
+
+  @Input()
+  covoiturage!: Covoiturage;
+  
   editerCovoiturage(covoiturage: Covoiturage) {
     if (covoiturage.id) {
       this._covoiturageService.editOne(covoiturage.id).subscribe(

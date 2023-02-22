@@ -1,6 +1,7 @@
 export interface Adresse {
-
-    Numero?: number,
+    
+    id?:number,
+    numero?: number,
     complementNumero?: string,
     voie?: string,
     codePostal?: number,
