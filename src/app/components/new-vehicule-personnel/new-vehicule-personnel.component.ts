@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { VehiculePersonnel } from 'src/app/models/vehicule-personnel';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
@@ -14,11 +15,11 @@ import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.se
  */
 const limitePlacesValidator : ValidatorFn = (control: AbstractControl) : ValidationErrors | null => {
     const places = control.get('places')?.value;
-    const limitePlaces = control.get('limitePlaces')?.value;
-    if (places !== null && limitePlaces !== null && places > limitePlaces){
+    const limitePlace = control.get('limitePlace')?.value;
+    if (places !== null && limitePlace !== null && places > limitePlace){
       return null
     } else{
-      return {'invalidLimitePlaces' : true}
+      return {'invalidLimitePlace' : true}
     }
 }
 
@@ -51,7 +52,7 @@ export class NewVehiculePersonnelComponent implements OnInit{
       marque: [null, Validators.required],
       modele: [null, Validators.required],
       places: [null, Validators.required],
-      limitePlaces: [null, Validators.required]
+      limitePlace: [null, Validators.required]
     },
     {validators: [limitePlacesValidator]})
   }
@@ -68,14 +69,13 @@ export class NewVehiculePersonnelComponent implements OnInit{
     this.vehiculePersonnelToCreate.marque = this.vehiculePersonnelForm.value.marque;
     this.vehiculePersonnelToCreate.modele = this.vehiculePersonnelForm.value.modele;
     this.vehiculePersonnelToCreate.places = this.vehiculePersonnelForm.value.places;
-    this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlaces;
+    this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlace;
     this.vehiculePersonnelToCreate.collaborateursId = [1]
-    this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).subscribe();
+    console.log(this.vehiculePersonnelToCreate)
+    this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).pipe(
+      tap(() => this.vehiculePersonnelService.getVehiculePersonnelListByCollaborateurId(1).subscribe())
+    ).subscribe();
     this.router.navigateByUrl('vehicule-personnel/list')
   }
-
-  
-
-
 
 }

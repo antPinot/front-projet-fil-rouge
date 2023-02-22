@@ -1,0 +1,11 @@
+<mat-list>
+    <mat-list-item> <strong>Date de Départ : </strong>  {{data.dateDepart}}</mat-list-item>
+    <mat-list-item> <strong>Adresse de Départ : </strong> {{data.adresseDepart?.numero}}  {{data.adresseDepart?.complementNumero}} {{data.adresseDepart?.voie}} {{data.adresseDepart?.ville}}</mat-list-item>
+    <mat-list-item><strong>Adresse d'arrivée : </strong> {{data.adresseArrivee?.numero}}  {{data.adresseArrivee?.complementNumero}} {{data.adresseArrivee?.voie}} {{data.adresseArrivee?.ville}}</mat-list-item>
+    <mat-list-item> <strong>Places Restantes : </strong> {{data.placesRestantes}}</mat-list-item>
+    <mat-list-item> <strong>Nombre de personnes : </strong> {{data.nbPersonnes}}</mat-list-item>
+    <mat-list-item> <strong>Durée du trajet : </strong> {{data.dureeTrajet}}</mat-list-item>
+    <mat-list-item> <strong>Distance : </strong> {{data.distance}}</mat-list-item>
+    <mat-list-item> <strong>Organisateur : </strong> {{data.organisateurId}}</mat-list-item>
+    <mat-list-item> <strong>Véhicule Personnel : </strong>{{data.vehiculePersonnelId}}</mat-list-item>
+</mat-list>

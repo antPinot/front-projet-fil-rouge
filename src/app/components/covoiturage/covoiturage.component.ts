@@ -38,8 +38,18 @@ export class CovoiturageComponent implements OnInit{
       vehiculePersonnel: [0, Validators.required],
 
       adresseDepart: this.fb.group({
-        Numero: [0, Validators.required],
-        complementNumero: ['', Validators.required],
+        numero: 0,
+        complementNumero: '',
+        voie:['', Validators.required],
+        codePostal: [0, Validators.required],
+        ville: ['', Validators.required],
+        departement:['', Validators.required],
+        pays: ['', Validators.required],
+      }),
+
+      adresseArrivee: this.fb.group({
+        numero: 0,
+        complementNumero: '',
         voie:['', Validators.required],
         codePostal: [0, Validators.required],
         ville: ['', Validators.required],

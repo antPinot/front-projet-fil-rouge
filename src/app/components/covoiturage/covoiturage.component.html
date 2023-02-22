@@ -115,6 +115,14 @@
                 </div>
             </div>
             <div>
+                <label>Code Postal</label>
+                <input type="text" formControlName="codePostal">
+                <div *ngIf="covoiturageForm.get('adresseArrivee.codePostal')?.invalid && covoiturageForm.get('adresseArrivee.codePostal')?.touched"
+                    class="error">
+                    Le code postal est invalide
+                </div>
+            </div>
+            <div>
                 <label>Departement</label>
                 <input type="text" formControlName="departement">
                 <div *ngIf="covoiturageForm.get('adresseArrivee.departement')?.invalid && covoiturageForm.get('adresseArrivee.departement')?.touched"
