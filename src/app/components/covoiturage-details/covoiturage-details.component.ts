@@ -22,10 +22,10 @@ export class CovoiturageDetailsComponent {
 
   this._activatedRoute.paramMap.subscribe(paramMap =>{
 
-    const n: string|null = paramMap.get('id')!== null ? paramMap.get('id'): " ";
-    if(n !== ""){
-      this._covoiturageService.findById(n)
-    }
+    let n: string = paramMap.get('id')as string  
+    
+      this._covoiturageService.findById(n).subscribe( data => this.covoiturage$.next(data) )
+    
     
   });
   /**this._activatedRoute.paramMap
