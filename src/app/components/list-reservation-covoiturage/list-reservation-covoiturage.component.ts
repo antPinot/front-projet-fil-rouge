@@ -14,10 +14,15 @@ export class ListReservationCovoiturageComponent{
 
   enCours(): void {
     this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(2,'en-cours').subscribe();
+    // Comportement à effacer dès que les bons contrôles de dates seront implémentés
+    this.reservationCovoiturageService.enCours = true;
   }
 
   historique(): void {
     this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(2,'historique').subscribe();
+    // Comportement à effacer dès que les bons contrôles de dates seront implémentés
+    this.reservationCovoiturageService.enCours = false;
+
   }
 
 }

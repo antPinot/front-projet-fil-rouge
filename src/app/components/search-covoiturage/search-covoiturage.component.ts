@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
@@ -8,7 +8,7 @@ import { ReservationCovoiturageService } from 'src/app/services/reservation-covo
   templateUrl: './search-covoiturage.component.html',
   styleUrls: ['./search-covoiturage.component.css']
 })
-export class SearchCovoiturageComponent implements OnInit {
+export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   searchForm!: FormGroup;
 
@@ -21,6 +21,10 @@ export class SearchCovoiturageComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       searchDateDepart : [null]
     })
+  }
+
+  ngOnDestroy(): void {
+    this.searchResults$.next([]);
   }
 
   onSearch(){
