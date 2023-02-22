@@ -22,6 +22,7 @@ import { SearchCovoiturageComponent } from './components/search-covoiturage/sear
 
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { SingleCovoiturageComponent } from './components/single-covoiturage/single-covoiturage.component';
+import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
  
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SingleCovoiturageComponent } from './components/single-covoiturage/sing
     DetailReservationCovoiturageComponent,
     SearchCovoiturageComponent,
     CovoiturageListComponent ,
-    SingleCovoiturageComponent
+    SingleCovoiturageComponent,
+    CovoiturageDetailsComponent
   ],
   imports: [
     BrowserModule,
