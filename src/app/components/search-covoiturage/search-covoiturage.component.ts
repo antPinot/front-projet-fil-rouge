@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
@@ -14,7 +15,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   searchResults$ = this.reservationCovoiturageService.listCovoiturageByDateDepart$;
   
-  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder){}
+  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private router:Router){}
 
 
   ngOnInit(): void {

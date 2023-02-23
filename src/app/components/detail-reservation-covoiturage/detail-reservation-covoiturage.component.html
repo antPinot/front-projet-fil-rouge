@@ -6,6 +6,10 @@
     <mat-list-item> <strong>Nombre de personnes : </strong> {{data.nbPersonnes}}</mat-list-item>
     <mat-list-item> <strong>Durée du trajet : </strong> {{data.dureeTrajet}}</mat-list-item>
     <mat-list-item> <strong>Distance : </strong> {{data.distance}}</mat-list-item>
-    <mat-list-item> <strong>Organisateur : </strong> {{data.organisateurId}}</mat-list-item>
-    <mat-list-item> <strong>Véhicule Personnel : </strong>{{data.vehiculePersonnelId}}</mat-list-item>
+    <mat-list-item> <strong>Organisateur : </strong> {{data.organisateur?.prenom}} {{data.organisateur?.nom}}</mat-list-item>
+    <mat-list-item> <strong>Véhicule Personnel : </strong>{{data.vehiculePersonnel?.marque}} {{data.vehiculePersonnel?.modele}}</mat-list-item>
 </mat-list>
+<div mat-dialog-actions>
+    <button mat-button color="warn" mat-dialog-close >Annuler</button>
+    <button *ngIf="reservable" mat-button color="primary" mat-dialog-close (click)="onBook()">Réserver</button>
+</div>

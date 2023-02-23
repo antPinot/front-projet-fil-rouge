@@ -36,4 +36,13 @@ export class ReservationCovoiturageService {
       })
     )
   }
+
+  reserverCovoiturage(collaborateurId: number, covoiturage: Covoiturage): Observable<Covoiturage>{
+    return this.http.put<Covoiturage>(`http://localhost:8080/rest/covoiturage/reserver/${covoiturage.id}/${collaborateurId}`, covoiturage).pipe(
+      tap((covoiturageReserve) => {
+        this.listReservationCovoiturage$.value.push(covoiturageReserve);
+      })
+    )
+  }
+
 }
