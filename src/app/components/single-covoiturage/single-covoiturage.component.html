@@ -34,8 +34,10 @@
             adresse arrivée : {{covoituragePersonnel.adresseArrivee}}
         </div>
         <div class="col">
-            <button mat-raised-button color="warn"   [routerLink]="['/covoiturage', covoituragePersonnel.id, 'supprimer']">
+            <button mat-raised-button color="warn" (click)="deleteCovoiturage(covoituragePersonnel)">
                 Supprimer
+                <!--[routerLink]="['/covoiturage', covoituragePersonnel.id, 'supprimer']-->
+
             </button>
             <button mat-raised-button color="primary" [routerLink]="['/covoiturage', covoituragePersonnel.id, 'edit']">
                 Editer
