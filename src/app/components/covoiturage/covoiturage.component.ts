@@ -26,8 +26,7 @@ export class CovoiturageComponent implements OnInit{
 
   ngOnInit(){
 
-    this._covoiturageService.findAll().subscribe();
-
+    
     this.covoiturageForm = this.fb.group({
       dateDepart: ['', Validators.required],
       placesRestantes: [0, Validators.required],
@@ -79,6 +78,8 @@ export class CovoiturageComponent implements OnInit{
     };
     console.log(covoiturage);
     this._covoiturageService.createOne(covoiturage).subscribe();
+    this._covoiturageService.findAll().subscribe();
+
   }
 
 
