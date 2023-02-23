@@ -11,14 +11,22 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { ListVehiculePersonnelComponent } from './components/list-vehicule-personnel/list-vehicule-personnel.component';
 import { SingleVehiculePersonnelComponent } from './components/single-vehicule-personnel/single-vehicule-personnel.component';
+import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
+import { ListVehiculeSocieteComponent } from './components/list-vehicule-societe/list-vehicule-societe.component';
+import { SingleVehiculeSocieteComponent } from './components/single-vehicule-societe/single-vehicule-societe.component';
+import { DetailVehiculeSocieteComponent } from './components/detail-vehicule-societe/detail-vehicule-societe.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     CovoiturageComponent,
+    NewVehiculeSocieteComponent,
     NewVehiculePersonnelComponent,
     ListVehiculePersonnelComponent,
     SingleVehiculePersonnelComponent,
+    ListVehiculeSocieteComponent,
+    SingleVehiculeSocieteComponent,
+    DetailVehiculeSocieteComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +34,7 @@ import { SingleVehiculePersonnelComponent } from './components/single-vehicule-p
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [CovoiturageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
