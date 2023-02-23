@@ -14,12 +14,14 @@ export class DetailReservationCovoiturageComponent implements OnInit{
 
   covoiturage!: Covoiturage
 
+  reservable!: boolean
+
   constructor(public dialogRef: MatDialogRef<DetailReservationCovoiturageComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: Covoiturage, private reservationCovoiturageService: ReservationCovoiturageService, private router:Router) {
       this.covoiturage = {...data}
      }
   ngOnInit(): void {
-    this.dialogRef.getState()
+    this.router.url == '/covoiturage/reservation/search' ? this.reservable = true : this.reservable = false
   }  
 
   onBook(){
@@ -28,7 +30,6 @@ export class DetailReservationCovoiturageComponent implements OnInit{
       tap((bookedCovoiturage) => {
         let updatedResultList =  this.reservationCovoiturageService.listCovoiturageByDateDepart$.value.filter(c => c.id != bookedCovoiturage.id);
         this.reservationCovoiturageService.listCovoiturageByDateDepart$.next(updatedResultList);
-        //this.reservationCovoiturageService.listReservationCovoiturage$.value.push(bookedCovoiturage);
       }),
       tap(() => this.router.navigateByUrl('/covoiturage/reservation/list'))
     ).subscribe()
