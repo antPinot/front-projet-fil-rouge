@@ -1,0 +1,33 @@
+<div class="container">
+    <form [formGroup]="vehiculePersonnelToEditForm" class="form-group">
+        <div>
+            <label for="immatriculation">Immatriculation</label>
+            <input type="text" id="immatriculation" formControlName="immatriculation" [(ngModel)]="vehiculePersonnelToEdit.immatriculation">
+            <div *ngIf="vehiculePersonnelToEditForm.get('immatriculation')?.hasError('pattern')" class="alert-message">Entrez une immatriculation au format AA-123-AA</div>
+            <div *ngIf="vehiculePersonnelToEditForm.get('immatriculation')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="marque">Marque</label>
+            <input type="text" id="marque" formControlName="marque" [(ngModel)]="vehiculePersonnelToEdit.marque">
+            <div *ngIf="vehiculePersonnelToEditForm.get('marque')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="modele">Modèle</label>
+            <input type="text" id="modele" formControlName="modele" [(ngModel)]="vehiculePersonnelToEdit.modele">
+            <div *ngIf="vehiculePersonnelToEditForm.get('modele')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="places">Places</label>
+            <input type="text" id="places" formControlName="places" [(ngModel)]="vehiculePersonnelToEdit.places">
+            <div *ngIf="vehiculePersonnelToEditForm.get('places')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="limitePlace">Limite de places</label>
+            <input type="text" id="limitePlace" formControlName="limitePlace" [(ngModel)]="vehiculePersonnelToEdit.limitePlace">
+            <div *ngIf="vehiculePersonnelToEditForm.get('limitePlace')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+            <div *ngIf="vehiculePersonnelToEditForm.errors?.['invalidLimitePlace']" class="alert-message">Entrez une limite de places inférieure au nombre de places</div>
+        </div>
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()" [disabled]="vehiculePersonnelToEditForm.invalid">Modifier véhicule</button>
+    </form>
+    <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de vos véhicules</button>
+</div>

@@ -22,6 +22,7 @@ import { SingleCovoiturageComponent } from './components/single-covoiturage/sing
 import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
+import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
  
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HeaderComponent } from './components/header/header.component';
     CovoiturageListComponent ,
     SingleCovoiturageComponent,
     CovoiturageDetailsComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditVehiculePersonnelComponent
   ],
   imports: [
     BrowserModule,
