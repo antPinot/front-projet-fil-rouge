@@ -8,13 +8,14 @@ import { Covoiturage } from '../models/covoiturage';
   providedIn: 'root'
 })
 export class CovoiturageService {
- 
+
 
   private _baseUrl = 'http://localhost:8080/rest/covoiturage';
 
   public covoiturages$= new BehaviorSubject<Covoiturage[]>([]);
 
   public covoiturage$  = new BehaviorSubject<Covoiturage>({}); ////pour la methode findOne
+  covoiturageList$: any;
 
   /**utiliser httpclient */
   constructor(private _http:HttpClient) {}
@@ -28,12 +29,23 @@ export class CovoiturageService {
     .pipe(
       tap(covoiturages =>this.covoiturages$.next(covoiturages)),
       catchError(error => {
-        console.error('Error fetching todos', error);
+        console.error('Error fetching covoiturages', error);
         return of([]);
       })
     );
   }
-    
+  getCovoiturages$(): Observable<Covoiturage[]> {
+    return this.covoiturages$.asObservable();
+  }
+/***/
+createOne(covoiturage: Covoiturage): Observable<Covoiturage> {
+  return this._http.post<Covoiturage>(this._baseUrl, covoiturage)
+  .pipe(tap( (covoitCreate) => {  
+   this.covoiturages$.next( [ covoitCreate, ...this.covoiturages$.value] ) /* dans le tableau todos$ avec next() je lui passe la variable dans un nouveau tableau*/ 
+  }))
+
+ }
+
 
   /**findById */
   findById(id:string): Observable<Covoiturage>{

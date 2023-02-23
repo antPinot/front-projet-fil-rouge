@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Covoiturage } from 'src/app/models/covoiturage';
 import { CovoiturageService } from 'src/app/services/covoiturage.service';
@@ -10,7 +10,9 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   styleUrls: ['./covoiturage.component.css']
 })
 export class CovoiturageComponent implements OnInit{
+  
 
+  @Input()
   covoiturageForm!:FormGroup ;
 
   covoiturage$ = this._covoiturageService.covoiturage$; //initialisation de covoiturages$
@@ -24,8 +26,7 @@ export class CovoiturageComponent implements OnInit{
 
   ngOnInit(){
 
-    this._covoiturageService.findAll().subscribe();
-
+    
     this.covoiturageForm = this.fb.group({
       dateDepart: ['', Validators.required],
       placesRestantes: [0, Validators.required],
@@ -35,15 +36,25 @@ export class CovoiturageComponent implements OnInit{
       organisateur: [0, Validators.required],
       vehiculePersonnel: [0, Validators.required],
 
-      adresse: this.fb.group({
-        Numero: [0, Validators.required],
-        complementNumero: ['', Validators.required],
+      adresseDepart: this.fb.group({
+        numero: 0,
+        complementNumero: '',
         voie:['', Validators.required],
         codePostal: [0, Validators.required],
         ville: ['', Validators.required],
         departement:['', Validators.required],
         pays: ['', Validators.required],
-      })
+      }),
+
+      adresseArrivee: this.fb.group({
+        numero: 0,
+        complementNumero: '',
+        voie:['', Validators.required],
+        codePostal: [0, Validators.required],
+        ville: ['', Validators.required],
+        departement:['', Validators.required],
+        pays: ['', Validators.required],
+      }),
     });
 
 
@@ -59,12 +70,16 @@ export class CovoiturageComponent implements OnInit{
       nbPersonnes: formData.nbPersonnes,
       dureeTrajet: formData.dureeTrajet,
       distance: formData.distance,
-      organisateur: formData.organisateur,
-      vehiculePersonnel: formData.vehiculePersonnel,
-      adresse: formData.adresse,
+      organisateurId: formData.organisateur,
+      vehiculePersonnelId: formData.vehiculePersonnel,
+      adresseDepart: formData.adresseDepart,
+      adresseArrivee: formData.adresseArrivee,
       id: undefined
     };
     console.log(covoiturage);
+    this._covoiturageService.createOne(covoiturage).subscribe();
+    this._covoiturageService.findAll().subscribe();
+
   }
 
 
@@ -76,6 +91,10 @@ export class CovoiturageComponent implements OnInit{
   }
 
   /**methode edit un covoiturage */
+
+  @Input()
+  covoiturage!: Covoiturage;
+  
   editerCovoiturage(covoiturage: Covoiturage) {
     if (covoiturage.id) {
       this._covoiturageService.editOne(covoiturage.id).subscribe(
