@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Covoiturage } from 'src/app/models/covoiturage';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 import { DetailReservationCovoiturageComponent } from '../detail-reservation-covoiturage/detail-reservation-covoiturage.component';
@@ -18,7 +19,7 @@ export class SingleReservationCovoiturageComponent implements OnInit{
 
   reservable!: boolean
 
-  constructor(private dialog: MatDialog, private reservationCovoiturageService: ReservationCovoiturageService) { }
+  constructor(private dialog: MatDialog, private reservationCovoiturageService: ReservationCovoiturageService, private router:Router) { }
 
   ngOnInit(): void {
     if (this.reservationCovoiturage.collaborateurs?.find(c => c.id == 2)){
@@ -29,9 +30,10 @@ export class SingleReservationCovoiturageComponent implements OnInit{
   }
 
   displayDetails() {
-    const detailWindow = this.dialog.open(DetailReservationCovoiturageComponent, {
+    this.dialog.open(DetailReservationCovoiturageComponent, {
       height: '400px', width: '700px', data:
       {
+        id: this.reservationCovoiturage.id,
         dateDepart: this.reservationCovoiturage.dateDepart,
         adresseDepart: this.reservationCovoiturage.adresseDepart,
         adresseArrivee: this.reservationCovoiturage.adresseArrivee,
@@ -39,8 +41,8 @@ export class SingleReservationCovoiturageComponent implements OnInit{
         nbPersonnes: this.reservationCovoiturage.nbPersonnes,
         dureeTrajet: this.reservationCovoiturage.dureeTrajet,
         distance: this.reservationCovoiturage.distance,
-        organisateur : this.reservationCovoiturage.organisateurId,
-        vehicule: this.reservationCovoiturage.vehiculePersonnelId,
+        organisateur : this.reservationCovoiturage.organisateur,
+        vehiculePersonnel: this.reservationCovoiturage.vehiculePersonnel
       }
     },)
   }
