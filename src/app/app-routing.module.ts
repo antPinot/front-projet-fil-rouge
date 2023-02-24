@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'Login', component: LoginComponent},
   {path: 'Logout', component: LogoutComponent},
 
-  {path: '', redirectTo: 'Login'}, /**redirection */
+  {path: '', redirectTo: 'Login', pathMatch: 'full'}, /**redirection */
   {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent},
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent},
