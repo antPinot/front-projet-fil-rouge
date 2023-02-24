@@ -61,9 +61,12 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
     this.reservationVehiculeSociete.collaborateurId = 1
     this.reservationVehiculeSociete.vehiculeSocieteId = this.currentVehiculeSociete.id;
     this.reservationVehiculeSociete.vehiculeSociete = this.currentVehiculeSociete;
+    console.log(this.reservationVehiculeSociete)
     this.reservationVehiculeService.reserverVehiculeSociete(this.reservationVehiculeSociete).pipe(
+      tap(() => this.reservationVehiculeService.getReservationVehiculeSocieteByCollaborateur(1, 'en-cours').subscribe()),
       tap(() => this.router.navigateByUrl('vehicule-societe/reservation/list'))
     ).subscribe();
+    
   }
 
   onSearch(){
