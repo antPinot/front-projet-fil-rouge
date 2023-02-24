@@ -25,6 +25,9 @@ import { CovoiturageDetailsComponent } from './components/covoiturage-details/co
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
+import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
+import { SingleReservationVehiculeComponent } from './components/single-reservation-vehicule/single-reservation-vehicule.component';
+import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
  
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { EditVehiculePersonnelComponent } from './components/edit-vehicule-perso
     SingleCovoiturageComponent,
     CovoiturageDetailsComponent,
     HeaderComponent,
-    EditVehiculePersonnelComponent
+    EditVehiculePersonnelComponent,
+    ListReservationVehiculeSocieteComponent,
+    SingleReservationVehiculeComponent,
+    NewReservationVehiculeSocieteComponent
   ],
   imports: [
     BrowserModule,

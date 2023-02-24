@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-1">
+        <button mat-raised-button (click)="enCours()">En Cours</button>
+    </div>
+    <div class="col-1">
+        <button mat-raised-button (click)="historique()">Historique</button>
+    </div>
+</div>
+<app-single-reservation-vehicule *ngFor="let reservationVehicule of listReservationVehicule$ | async " [reservationVehicule]="reservationVehicule"></app-single-reservation-vehicule>
+<div>
+    <button mat-raised-button color="primary" routerLink="../create">Réserver un Véhicule</button>
+</div>

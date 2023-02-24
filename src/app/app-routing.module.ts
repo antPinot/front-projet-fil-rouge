@@ -5,8 +5,10 @@ import { CovoiturageListComponent } from './components/covoiturage-list/covoitur
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
+import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
 import { ListVehiculePersonnelComponent } from './components/list-vehicule-personnel/list-vehicule-personnel.component';
 import { ListVehiculeSocieteComponent } from './components/list-vehicule-societe/list-vehicule-societe.component';
+import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
@@ -19,9 +21,10 @@ const routes: Routes = [
   {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent},
   {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
   {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent},
-    {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
+  {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent},
-
+  {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent},
+  {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent},
 
   {
     path: 'covoiturage/:id/edit', 
