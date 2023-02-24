@@ -10,3 +10,21 @@ html,body {
     display:table;/* shrinks to fit content */
     margin:auto;
   }
+
+  html,body {
+    height:100%;
+    width:100%;
+    margin:0;
+  }
+  .form1 {
+    display:flex;
+  }
+  form {
+    display:table;/* shrinks to fit content */
+    margin:auto;
+  }
+
+  input,label{
+    display: block;
+    
+}

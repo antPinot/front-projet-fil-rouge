@@ -10,3 +10,8 @@ html,body {
     display:table;/* shrinks to fit content */
     margin:auto;
   }
+
+  input,label{
+    display: block;
+    
+}
