@@ -8,6 +8,10 @@ import { ListVehiculePersonnelComponent } from './components/list-vehicule-perso
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 import { VehiculeServiceComponent } from './components/vehicule-service/vehicule-service.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+
+
 
 const routes: Routes = [
   {path: 'vehicule-personnel/create', component: NewVehiculePersonnelComponent},
@@ -17,6 +21,10 @@ const routes: Routes = [
   {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent},
   {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
   {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent},
+  {path: 'Login', component: LoginComponent},
+  {path: 'Logout', component: LogoutComponent},
+
+  {path: '', redirectTo: 'Login'}, /**redirection */
 
   {
     path: 'covoiturage/:id/edit', 
