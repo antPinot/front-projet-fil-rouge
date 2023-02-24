@@ -51,7 +51,13 @@ import { LogoutComponent } from './components/logout/logout.component';
     CovoiturageListComponent ,
     SingleCovoiturageComponent,
     CovoiturageDetailsComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    LogoutComponent,
+    EditVehiculePersonnelComponent,
+    ListReservationVehiculeSocieteComponent,
+    SingleReservationVehiculeComponent,
+    NewReservationVehiculeSocieteComponent
   ],
   imports: [
     BrowserModule,
