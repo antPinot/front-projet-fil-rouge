@@ -1,4 +1,15 @@
-<p>covoiturage list </p>
+<h2>Listes des annonces </h2>
+
+<div class="row">
+    <div class="col-1">
+        <button mat-raised-button (click)="enCours()">En Cours</button>
+    </div>
+    <div class="col-1">
+        <button mat-raised-button (click)="historique()">Historique</button>
+    </div>
+</div>
+
+
 <app-single-covoiturage     *ngFor="let covoituragePersonnel of covoiturageList$ | async" [covoituragePersonnel]="covoituragePersonnel"></app-single-covoiturage> >
 
  

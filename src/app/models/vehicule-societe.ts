@@ -1,10 +1,11 @@
-export interface VehiculeService {
+export interface VehiculeSociete {
     id?: number;
     immatriculation?: string;
     marque?: string;
     modele?: string;
     places?: number;
-    disponible?: number;
+    photo?: string;
+    disponible?: boolean;
     statut?: number;
-    idCategorie?: number;
+    categorie?: string;
 }

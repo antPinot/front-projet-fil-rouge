@@ -11,7 +11,8 @@ export class CovoiturageListService {
 
   private _baseUrl = 'http://localhost:8080/rest/covoiturage-list';  
 
-  covoiturageListByCollaborateurId$ = new BehaviorSubject<Covoiturage[]>([])
+  covoiturageListByOrganisateurId$ = new BehaviorSubject<Covoiturage[]>([]);
+  enCours!: boolean;
   
 
   constructor(private http:HttpClient) { }
@@ -25,9 +26,9 @@ export class CovoiturageListService {
    * @param collaborateurId 
    * @returns 
    */
-  getCovoiturageListByCollaborateurId(collaborateurId : number): Observable<Covoiturage[]>{
-    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/annonces/${collaborateurId}?statut=En-cours`).pipe(
-      tap((covoituragePersonnel: Covoiturage[]) => this.covoiturageListByCollaborateurId$.next(covoituragePersonnel)));
+  getCovoiturageListByOrganisateurId(organisateurId : number, statut: string): Observable<Covoiturage[]>{
+    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/annonces/${organisateurId}?statut=${statut}`).pipe(
+      tap((covoituragePersonnel: Covoiturage[]) => this.covoiturageListByOrganisateurId$.next(covoituragePersonnel)));
   }
 
   /**
@@ -38,8 +39,8 @@ export class CovoiturageListService {
    */
   deleteCovoituragePersonnel(covoituragePersonnelId: number): Observable<Covoiturage>{
     return this.http.delete<Covoiturage>(`http://localhost:8080/rest/covoiturage-list/${covoituragePersonnelId}`).pipe(
-      tap(() => this.covoiturageListByCollaborateurId$.next(
-        this.covoiturageListByCollaborateurId$.value.filter(v => v.id != covoituragePersonnelId)
+      tap(() => this.covoiturageListByOrganisateurId$.next(
+        this.covoiturageListByOrganisateurId$.value.filter(v => v.id != covoituragePersonnelId)
       ))
     )
   }
