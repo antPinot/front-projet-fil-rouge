@@ -59,7 +59,28 @@
                 Le véhicule personnel est requis
             </div>
         </div>
+
+
         <div formGroupName="adresseDepart">
+
+            <div>
+                <label>Numero adresse</label>
+                <input type="text" formControlName="numero">
+                <div *ngIf="covoiturageForm.get('adresseDepart.numero')?.invalid && covoiturageForm.get('adresseDepart.numero')?.touched"
+                    class="error">
+                    Le numero est requise
+                </div>
+            </div>
+
+            <div>
+                <label>Complement Numero adresse</label>
+                <input type="text" formControlName="completNumero">
+                <div *ngIf="covoiturageForm.get('adresseDepart.completNumero')?.invalid && covoiturageForm.get('adresseDepart.completNumero')?.touched"
+                    class="error">
+                    Le complement numero est requise
+                </div>
+            </div>
+
             <div>
                 <label>Voie</label>
                 <input type="text" formControlName="voie">
@@ -76,6 +97,16 @@
                     La ville est invalide
                 </div>
             </div>
+
+            <div>
+                <label>Code Postal</label>
+                <input type="text" formControlName="codePostal">
+                <div *ngIf="covoiturageForm.get('adresseDepart.codePostal')?.invalid && covoiturageForm.get('adresseDepart.codePostal')?.touched"
+                    class="error">
+                    Le code postal est invalide
+                </div>
+            </div>
+
             <div>
                 <label>Departement</label>
                 <input type="text" formControlName="departement">
@@ -84,7 +115,6 @@
                     Le departement est invalide
                 </div>
             </div>
-
             <div>
                 <label>Pays</label>
                 <input type="text" formControlName="pays">
@@ -98,6 +128,26 @@
 
 
         <div formGroupName="adresseArrivee">
+
+            <div>
+                <label>Numero</label>
+                <input type="text" formControlName="numero">
+                <div *ngIf="covoiturageForm.get('adresseArrivee.numero')?.invalid && covoiturageForm.get('adresseArrivee.numero')?.touched"
+                    class="error">
+                    Le numero est requise
+                </div>
+            </div>
+
+
+            <div>
+                <label>Complement Numero</label>
+                <input type="text" formControlName="completNumero">
+                <div *ngIf="covoiturageForm.get('adresseArrivee.completNumero')?.invalid && covoiturageForm.get('adresseArrivee.completNumero')?.touched"
+                    class="error">
+                    Le complement numero est requise
+                </div>
+            </div>
+
             <div>
                 <label>Voie</label>
                 <input type="text" formControlName="voie">
@@ -116,7 +166,7 @@
             </div>
             <div>
                 <label>Code Postal</label>
-                <input type="text" formControlName="codePostal">
+                <input type="number" formControlName="codePostal">
                 <div *ngIf="covoiturageForm.get('adresseArrivee.codePostal')?.invalid && covoiturageForm.get('adresseArrivee.codePostal')?.touched"
                     class="error">
                     Le code postal est invalide
@@ -143,5 +193,20 @@
         <button type="submit" [disabled]="covoiturageForm.invalid">Submit</button>
    </form>
 </div>
-<!--  Liste des covoiturages    JUSTE UN EXEMPLE     -->
+<!--  Liste des covoiturages  
+    
+    numero?: number,
+    complementNumero?: string,
+    voie?: string,
+    codePostal?: number,
+    ville?:string
+    departement?: string,
+    pays?: string,
+    
+    
+    
+    
+    
+    
+    JUSTE UN EXEMPLE     -->
  

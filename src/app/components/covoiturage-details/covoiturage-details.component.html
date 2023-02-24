@@ -61,6 +61,25 @@
             </div>
         </div>
         <div formGroupName="adresseDepart">
+
+            <div>
+                <label>Numero adresse</label>
+                <input type="text" formControlName="numero">
+                <div *ngIf="covoiturageFormGroup.get('adresseDepart.numero')?.invalid && covoiturageFormGroup.get('adresseDepart.numero')?.touched"
+                    class="error">
+                    Le numero est requise
+                </div>
+            </div>
+
+            <div>
+                <label>Complement Numero adresse</label>
+                <input type="text" formControlName="completNumero">
+                <div *ngIf="covoiturageFormGroup.get('adresseDepart.completNumero')?.invalid && covoiturageFormGroup.get('adresseDepart.completNumero')?.touched"
+                    class="error">
+                    Le complement numero est requise
+                </div>
+            </div>
+
             <div>
                 <label>Voie</label>
                 <input type="text" formControlName="voie">
@@ -77,6 +96,17 @@
                     La ville est invalide
                 </div>
             </div>
+
+            <div>
+                <label>Code Postal</label>
+                <input type="text" formControlName="codePostal">
+                <div *ngIf="covoiturageFormGroup.get('adresseDepart.codePostal')?.invalid && covoiturageFormGroup.get('adresseDepart.codePostal')?.touched"
+                    class="error">
+                    Le code postal est invalide
+                </div>
+            </div>
+
+
             <div>
                 <label>Departement</label>
                 <input type="text" formControlName="departement">
@@ -96,14 +126,39 @@
             </div>
         </div>
        <div formGroupName="adresseArrivee">
-            <div>
-                <label>Voie</label>
-                <input type="text" formControlName="voie">
-                <div *ngIf="covoiturageFormGroup.get('adresseArrivee.voie')?.invalid && covoiturageFormGroup.get('adresseArrivee.voie')?.touched"
+
+
+        <div>
+            <label>Numero</label>
+            <input type="text" formControlName="numero">
+            <div *ngIf="covoiturageFormGroup.get('adresseArrivee.numero')?.invalid && covoiturageFormGroup.get('adresseArrivee.numero')?.touched"
+                class="error">
+                Le numero est requise
+            </div>
+        </div>
+
+
+        <div>
+            <label>Complement Numero</label>
+            <input type="text" formControlName="completNumero">
+            <div *ngIf="covoiturageFormGroup.get('adresseArrivee.completNumero')?.invalid && covoiturageFormGroup.get('adresseArrivee.completNumero')?.touched"
+                class="error">
+                Le complement numero est requise
+            </div>
+        </div>
+
+
+        <div>
+            <label>Voie</label>
+            <input type="text" formControlName="voie">
+            <div *ngIf="covoiturageFormGroup.get('adresseArrivee.voie')?.invalid && covoiturageFormGroup.get('adresseArrivee.voie')?.touched"
                     class="error">
                     La voie est requise
-                </div>
             </div>
+        </div>
+
+
+
             <div>
                 <label>Ville</label>
                 <input type="text" formControlName="ville">
@@ -142,3 +197,5 @@
       <button class='edit' routerLink="../../list-covoiturage">Retour</button> <!-- mettre route de redirection ici-->
 
 </div>
+
+

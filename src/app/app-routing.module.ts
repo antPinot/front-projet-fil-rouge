@@ -12,6 +12,14 @@ import { NewReservationVehiculeSocieteComponent } from './components/new-reserva
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
+<<<<<<< HEAD
+import { VehiculeServiceComponent } from './components/vehicule-service/vehicule-service.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+
+
+=======
+>>>>>>> 8ff185f3104d95cdc77b3f9e53f05e372123ff3a
 
 const routes: Routes = [
   {path: 'vehicule-personnel/create', component: NewVehiculePersonnelComponent},
@@ -21,10 +29,17 @@ const routes: Routes = [
   {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent},
   {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
   {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent},
+<<<<<<< HEAD
+  {path: 'Login', component: LoginComponent},
+  {path: 'Logout', component: LogoutComponent},
+
+  {path: '', redirectTo: 'Login'}, /**redirection */
+=======
   {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent},
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent},
   {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent},
+>>>>>>> 8ff185f3104d95cdc77b3f9e53f05e372123ff3a
 
   {
     path: 'covoiturage/:id/edit', 

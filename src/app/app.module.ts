@@ -29,6 +29,8 @@ import { ListReservationVehiculeSocieteComponent } from './components/list-reser
 import { SingleReservationVehiculeComponent } from './components/single-reservation-vehicule/single-reservation-vehicule.component';
 import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
 import { MatCarouselModule } from 'ng-mat-carousel';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
  
 @NgModule({
   declarations: [
@@ -49,11 +51,7 @@ import { MatCarouselModule } from 'ng-mat-carousel';
     CovoiturageListComponent ,
     SingleCovoiturageComponent,
     CovoiturageDetailsComponent,
-    HeaderComponent,
-    EditVehiculePersonnelComponent,
-    ListReservationVehiculeSocieteComponent,
-    SingleReservationVehiculeComponent,
-    NewReservationVehiculeSocieteComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
