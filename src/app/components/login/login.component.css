@@ -1,0 +1,23 @@
+.form_container{
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.form_container .group{
+    margin-bottom: 15px;
+     
+}
+
+.form_container label{
+    display: block;
+     
+}
+
+
+.form_container button{
+    width: 150px;
+    margin: 0 auto;
+}
+
+ 

@@ -1,1 +1,29 @@
 <p>login works!</p>
+<div class="form_container">
+
+  <form name="form" #f="ngForm">
+
+    <div class="group">
+        <label for="email">email</label>
+        <input type="text" name="email" id="email" [(ngModel)]="form.email" #email="ngModel">
+    </div>
+    <div>
+        <label for="password">password</label>
+        <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel">
+    </div>
+
+    <div class="group">
+        <button> login</button>
+    </div>
+  </form>
+
+
+
+  <div>
+
+    <div> test email : {{form.email}}</div>
+    
+    <div> test password : {{form.password}}</div>
+  </div>
+
+</div>

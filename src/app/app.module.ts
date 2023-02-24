@@ -22,7 +22,7 @@ import { SearchCovoiturageComponent } from './components/search-covoiturage/sear
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { SingleCovoiturageComponent } from './components/single-covoiturage/single-covoiturage.component';
 import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
 import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
@@ -62,6 +62,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
