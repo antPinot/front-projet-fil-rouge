@@ -1,1 +1,40 @@
 <p>login works!</p>
+<div class="form_container">
+
+  <form name="form"
+   #f="ngForm"
+   (ngSubmit)="f.form.valid && onSubmit()"
+  
+  >
+
+    <div class="group">
+        <label for="email">email</label>
+        <input type="text" name="email" id="email" [(ngModel)]="form.email" #email="ngModel" required>
+        <div class="form_error" *ngIf="email.errors && f.submitted">
+            email requis.
+        </div>
+    </div>
+    <div>
+        <label for="password">password</label>
+        <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel" required minlength="5">
+        <div class="form_error" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']"> mots de passe requis .</div>
+            <div *ngIf="password.errors['minlength']"> mot de passe incomplet .</div>
+        </div>
+    </div>
+
+    <div class="group">
+        <button> login</button>
+    </div>
+  </form>
+
+
+
+  <div>
+
+    <div> test email : {{form.email}}</div>
+    
+    <div> test password : {{form.password}}</div>
+  </div>
+
+</div>
