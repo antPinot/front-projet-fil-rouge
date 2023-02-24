@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { VehiculePersonnel } from 'src/app/models/vehicule-personnel';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
@@ -14,7 +15,7 @@ import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.se
 })
 export class SingleVehiculePersonnelComponent implements OnInit{
 
-  constructor(private vehiculePersonnelService: VehiculePersonnelService) { }
+  constructor(private vehiculePersonnelService: VehiculePersonnelService, private router:Router) { }
 
   @Input()
   vehiculePersonnel!: VehiculePersonnel
@@ -35,6 +36,11 @@ export class SingleVehiculePersonnelComponent implements OnInit{
     if (vehiculePersonnelId) {
       this.vehiculePersonnelService.deleteVehiculePersonnel(vehiculePersonnelId).subscribe();
     }
+  }
+
+  onEdit(){
+    this.vehiculePersonnelService.vehiculePersonnelToEdit = this.vehiculePersonnel;
+    this.router.navigateByUrl('vehicule-personnel/edit');
   }
 
 }

@@ -6,6 +6,35 @@
         <a class="navbar-brand" routerLink="vehicule-personnel/list" routerLinkActive="active">Mes véhicules personnels</a>
         <a class="navbar-brand" routerLink="covoiturage/list-covoiturage" routerLinkActive="active">Mes annonces</a>
         <a class="navbar-brand" routerLink="covoiturage/create" routerLinkActive="active">Créer une annonce</a>
+
+        <a class="navbar-brand" [matMenuTriggerFor]="vehiculeSocieteReservation">Mes réservations de véhicule</a>
+        <mat-menu #vehiculeSocieteReservation = "matMenu">
+          <button mat-menu-item routerLink='vehicule-societe/reservation/list'>Mes réservations</button>
+          <button mat-menu-item>Réserver un véhicule</button>
+        </mat-menu>
+
+        <a class="navbar-brand" [matMenuTriggerFor]="administrateur">Administrateur</a>
+        <mat-menu #administrateur = "matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="collaborateurs">Collaborateurs</button>
+          <button mat-menu-item [matMenuTriggerFor]="vehiculeSociete">Véhicules de Société</button>
+        </mat-menu>
+
+        <mat-menu #collaborateurs="matMenu">
+          <button mat-menu-item>Créer un collaborateur</button>
+          <button mat-menu-item>Modifier un collaborateur</button>
+          <button mat-menu-item>Supprimer un collaborateur</button>
+        </mat-menu>
+
+        <mat-menu #vehiculeSociete="matMenu">
+          <button mat-menu-item routerLink="vehicule-societe" routerLinkActive="active">Lister les véhicules de société</button>
+          <button mat-menu-item routerLink="vehicule-societe/create" routerLinkActive="active">Créer un véhicule de société</button>
+          <button mat-menu-item>Modifier un véhicule de société</button>
+          <button mat-menu-item>Supprimer un véhicule de société</button>
+          <button mat-menu-item>Lister les réservations en cours</button>
+        </mat-menu>
+        
+
+
       </nav>
 </header>
 

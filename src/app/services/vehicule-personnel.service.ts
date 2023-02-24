@@ -14,6 +14,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class VehiculePersonnelService {
 
+  vehiculePersonnelToEdit!: VehiculePersonnel
+
   vehiculePersonnelListByCollaborateurId$ = new BehaviorSubject<VehiculePersonnel[]>([])
 
   constructor(private http:HttpClient) { }
@@ -26,6 +28,10 @@ export class VehiculePersonnelService {
    */
   createVehiculePersonnel(vehiculePersonnel : VehiculePersonnel): Observable<VehiculePersonnel>{
     return this.http.post<VehiculePersonnel>('http://localhost:8080/rest/vehicule-personnel', vehiculePersonnel);
+  }
+
+  editVehiculePersonnel(vehiculePersonnel : VehiculePersonnel): Observable<VehiculePersonnel>{
+    return this.http.put<VehiculePersonnel>('http://localhost:8080/rest/vehicule-personnel', vehiculePersonnel);
   }
 
   /**
