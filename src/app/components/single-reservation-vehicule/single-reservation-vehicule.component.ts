@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReservationVehiculeSociete } from 'src/app/models/reservationVehiculeSociete.model';
 import { ReservationVehiculeService } from 'src/app/services/reservation-vehicule.service';
 
@@ -12,10 +13,11 @@ export class SingleReservationVehiculeComponent{
   @Input()
   reservationVehicule!: ReservationVehiculeSociete
 
-  constructor(private reservationVehiculeService: ReservationVehiculeService){}
+  constructor(private reservationVehiculeService: ReservationVehiculeService, private router:Router){}
 
-  onUpdate(){
-
+  onEdit(){
+    this.reservationVehiculeService.reservationVehiculeSocieteToEdit = this.reservationVehicule;
+    this.router.navigateByUrl('vehicule-societe/reservation/edit')
   }
 
   onDelete(){

@@ -30,6 +30,7 @@ import { SingleReservationVehiculeComponent } from './components/single-reservat
 import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { EditReservationVehiculeComponent } from './components/edit-reservation-vehicule/edit-reservation-vehicule.component';
  
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     EditVehiculePersonnelComponent,
     ListReservationVehiculeSocieteComponent,
     SingleReservationVehiculeComponent,
-    NewReservationVehiculeSocieteComponent
+    NewReservationVehiculeSocieteComponent,
+    EditReservationVehiculeComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
+import { EditReservationVehiculeComponent } from './components/edit-reservation-vehicule/edit-reservation-vehicule.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
 import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent},
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent},
   {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent},
+  {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent},
 
   {
     path: 'covoiturage/:id/edit', 

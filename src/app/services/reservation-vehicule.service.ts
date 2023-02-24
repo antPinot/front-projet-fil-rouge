@@ -9,6 +9,8 @@ import { VehiculeSociete } from '../models/vehicule-societe';
 })
 export class ReservationVehiculeService {
 
+  reservationVehiculeSocieteToEdit!: ReservationVehiculeSociete
+
   listReservationVehicule$ = new BehaviorSubject<ReservationVehiculeSociete[]>([])
 
   listVehicule$ = new BehaviorSubject<VehiculeSociete[]>([])
@@ -37,7 +39,9 @@ export class ReservationVehiculeService {
     )
   }
 
-
+  updateReservationVehiculeSociete(reservationVehiculeSociete: ReservationVehiculeSociete): Observable<ReservationVehiculeSociete>{
+    return this.http.put<ReservationVehiculeSociete>(`http://localhost:8080/rest/reservation-vehicule/${reservationVehiculeSociete.id}`, reservationVehiculeSociete);
+  }
 
 
 }
