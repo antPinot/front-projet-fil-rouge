@@ -28,6 +28,7 @@ import { EditVehiculePersonnelComponent } from './components/edit-vehicule-perso
 import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
 import { SingleReservationVehiculeComponent } from './components/single-reservation-vehicule/single-reservation-vehicule.component';
 import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
+import { MatCarouselModule } from 'ng-mat-carousel';
  
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { NewReservationVehiculeSocieteComponent } from './components/new-reserva
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    MatCarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

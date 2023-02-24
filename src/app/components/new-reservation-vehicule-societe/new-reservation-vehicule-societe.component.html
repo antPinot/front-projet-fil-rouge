@@ -1,1 +1,16 @@
-<p>new-reservation-vehicule-societe works!</p>
+<div class="container">
+    <form [formGroup]="reservationVehiculeSocieteForm" class="form-group">
+        <div>
+            <label for="dateDepart">Date de départ</label>
+            <input type="text" id="dateDepart" formControlName="dateDepart">
+            <div *ngIf="reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <div>
+            <label for="dateRetour">Date de retour</label>
+            <input type="text" id="dateRetour" formControlName="dateRetour">
+            <div *ngIf="reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required')" class="alert-message">Ce champ est requis</div>
+        </div>
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()" [disabled]="reservationVehiculeSocieteForm.invalid">Réserver le véhicule</button>
+    </form>
+    <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de vos véhicules</button>
+</div>

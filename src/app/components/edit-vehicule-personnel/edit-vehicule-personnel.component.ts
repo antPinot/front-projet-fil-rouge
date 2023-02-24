@@ -30,11 +30,11 @@ export class EditVehiculePersonnelComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehiculePersonnelToEditForm = this.formBuilder.group({
-      immatriculation: [null, [Validators.required, Validators.pattern('[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}')]],
-      marque: [null, Validators.required],
-      modele: [null, Validators.required],
-      places: [null, Validators.required],
-      limitePlace: [null, Validators.required]
+      immatriculation: [this.vehiculePersonnelToEdit.immatriculation, [Validators.required, Validators.pattern('[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}')]],
+      marque: [this.vehiculePersonnelToEdit.marque, Validators.required],
+      modele: [this.vehiculePersonnelToEdit.modele, Validators.required],
+      places: [this.vehiculePersonnelToEdit.places, Validators.required],
+      limitePlace: [this.vehiculePersonnelToEdit.limitePlace, Validators.required]
     },
       { validators: [limitePlacesValidator] })
   }

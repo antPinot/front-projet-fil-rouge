@@ -10,7 +10,7 @@
         <a class="navbar-brand" [matMenuTriggerFor]="vehiculeSocieteReservation">Mes réservations de véhicule</a>
         <mat-menu #vehiculeSocieteReservation = "matMenu">
           <button mat-menu-item routerLink='vehicule-societe/reservation/list'>Mes réservations</button>
-          <button mat-menu-item>Réserver un véhicule</button>
+          <button mat-menu-item routerLink='vehicule-societe/reservation/create'>Réserver un véhicule</button>
         </mat-menu>
 
         <a class="navbar-brand" [matMenuTriggerFor]="administrateur">Administrateur</a>
