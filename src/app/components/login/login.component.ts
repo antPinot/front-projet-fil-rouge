@@ -1,5 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+ 
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+
+
+/**INTERFACE credentials */
+interface ICredentials{
+  email: string,
+  password: string
+}
+
+/**interface token */
+interface IToken{
+  access_token: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -8,24 +21,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-constructor(private http: HttpClient){}
+constructor( private authService: AuthService){}
 
 /**objet form */
-form: any ={
+form: ICredentials ={
 
-  email: null,
-  password: null
+  email: '',
+  password: '',
 
 }
 
-  onSubmit(){
+  onSubmit(): void{
     console.log(this.form);
     
 
-    /**ici la route ne marche pas car pas ENCORE implementer dans le back  */
-    this.http.post('http://localhost:8080/rest/Login', this.form).subscribe(
+    /**appel au service  */
+    this.authService.login(this.form).subscribe(
 
-      data => console.log(data),
+      (data:IToken) => console.log(data.access_token),
       error => console.log(error)
     );
   }
