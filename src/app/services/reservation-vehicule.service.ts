@@ -23,6 +23,12 @@ export class ReservationVehiculeService {
     );
   }
 
+  getAllVehiculeSociete() : Observable <VehiculeSociete[]>{
+    return this.http.get<VehiculeSociete[]>('http://localhost:8080/rest/vehicule-societe').pipe(
+      tap((allVehicules) => this.listVehicule$.next(allVehicules))
+    );
+  }
+
   getVehiculeSocieteDispoByDates(dateDepart: string, dateRetour: string): Observable<VehiculeSociete[]>{
     return this.http.get<VehiculeSociete[]>(`http://localhost:8080/rest/vehicule-societe/searchVehiculeSocietes?dateDepart=${dateDepart}&dateRetour=${dateRetour}`).pipe(
       tap((listVehiculeSocieteDispo) => this.listVehicule$.next(listVehiculeSocieteDispo))
@@ -40,7 +46,7 @@ export class ReservationVehiculeService {
   }
 
   updateReservationVehiculeSociete(reservationVehiculeSociete: ReservationVehiculeSociete): Observable<ReservationVehiculeSociete>{
-    return this.http.put<ReservationVehiculeSociete>(`http://localhost:8080/rest/reservation-vehicule/${reservationVehiculeSociete.id}`, reservationVehiculeSociete);
+    return this.http.put<ReservationVehiculeSociete>(`http://localhost:8080/rest/reservation-vehicule/MAJReservation/${reservationVehiculeSociete.id}`, reservationVehiculeSociete);
   }
 
 

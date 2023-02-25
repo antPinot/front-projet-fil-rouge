@@ -46,7 +46,6 @@ export class EditVehiculePersonnelComponent implements OnInit {
     this.vehiculePersonnelToEdit.places = this.vehiculePersonnelToEditForm.value.places;
     this.vehiculePersonnelToEdit.limitePlace = this.vehiculePersonnelToEditForm.value.limitePlace;
     this.vehiculePersonnelToEdit.collaborateursId = [1]
-    console.log(this.vehiculePersonnelToEdit)
     this.vehiculePersonnelService.editVehiculePersonnel(this.vehiculePersonnelToEdit).pipe(
       tap(() => this.vehiculePersonnelService.getVehiculePersonnelListByCollaborateurId(1).subscribe())
     ).subscribe();
