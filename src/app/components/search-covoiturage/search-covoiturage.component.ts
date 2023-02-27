@@ -18,6 +18,8 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   searchResults$ = this.reservationCovoiturageService.listCovoiturageByDateDepart$;
 
+  minDate = new Date();
+
   constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService,
     private adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private locale:string) { }
 
@@ -34,7 +36,6 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   onSearch() {
     if (this.collaborateurId) {
-      //console.log(this.searchForm.value.searchDateDepart)
       let formattedDate = moment(this.searchForm.value.searchDateDepart).format("DD/MM/YYYY");
       this.reservationCovoiturageService.getCovoiturageByDateDepart(this.collaborateurId, formattedDate).subscribe();
     }

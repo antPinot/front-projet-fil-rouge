@@ -1,11 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { tap } from 'rxjs';
 import { ReservationVehiculeSociete } from 'src/app/models/reservationVehiculeSociete.model';
 import { VehiculeSociete } from 'src/app/models/vehicule-societe';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationVehiculeService } from 'src/app/services/reservation-vehicule.service';
+
+const coherentDateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const dateDepart = control.get('dateDepart')?.value;
+  const dateRetour = control.get('dateRetour')?.value;
+  if (dateDepart !== null && dateRetour !== null && moment(dateDepart).isBefore(dateRetour)) {
+    return null
+  } else {
+    return { 'minDate': true }
+  }
+}
 
 @Component({
   selector: 'app-new-reservation-vehicule-societe',
@@ -13,6 +24,8 @@ import { ReservationVehiculeService } from 'src/app/services/reservation-vehicul
   styleUrls: ['./new-reservation-vehicule-societe.component.css']
 })
 export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy {
+  
+  currentDate = new Date();
 
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
@@ -33,7 +46,8 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
     this.reservationVehiculeSocieteForm = this.formBuilder.group({
       dateDepart: [null, Validators.required],
       dateRetour: [null, Validators.required]
-    })
+    },
+    {validators: [coherentDateValidator]})
   }
 
   ngOnDestroy(): void {
@@ -60,8 +74,10 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
 
   onSubmitForm() {
     if (this.collaborateurId) {
-      this.reservationVehiculeSociete.dateDepart = this.reservationVehiculeSocieteForm.value.dateDepart;
-      this.reservationVehiculeSociete.dateRetour = this.reservationVehiculeSocieteForm.value.dateRetour;
+      let formattedDateDepart = moment(this.reservationVehiculeSocieteForm.value.dateDepart).format("DD/MM/YYYY HH:mm")
+      let formattedDateRetour = moment(this.reservationVehiculeSocieteForm.value.dateRetour).format("DD/MM/YYYY HH:mm")
+      this.reservationVehiculeSociete.dateDepart = formattedDateDepart;
+      this.reservationVehiculeSociete.dateRetour = formattedDateRetour;
       this.reservationVehiculeSociete.collaborateurId = this.collaborateurId
       this.reservationVehiculeSociete.vehiculeSocieteId = this.currentVehiculeSociete.id;
       this.reservationVehiculeSociete.vehiculeSociete = this.currentVehiculeSociete;
@@ -74,7 +90,11 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
   }
 
   onSearch() {
-    this.reservationVehiculeService.getVehiculeSocieteDispoByDates(this.reservationVehiculeSocieteForm.value.dateDepart, this.reservationVehiculeSocieteForm.value.dateRetour).pipe(
+    let formattedDateDepart = moment(this.reservationVehiculeSocieteForm.value.dateDepart).format("DD/MM/YYYY HH:mm")
+    let formattedDateRetour = moment(this.reservationVehiculeSocieteForm.value.dateRetour).format("DD/MM/YYYY HH:mm")
+    console.log(this.reservationVehiculeSocieteForm.value.dateDepart, this.reservationVehiculeSocieteForm.value.dateRetour)
+    console.log(formattedDateDepart, formattedDateRetour)
+    this.reservationVehiculeService.getVehiculeSocieteDispoByDates(formattedDateDepart, formattedDateRetour).pipe(
       tap((vehiculesSociete) => {
         this.currentVehiculeSociete = vehiculesSociete[0]
         vehiculesSociete.length == 0 ? this.emptyResult = true : this.emptyResult = false

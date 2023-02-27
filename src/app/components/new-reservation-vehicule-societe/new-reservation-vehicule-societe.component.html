@@ -30,20 +30,28 @@
                 <form [formGroup]="reservationVehiculeSocieteForm" class="form-group">
                     <div>
                         <label for="dateDepart">Date de départ</label>
-                        <input type="text" id="dateDepart" formControlName="dateDepart">
+                        <input type="text" id="dateDepart" formControlName="dateDepart" matInput
+                            [ngxMatDatetimePicker]="dateDepartPicker" [min]="currentDate">
+                        <mat-datepicker-toggle matIconSuffix [for]="$any(dateDepartPicker)"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #dateDepartPicker [showSeconds]="false"></ngx-mat-datetime-picker>
                         <div *ngIf="reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')"
                             class="alert-message">Ce champ est requis</div>
                     </div>
                     <div>
                         <label for="dateRetour">Date de retour</label>
-                        <input type="text" id="dateRetour" formControlName="dateRetour">
+                        <input type="text" id="dateRetour" formControlName="dateRetour" matInput
+                            [ngxMatDatetimePicker]="dateRetourPicker">
+                        <mat-datepicker-toggle matIconSuffix [for]="$any(dateRetourPicker)"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #dateRetourPicker [showSeconds]="false"></ngx-mat-datetime-picker>
                         <div *ngIf="reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required')"
-                            class="alert-message">Ce champ est requis</div>
+                            class="alert-message danger">Ce champ est requis</div>
+                        <div *ngIf="reservationVehiculeSocieteForm.errors?.['minDate']" class="alert alert-danger">Entrez une
+                            date de retour postérieure à la date de départ</div>
                     </div>
                     <button mat-raised-button color="accent" (click)="onSearch()"
-                        [disabled]="reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required') || reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')">Rechercher</button>
+                        [disabled]="reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required') || reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required') || reservationVehiculeSocieteForm.errors?.['minDate']">Rechercher</button>
                     <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()"
-                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required') || reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')">Réserver
+                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required') || reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required') || reservationVehiculeSocieteForm.errors?.['minDate']">Réserver
                         le véhicule</button>
                 </form>
                 <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de

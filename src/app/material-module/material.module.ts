@@ -9,6 +9,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 
 
 
@@ -25,8 +27,10 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatCardModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatMomentDateModule
-
+    MatMomentDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule
   ],
   exports:[
     MatButtonModule,
@@ -36,7 +40,10 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatMenuModule,
     MatCardModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule
   ]
 })
 export class MaterialModule { }
