@@ -29,6 +29,13 @@
   </form>
 
 
+  <div *ngIf="isLoggedIn()">
+    <div class="group">
+      <button (click)="onLogout()">logout</button>
+    </div>
+  </div>
+
+
 
   <div>
 

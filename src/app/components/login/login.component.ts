@@ -18,6 +18,9 @@ constructor(
    private tokenService: TokenService
   ){}
 
+
+  
+
 /**objet form */
 form: ICredentials ={
 
@@ -33,11 +36,36 @@ form: ICredentials ={
     /**appel au service  */
     this.authService.login(this.form).subscribe(
       data => {
-        console.log(data.access_token)
-        this.tokenService.saveToken(data.access_token)
+        console.log('Response:', data);
+        const token = data && data.token;
+        console.log('Access token:', token);
+        if (token) {
+          this.tokenService.saveToken(token);
+        } else {
+          console.error('Error: Token value is undefined');
+        }
       },
       error => console.log(error)
     );
   }
-  ngOnInit(): void{}
+
+
+
+  /**methode pour savoir si user est connecté */
+  
+
+  /**methode onLogout au click  FONCTIONNE*/
+  onLogout(){
+    console.log("coucou");
+    return this.tokenService.clearToken();
+  }
+   
+  ngOnInit(): void {
+    
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.tokenService.getToken(); // renvoie true si le token existe, false sinon
+  }
+   
 }
