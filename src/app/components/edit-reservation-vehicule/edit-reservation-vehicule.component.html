@@ -1,11 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <mat-card *ngIf="emptyResult">
-                <mat-card-content>
-                    <strong>Aucun véhicule disponible</strong>
-                </mat-card-content>
-            </mat-card>
             <mat-card *ngIf="currentVehiculeSociete">
                 <div class="container">
                     <div class="row">
@@ -27,28 +22,27 @@
         </div>
         <div class="col">
             <div class="container">
-                <form [formGroup]="reservationVehiculeSocieteForm" class="form-group">
+                <form [formGroup]="reservationVehiculeEditForm" class="form-group">
                     <div>
-                        <label for="dateDepart">Date de départ</label>
+                        <label for="dateDepart">Modèle</label>
                         <input type="text" id="dateDepart" formControlName="dateDepart">
-                        <div *ngIf="reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')"
+                        <div *ngIf="reservationVehiculeEditForm.get('dateDepart')?.hasError('required')"
                             class="alert-message">Ce champ est requis</div>
                     </div>
                     <div>
-                        <label for="dateRetour">Date de retour</label>
+                        <label for="dateRetour">Places</label>
                         <input type="text" id="dateRetour" formControlName="dateRetour">
-                        <div *ngIf="reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required')"
+                        <div *ngIf="reservationVehiculeEditForm.get('dateRetour')?.hasError('required')"
                             class="alert-message">Ce champ est requis</div>
                     </div>
-                    <button mat-raised-button color="accent" (click)="onSearch()"
-                        [disabled]="reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required') || reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')">Rechercher</button>
+                    <button mat-raised-button color="accent"
+                        [disabled]="reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required')">Rechercher</button>
                     <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()"
-                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeSocieteForm.get('dateRetour')?.hasError('required') || reservationVehiculeSocieteForm.get('dateDepart')?.hasError('required')">Réserver
-                        le véhicule</button>
+                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required')">Modifier 
+                        la réservation</button>
                 </form>
                 <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de
-                    vos
-                    véhicules</button>
+                    vos réservations</button>
             </div>
         </div>
     </div>

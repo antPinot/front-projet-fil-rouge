@@ -6,5 +6,7 @@ export interface ReservationVehiculeSociete{
     dateDepart?: string,
     dateRetour?: string,
     collaborateur?: Collaborateur,
-    vehiculeSociete?: VehiculeSociete
+    vehiculeSociete?: VehiculeSociete,
+    collaborateurId?: number,
+    vehiculeSocieteId?: number
 }

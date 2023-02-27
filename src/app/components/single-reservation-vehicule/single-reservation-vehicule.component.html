@@ -15,5 +15,11 @@
         <div class="col">
             Modèle : {{reservationVehicule.vehiculeSociete?.modele}}
         </div>
+        <div class="col">
+            <div class="container">
+                <button class="row" mat-raised-button color="primary" (click)="onEdit()">Modifier</button>
+                <button class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+            </div> 
+        </div>
     </div>
 </div>

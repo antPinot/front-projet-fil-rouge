@@ -27,7 +27,9 @@ export class VehiculePersonnelService {
    * @returns 
    */
   createVehiculePersonnel(vehiculePersonnel : VehiculePersonnel): Observable<VehiculePersonnel>{
-    return this.http.post<VehiculePersonnel>('http://localhost:8080/rest/vehicule-personnel', vehiculePersonnel);
+    return this.http.post<VehiculePersonnel>('http://localhost:8080/rest/vehicule-personnel', vehiculePersonnel).pipe(
+      tap((vehiculeToCreate) => console.log(vehiculeToCreate))
+    );
   }
 
   editVehiculePersonnel(vehiculePersonnel : VehiculePersonnel): Observable<VehiculePersonnel>{
