@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Covoiturage } from 'src/app/models/covoiturage';
+import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 import { DetailReservationCovoiturageComponent } from '../detail-reservation-covoiturage/detail-reservation-covoiturage.component';
 
@@ -10,19 +11,21 @@ import { DetailReservationCovoiturageComponent } from '../detail-reservation-cov
   templateUrl: './single-reservation-covoiturage.component.html',
   styleUrls: ['./single-reservation-covoiturage.component.css']
 })
-export class SingleReservationCovoiturageComponent implements OnInit{
+export class SingleReservationCovoiturageComponent implements OnInit {
 
   @Input()
   reservationCovoiturage!: Covoiturage
+
+  collaborateurId?= this.authService.currentCollaborateur?.id;
 
   enCours = this.reservationCovoiturageService.enCours;
 
   reservable!: boolean
 
-  constructor(private dialog: MatDialog, private reservationCovoiturageService: ReservationCovoiturageService, private router:Router) { }
+  constructor(private dialog: MatDialog, private reservationCovoiturageService: ReservationCovoiturageService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    if (this.reservationCovoiturage.collaborateurs?.find(c => c.id == 2)){
+    if (this.reservationCovoiturage.collaborateurs?.find(c => c.id == this.collaborateurId)) {
       this.reservable = false;
     } else {
       this.reservable = true;
@@ -41,14 +44,17 @@ export class SingleReservationCovoiturageComponent implements OnInit{
         nbPersonnes: this.reservationCovoiturage.nbPersonnes,
         dureeTrajet: this.reservationCovoiturage.dureeTrajet,
         distance: this.reservationCovoiturage.distance,
-        organisateur : this.reservationCovoiturage.organisateur,
+        organisateur: this.reservationCovoiturage.organisateur,
         vehiculePersonnel: this.reservationCovoiturage.vehiculePersonnel
       }
     },)
   }
 
-  onDelete(){
-    this.reservationCovoiturageService.annulerReservationCovoiturage(2, this.reservationCovoiturage).subscribe()
+  onDelete() {
+    if (this.collaborateurId) {
+      this.reservationCovoiturageService.annulerReservationCovoiturage(this.collaborateurId, this.reservationCovoiturage).subscribe()
+    }
+
   }
 
 }

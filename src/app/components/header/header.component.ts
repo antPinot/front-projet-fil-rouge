@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { IToken } from 'src/app/models/token';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,8 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
-  //logoutToken = this.authService.currentToken
 
   constructor(private authService: AuthService, private router:Router){ }
 

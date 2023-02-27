@@ -1,7 +1,7 @@
 .form_container{
     width: 300px;
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 135px;
+    margin-top: 20px;
 }
 
 .form_container .group{
@@ -24,4 +24,10 @@
     color : red;
 }
 
+mat-card{
+    min-height: 200px;
+    width: 500px;
+    margin: auto;
+    margin-top: 8%;
+}
  

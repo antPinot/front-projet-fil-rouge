@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { VehiculeSociete } from 'src/app/models/vehicule-societe';
+import { AuthService } from 'src/app/services/auth.service';
 import { ReservationVehiculeService } from 'src/app/services/reservation-vehicule.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { ReservationVehiculeService } from 'src/app/services/reservation-vehicul
 })
 export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
 
+  collaborateurId?= this.authService.currentCollaborateur?.id;
+
   reservationVehiculeToEdit = this.reservationVehiculeService.reservationVehiculeSocieteToEdit;
 
   listVehiculeSociete$ = this.reservationVehiculeService.listVehicule$
@@ -20,7 +23,7 @@ export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
 
   currentVehiculeSociete = this.reservationVehiculeService.reservationVehiculeSocieteToEdit.vehiculeSociete;
 
-  constructor(private reservationVehiculeService: ReservationVehiculeService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private reservationVehiculeService: ReservationVehiculeService, private formBuilder: FormBuilder, private router: Router, private authService:AuthService) { }
 
   ngOnInit(): void {
     this.reservationVehiculeEditForm = this.formBuilder.group({
@@ -65,7 +68,7 @@ export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
     this.reservationVehiculeToEdit.collaborateurId = this.reservationVehiculeToEdit.collaborateur?.id;
     this.reservationVehiculeToEdit.vehiculeSocieteId = this.reservationVehiculeToEdit.vehiculeSociete?.id;
     this.reservationVehiculeService.updateReservationVehiculeSociete(this.reservationVehiculeToEdit).pipe(
-      tap(() => this.reservationVehiculeService.getReservationVehiculeSocieteByCollaborateur(1, 'en-cours')),
+      tap(() => this.reservationVehiculeService.getReservationVehiculeSocieteByCollaborateur(this.collaborateurId, 'en-cours')),
       tap(() => this.router.navigateByUrl('vehicule-societe/reservation/list'))
     ).subscribe();
   }

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { VehiculePersonnel } from 'src/app/models/vehicule-personnel';
+import { AuthService } from 'src/app/services/auth.service';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
 /**
@@ -13,14 +14,14 @@ import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.se
  * @param control 
  * @returns ValidationsErros ou null 
  */
-const limitePlacesValidator : ValidatorFn = (control: AbstractControl) : ValidationErrors | null => {
-    const places = control.get('places')?.value;
-    const limitePlace = control.get('limitePlace')?.value;
-    if (places !== null && limitePlace !== null && places > limitePlace){
-      return null
-    } else{
-      return {'invalidLimitePlace' : true}
-    }
+const limitePlacesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const places = control.get('places')?.value;
+  const limitePlace = control.get('limitePlace')?.value;
+  if (places !== null && limitePlace !== null && places > limitePlace) {
+    return null
+  } else {
+    return { 'invalidLimitePlace': true }
+  }
 }
 
 /**
@@ -34,13 +35,15 @@ const limitePlacesValidator : ValidatorFn = (control: AbstractControl) : Validat
   templateUrl: './new-vehicule-personnel.component.html',
   styleUrls: ['./new-vehicule-personnel.component.css']
 })
-export class NewVehiculePersonnelComponent implements OnInit{
+export class NewVehiculePersonnelComponent implements OnInit {
+
+  collaborateurId?= this.authService.currentCollaborateur?.id;
 
   vehiculePersonnelForm!: FormGroup;
   vehiculePersonnelToCreate: VehiculePersonnel = {
   }
 
-  constructor(private formBuilder: FormBuilder, private router:Router, private vehiculePersonnelService: VehiculePersonnelService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private vehiculePersonnelService: VehiculePersonnelService, private authService: AuthService) { }
 
   /**
    * Initialisation du formulaire avec les validateurs
@@ -54,7 +57,7 @@ export class NewVehiculePersonnelComponent implements OnInit{
       places: [null, Validators.required],
       limitePlace: [null, Validators.required]
     },
-    {validators: [limitePlacesValidator]})
+      { validators: [limitePlacesValidator] })
   }
 
   /**
@@ -64,16 +67,17 @@ export class NewVehiculePersonnelComponent implements OnInit{
    * de création d'un collaborateur
    * 
    */
-  onSubmitForm(){
-    this.vehiculePersonnelToCreate.immatriculation = this.vehiculePersonnelForm.value.immatriculation;
-    this.vehiculePersonnelToCreate.marque = this.vehiculePersonnelForm.value.marque;
-    this.vehiculePersonnelToCreate.modele = this.vehiculePersonnelForm.value.modele;
-    this.vehiculePersonnelToCreate.places = this.vehiculePersonnelForm.value.places;
-    this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlace;
-    this.vehiculePersonnelToCreate.collaborateursId = [1]
-    console.log(this.vehiculePersonnelToCreate)
+  onSubmitForm() {
+    if (this.collaborateurId) {
+      this.vehiculePersonnelToCreate.immatriculation = this.vehiculePersonnelForm.value.immatriculation;
+      this.vehiculePersonnelToCreate.marque = this.vehiculePersonnelForm.value.marque;
+      this.vehiculePersonnelToCreate.modele = this.vehiculePersonnelForm.value.modele;
+      this.vehiculePersonnelToCreate.places = this.vehiculePersonnelForm.value.places;
+      this.vehiculePersonnelToCreate.limitePlace = this.vehiculePersonnelForm.value.limitePlace;
+      this.vehiculePersonnelToCreate.collaborateursId = [this.collaborateurId];
+    }
     this.vehiculePersonnelService.createVehiculePersonnel(this.vehiculePersonnelToCreate).pipe(
-      tap(() => this.vehiculePersonnelService.getVehiculePersonnelListByCollaborateurId(1).subscribe())
+      tap(() => this.vehiculePersonnelService.getVehiculePersonnelListByCollaborateurId(this.collaborateurId).subscribe())
     ).subscribe();
     this.router.navigateByUrl('vehicule-personnel/list')
   }

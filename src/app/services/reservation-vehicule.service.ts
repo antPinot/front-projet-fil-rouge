@@ -17,7 +17,7 @@ export class ReservationVehiculeService {
 
   constructor(private http:HttpClient) { }
 
-  getReservationVehiculeSocieteByCollaborateur(collaborateurId: number, state: string): Observable<ReservationVehiculeSociete[]>{
+  getReservationVehiculeSocieteByCollaborateur(collaborateurId: number | undefined, state: string): Observable<ReservationVehiculeSociete[]>{
     return this.http.get<ReservationVehiculeSociete[]>(`http://localhost:8080/rest/reservation-vehicule/?collaborateurId=${collaborateurId}&state=${state}`).pipe(
       tap((listReservations) => this.listReservationVehicule$.next(listReservations))
     );

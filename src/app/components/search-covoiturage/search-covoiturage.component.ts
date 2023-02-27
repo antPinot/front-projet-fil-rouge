@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
 @Component({
@@ -11,16 +12,18 @@ import { ReservationCovoiturageService } from 'src/app/services/reservation-covo
 })
 export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
+  collaborateurId?= this.authService.currentCollaborateur?.id;
+
   searchForm!: FormGroup;
 
   searchResults$ = this.reservationCovoiturageService.listCovoiturageByDateDepart$;
-  
-  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private router:Router){}
+
+  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
-      searchDateDepart : [null]
+      searchDateDepart: [null]
     })
   }
 
@@ -28,8 +31,11 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
     this.searchResults$.next([]);
   }
 
-  onSearch(){
-    this.reservationCovoiturageService.getCovoiturageByDateDepart(2, this.searchForm.value.searchDateDepart).subscribe();
+  onSearch() {
+    if (this.collaborateurId) {
+      this.reservationCovoiturageService.getCovoiturageByDateDepart(this.collaborateurId, this.searchForm.value.searchDateDepart).subscribe();
+    }
+
   }
 
 

@@ -68,7 +68,6 @@ import { EditReservationVehiculeComponent } from './components/edit-reservation-
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-     
   ],
   providers: [],
   bootstrap: [AppComponent]
