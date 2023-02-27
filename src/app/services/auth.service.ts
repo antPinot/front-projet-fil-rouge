@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  url = 'http://localhost:8080/rest/Login'; /*url pas fonctionnel en back*/
+  url = 'http://localhost:8080/rest/collaborateur/login'; /*url pas fonctionnel en back*/
   
 
   constructor(private _http: HttpClient) { }
@@ -14,6 +14,7 @@ export class AuthService {
 
   /**methode login */
   login(credentials: any){
+    console.log(credentials)
    return this._http.post(this.url, credentials)
   }
 }
