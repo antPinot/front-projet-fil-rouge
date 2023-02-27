@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { IToken } from '../models/token';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class TokenService {
   constructor(private router: Router) { }
 
 
-  saveToken(token:string):void{
-    localStorage.setItem('token', token), /**je sauvergarde le token dans le localStorage */
-    this.router.navigate(['admin'])
+  saveToken(token:IToken):void{
+    localStorage.setItem('access_token', token.access_token) /**je sauvergarde le token dans le localStorage */
+    //localStorage.setItem('collaborateurId', token.collaborateurId);
   }
 }

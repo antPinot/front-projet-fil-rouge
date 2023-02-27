@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
 /**
@@ -13,16 +14,19 @@ import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.se
 })
 export class ListVehiculePersonnelComponent implements OnInit{
 
+  collaborateurId? = this.authService.currentCollaborateur?.id;
+
   vehiculePersonnelList$ = this.vehiculePersonnelService.vehiculePersonnelListByCollaborateurId$
 
-  constructor(private vehiculePersonnelService: VehiculePersonnelService){}
+  constructor(private vehiculePersonnelService: VehiculePersonnelService, private authService:AuthService){}
 
   /**
-   * Fait appel au service de VehiculePersonnel pour récupérer la liste des véhicules personnels en fonction d'en collaborateur.
+   * Fait appel au service de VehiculePersonnel pour récupérer la liste des véhicules personnels en fonction d'un collaborateur.
    */
   ngOnInit(): void {
-    this.vehiculePersonnelService.getVehiculePersonnelListByCollaborateurId(1).subscribe();
+    this.vehiculePersonnelService.getVehiculePersonnelListByCollaborateurId(this.collaborateurId).subscribe();
   }
 
+  
 
 }

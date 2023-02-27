@@ -1,10 +1,11 @@
- 
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICredentials } from 'src/app/models/credentials';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 
- 
+
 
 @Component({
   selector: 'app-login',
@@ -13,31 +14,39 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class LoginComponent implements OnInit {
 
-constructor( 
-   private authService: AuthService, 
-   private tokenService: TokenService
-  ){}
+  failedLogin!: boolean
 
-/**objet form */
-form: ICredentials ={
+  constructor(
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private router:Router
+  ) { }
 
-  email: '',
-  password: '',
+  /**objet form */
+  form: ICredentials = {
+    login: '',
+    password: '',
+  }
 
-}
-
-  onSubmit(): void{
-    console.log(this.form);
-    
+  onSubmit(): void {
 
     /**appel au service  */
     this.authService.login(this.form).subscribe(
-      data => {
-        console.log(data.access_token)
-        this.tokenService.saveToken(data.access_token)
+      { next : (data) => {
+        this.tokenService.saveToken(data)
+        this.authService.findByToken(data.access_token).subscribe(
+          collaborateur => console.log(collaborateur)
+        )
+        this.failedLogin = false;
+        this.router.navigate(['covoiturage/reservation/search']);
       },
-      error => console.log(error)
+      error : (error) => {
+        console.log(error)
+        this.failedLogin = true;
+      }
+    }
     );
+
   }
-  ngOnInit(): void{}
+  ngOnInit(): void { }
 }

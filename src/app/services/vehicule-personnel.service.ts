@@ -42,7 +42,7 @@ export class VehiculePersonnelService {
    * @param collaborateurId 
    * @returns 
    */
-  getVehiculePersonnelListByCollaborateurId(collaborateurId : number): Observable<VehiculePersonnel[]>{
+  getVehiculePersonnelListByCollaborateurId(collaborateurId?: number | undefined ): Observable<VehiculePersonnel[]>{
     return this.http.get<VehiculePersonnel[]>(`http://localhost:8080/rest/vehicule-personnel/collaborateur/${collaborateurId}`).pipe(
       tap((vehiculePersonnel) => this.vehiculePersonnelListByCollaborateurId$.next(vehiculePersonnel)));
   }

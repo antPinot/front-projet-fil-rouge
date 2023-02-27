@@ -15,26 +15,27 @@ import { NewReservationVehiculeSocieteComponent } from './components/new-reserva
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 
 
 const routes: Routes = [
-  {path: 'vehicule-personnel/create', component: NewVehiculePersonnelComponent},
-  {path: 'vehicule-personnel/list', component: ListVehiculePersonnelComponent},
-  {path: 'vehicule-personnel/edit', component: EditVehiculePersonnelComponent},
+  {path: 'vehicule-personnel/create', component: NewVehiculePersonnelComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-personnel/list', component: ListVehiculePersonnelComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-personnel/edit', component: EditVehiculePersonnelComponent, canActivate: [AuthGuard]},
   {path: 'covoiturage/create', component: CovoiturageComponent},
-  {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent},
-  {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent},
-  {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent},
+  {path: 'covoiturage/list-covoiturage', component: CovoiturageListComponent, canActivate: [AuthGuard]},
+  {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent, canActivate: [AuthGuard]},
+  {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent, canActivate: [AuthGuard]},
   {path: 'Login', component: LoginComponent},
   {path: 'Logout', component: LogoutComponent},
 
   {path: '', redirectTo: 'Login', pathMatch: 'full'}, /**redirection */
   {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent},
-  {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent},
-  {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent},
-  {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent},
+  {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
 
   {
     path: 'covoiturage/:id/edit', 

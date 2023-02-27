@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CovoiturageListService } from 'src/app/services/covoiturage-list.service';
-import { CovoiturageService } from 'src/app/services/covoiturage.service';
+
 
 @Component({
   selector: 'app-covoiturage-list',
