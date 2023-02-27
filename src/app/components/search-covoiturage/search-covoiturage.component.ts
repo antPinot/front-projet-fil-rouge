@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
@@ -18,7 +18,8 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   searchResults$ = this.reservationCovoiturageService.listCovoiturageByDateDepart$;
 
-  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService,
+    private adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private locale:string) { }
 
 
   ngOnInit(): void {
@@ -33,7 +34,9 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   onSearch() {
     if (this.collaborateurId) {
-      this.reservationCovoiturageService.getCovoiturageByDateDepart(this.collaborateurId, this.searchForm.value.searchDateDepart).subscribe();
+      //console.log(this.searchForm.value.searchDateDepart)
+      let formattedDate = moment(this.searchForm.value.searchDateDepart).format("DD/MM/YYYY");
+      this.reservationCovoiturageService.getCovoiturageByDateDepart(this.collaborateurId, formattedDate).subscribe();
     }
 
   }

@@ -7,6 +7,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 
 
@@ -20,7 +23,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatListModule,
     MatMenuModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatMomentDateModule
+
   ],
   exports:[
     MatButtonModule,
@@ -29,7 +35,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatListModule,
     MatMenuModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule
   ]
 })
 export class MaterialModule { }

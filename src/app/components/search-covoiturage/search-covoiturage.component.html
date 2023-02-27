@@ -1,6 +1,8 @@
 <form [formGroup]="searchForm">
     <label for="searchDateDepart">Date de départ</label>
-    <input type="text" id="searchDateDepart" formControlName="searchDateDepart">
+    <input type="text" id="searchDateDepart" formControlName="searchDateDepart" matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
     <div *ngIf="searchForm.get('searchDateDepart')?.hasError('invalidDate')">Entrez une date valide</div>
     <button type="submit" (click)="onSearch()" [disabled]="searchForm.invalid">Rechercher</button>
 </form>
