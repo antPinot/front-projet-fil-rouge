@@ -29,4 +29,12 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
   }
+
+
+
+  /**methode register */
+  register(credentials: ICredentials): Observable<IToken> {
+  return this._http.post<IToken>(`${this.url}/register`, credentials);
+}
+
 }
