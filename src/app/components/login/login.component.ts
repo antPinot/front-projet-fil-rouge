@@ -1,18 +1,10 @@
  
 import { Component, OnInit } from '@angular/core';
+import { ICredentials } from 'src/app/models/credentials';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
-
-/**INTERFACE credentials */
-interface ICredentials{
-  email: string,
-  password: string
-}
-
-/**interface token */
-interface IToken{
-  access_token: string;
-}
+ 
 
 @Component({
   selector: 'app-login',
@@ -21,7 +13,10 @@ interface IToken{
 })
 export class LoginComponent implements OnInit {
 
-constructor( private authService: AuthService){}
+constructor( 
+   private authService: AuthService, 
+   private tokenService: TokenService
+  ){}
 
 /**objet form */
 form: ICredentials ={
@@ -37,8 +32,10 @@ form: ICredentials ={
 
     /**appel au service  */
     this.authService.login(this.form).subscribe(
-
-      (data:IToken) => console.log(data.access_token),
+      data => {
+        console.log(data.access_token)
+        this.tokenService.saveToken(data.access_token)
+      },
       error => console.log(error)
     );
   }
