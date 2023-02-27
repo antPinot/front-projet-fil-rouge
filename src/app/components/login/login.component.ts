@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenService: TokenService,
-    private router:Router
+    private router: Router
   ) { }
 
   /**objet form */
@@ -32,19 +32,23 @@ export class LoginComponent implements OnInit {
 
     /**appel au service  */
     this.authService.login(this.form).subscribe(
-      { next : (data) => {
-        this.tokenService.saveToken(data)
-        this.authService.findByToken(data.access_token).subscribe(
-          collaborateur => console.log(collaborateur)
-        )
-        this.failedLogin = false;
-        this.router.navigate(['covoiturage/reservation/search']);
-      },
-      error : (error) => {
-        console.log(error)
-        this.failedLogin = true;
+      {
+        next: (data) => {
+          this.tokenService.saveToken(data)
+          this.authService.findByToken(data.access_token).subscribe(
+            collaborateur => {
+              console.log(collaborateur);
+              this.failedLogin = false;
+              this.router.navigate(['home']);
+            }
+          )
+
+        },
+        error: (error) => {
+          console.log(error)
+          this.failedLogin = true;
+        }
       }
-    }
     );
 
   }

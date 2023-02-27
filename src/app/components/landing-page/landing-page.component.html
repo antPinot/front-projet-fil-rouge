@@ -1,0 +1,13 @@
+<mat-card *ngIf="currentCollaborateur">
+    <mat-card-content>
+        <mat-card-title>Bienvenue sur votre espace {{currentCollaborateur.prenom}} {{currentCollaborateur.nom}}</mat-card-title>
+        <mat-card-subtitle>Vos informations personnelles : </mat-card-subtitle>
+        <mat-list>
+            <mat-list-item><strong>Matricule : </strong> {{currentCollaborateur.matricule}}</mat-list-item>
+            <mat-list-item><strong>Vous êtes né le : </strong>{{currentCollaborateur.dateNaissance}}</mat-list-item>
+            <mat-list-item><strong>Mail : </strong>{{currentCollaborateur.mail}}</mat-list-item>
+            <mat-list-item><strong>Téléphone : </strong>{{currentCollaborateur.telephone}}</mat-list-item>
+            <mat-list-item><strong>Date de création : </strong>{{currentCollaborateur.dateCreation}}</mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

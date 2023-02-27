@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { isEmpty } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
@@ -7,13 +8,18 @@ import { ReservationCovoiturageService } from 'src/app/services/reservation-covo
   templateUrl: './list-reservation-covoiturage.component.html',
   styleUrls: ['./list-reservation-covoiturage.component.css']
 })
-export class ListReservationCovoiturageComponent {
+export class ListReservationCovoiturageComponent implements OnInit{
 
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
   listReservationCovoiturage$ = this.reservationCovoiturageService.listReservationCovoiturage$;
 
+  //isEmpty = this.listReservationCovoiturage$.value.length == 0;
+
   constructor(private reservationCovoiturageService: ReservationCovoiturageService, private authService: AuthService) { }
+  ngOnInit(): void {
+    this.enCours();
+  }
 
   enCours(): void {
     if (this.collaborateurId) {

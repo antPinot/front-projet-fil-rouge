@@ -5,6 +5,7 @@ import { CovoiturageListComponent } from './components/covoiturage-list/covoitur
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
 import { EditReservationVehiculeComponent } from './components/edit-reservation-vehicule/edit-reservation-vehicule.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
 import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
 import { ListVehiculePersonnelComponent } from './components/list-vehicule-personnel/list-vehicule-personnel.component';
@@ -29,8 +30,9 @@ const routes: Routes = [
   {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent, canActivate: [AuthGuard]},
   {path: 'Login', component: LoginComponent},
   {path: 'Logout', component: LogoutComponent},
+  {path: 'home', component: LandingPageComponent, canActivate: [AuthGuard]},
 
-  {path: '', redirectTo: 'Login', pathMatch: 'full'}, /**redirection */
+  {path: '', redirectTo: 'home', pathMatch: 'full'}, /**redirection */
   {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent},
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
