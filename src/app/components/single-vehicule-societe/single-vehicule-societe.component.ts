@@ -15,11 +15,19 @@ export class SingleVehiculeSocieteComponent {
   @Input()
   vehiculeSociete!: VehiculeSociete
 
+  /**
+   * Méthode de modification pour un véhicule de société au moment du click sur le bouton "Modifier"
+   * du véhicule concerné
+   */
   onEdit(){
     this._vehiculeSocieteService.vehiculeSocieteToEdit = this.vehiculeSociete;
     this.router.navigateByUrl('vehicule-societe/edit');
   }
 
+  /**
+   * Méthode de suppression pour un véhicule de société au moment du click sur le bouton "Supprimer"
+   * du véhicule concerné
+   */
   onDelete(idVs?: number) {
     if (idVs) {
       this._vehiculeSocieteService.deleteOne(idVs).subscribe();

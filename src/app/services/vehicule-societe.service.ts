@@ -14,21 +14,34 @@ export class VehiculeSocieteService {
 
   constructor(private _http: HttpClient) { }
 
+  /**
+   * Requête de recherche pour l'ensemble des véhicules de société
+   */
   findAllVehiculeSociete(): Observable<VehiculeSociete[]>{
     return this._http.get<VehiculeSociete[]>(`http://localhost:8080/rest/vehicule-societe`).pipe(
       tap((vehiculeSociete) => this.vehiculesSociete$.next(vehiculeSociete)));
   }
 
+  /**
+   * Requête de création pour un véhicule de société
+   */
   createOne(vS: VehiculeSociete): Observable<VehiculeSociete>{
     return this._http
     .post<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe', vS)
   }
 
+  /**
+   * Requête de modification pour un véhicule de société
+   */
   editOne(vS: VehiculeSociete): Observable<VehiculeSociete>{
     return this._http
     .put<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe', vS);
   }
   
+
+   /**
+   * Requête de suppression pour un véhicule de société
+   */
   deleteOne(idVs: number): Observable<VehiculeSociete>{
     return this._http
     .delete<VehiculeSociete>(`http://localhost:8080/rest/vehicule-societe/${idVs}`)
