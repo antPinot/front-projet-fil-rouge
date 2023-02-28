@@ -8,6 +8,12 @@ import { VehiculeSociete } from 'src/app/models/vehicule-societe';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationVehiculeService } from 'src/app/services/reservation-vehicule.service';
 
+/**
+ * 
+ * Validateur vérifiant que la date de retour n'est pas postérieure à la date 
+ * de départ dans le formulaire de recherche / réservation
+ * 
+ */
 const coherentDateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const dateDepart = control.get('dateDepart')?.value;
   const dateRetour = control.get('dateRetour')?.value;
@@ -18,6 +24,11 @@ const coherentDateValidator: ValidatorFn = (control: AbstractControl): Validatio
   }
 }
 
+/**
+ * 
+ * Component de réservation d'un véhicule de société. Composé d'un formulaire de recherche/soumission
+ * 
+ */
 @Component({
   selector: 'app-new-reservation-vehicule-societe',
   templateUrl: './new-reservation-vehicule-societe.component.html',
@@ -25,23 +36,30 @@ const coherentDateValidator: ValidatorFn = (control: AbstractControl): Validatio
 })
 export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy {
   
+  /** Date du jour */
   currentDate = new Date();
 
+  /** Id du collaborateur connecté */
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
+  /** Formulaire de recherche/soumission */
   reservationVehiculeSocieteForm!: FormGroup
 
+  /** Liste des véhicules de société disponibles en fonction des dates recherchées*/
   listVehiculeSociete$ = this.reservationVehiculeService.listVehicule$
 
+  /** Véhicule de société sélectionné dans le carrousel */
   currentVehiculeSociete!: VehiculeSociete
 
+  /** Booléen qui est true si le résultat de la recherche est vide */
   emptyResult: boolean = true
 
+  /** Réservation de Véhicule de Société qui sera alimentée avec les champs du formulaire */
   reservationVehiculeSociete: ReservationVehiculeSociete = {}
 
   constructor(private formBuilder: FormBuilder, private reservationVehiculeService: ReservationVehiculeService, private router: Router, private authService: AuthService) { }
 
-
+  /** Initialisation du formulaire */
   ngOnInit(): void {
     this.reservationVehiculeSocieteForm = this.formBuilder.group({
       dateDepart: [null, Validators.required],
@@ -50,10 +68,12 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
     {validators: [coherentDateValidator]})
   }
 
+  /** Réinitialisato*/
   ngOnDestroy(): void {
     this.listVehiculeSociete$.next([]);
   }
 
+  /** Fonction "précédent" du carrousel */
   previous() {
     let index = this.listVehiculeSociete$.value.indexOf(this.currentVehiculeSociete)
     if (index == 0) {
@@ -63,6 +83,7 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
     }
   }
 
+  /** Fonction "suivant" du carrousel */
   next() {
     let index = this.listVehiculeSociete$.value.indexOf(this.currentVehiculeSociete)
     if (index == this.listVehiculeSociete$.value.length - 1) {
@@ -72,6 +93,11 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
     }
   }
 
+  /** Soumission du formulaire
+   * 
+   * Formatage des dates récupérées via datetimepicker de angular-material-components avec moment.js
+   * 
+   */
   onSubmitForm() {
     if (this.collaborateurId) {
       let formattedDateDepart = moment(this.reservationVehiculeSocieteForm.value.dateDepart).format("DD/MM/YYYY HH:mm")
@@ -89,11 +115,12 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
 
   }
 
+  /** Recherche de véhicules de société disponibles en fonction d'une date de départ et d'une date de retour
+   * Affecte la valeur du booléen emptyResult en fonction du résultat de la recherche
+  */
   onSearch() {
     let formattedDateDepart = moment(this.reservationVehiculeSocieteForm.value.dateDepart).format("DD/MM/YYYY HH:mm")
     let formattedDateRetour = moment(this.reservationVehiculeSocieteForm.value.dateRetour).format("DD/MM/YYYY HH:mm")
-    console.log(this.reservationVehiculeSocieteForm.value.dateDepart, this.reservationVehiculeSocieteForm.value.dateRetour)
-    console.log(formattedDateDepart, formattedDateRetour)
     this.reservationVehiculeService.getVehiculeSocieteDispoByDates(formattedDateDepart, formattedDateRetour).pipe(
       tap((vehiculesSociete) => {
         this.currentVehiculeSociete = vehiculesSociete[0]
