@@ -44,7 +44,7 @@ constructor( private authService: AuthService,
         console.log('Response:', data);
         const token =  data.token;
         this.tokenService.saveRegisterToken(token);
-        //this.router.navigate(['admin']);
+        this.router.navigate(['Login']);
       },
       error => console.log(error)
     );
