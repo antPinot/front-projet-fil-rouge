@@ -68,7 +68,7 @@ export class NewReservationVehiculeSocieteComponent implements OnInit, OnDestroy
     {validators: [coherentDateValidator]})
   }
 
-  /** Réinitialisato*/
+  /** Réinitialisaton de la liste des véhicules de société disponibles à la destruction du component*/
   ngOnDestroy(): void {
     this.listVehiculeSociete$.next([]);
   }
