@@ -14,8 +14,10 @@ import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.se
 })
 export class ListVehiculePersonnelComponent implements OnInit{
 
+  /** Id du collaborateur connecté */
   collaborateurId? = this.authService.currentCollaborateur?.id;
 
+  /** Liste de véhicules personnels du collaborateur */
   vehiculePersonnelList$ = this.vehiculePersonnelService.vehiculePersonnelListByCollaborateurId$
 
   constructor(private vehiculePersonnelService: VehiculePersonnelService, private authService:AuthService){}
