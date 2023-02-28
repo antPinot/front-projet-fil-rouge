@@ -1,0 +1,13 @@
+<div *ngIf="vehiculeSociete" class="container border">
+    <div>
+        <div>Immatriculation : {{vehiculeSociete.immatriculation}}</div>
+        <div>Marque : {{vehiculeSociete.marque}}</div>
+        <div>Modèle : {{vehiculeSociete.modele}}</div>
+        <div> Places : {{vehiculeSociete.places}}</div>
+        <div>Photo : <img src="{{vehiculeSociete.photo}}" alt="Photo" width="350" height="200"/></div>
+        <div>
+            <button (click)="onEdit()">Modifier</button><br/><br/>
+            <button (click)="onDelete(vehiculeSociete.id)">Supprimer</button>
+        </div>
+    </div>
+</div>

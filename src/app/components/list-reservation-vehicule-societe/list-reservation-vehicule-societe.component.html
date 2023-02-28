@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-1">
+        <button mat-raised-button (click)="enCours()">En Cours</button>
+    </div>
+    <div class="col-1">
+        <button mat-raised-button (click)="historique()">Historique</button>
+    </div>
+</div>
+<mat-card>
+    <mat-card-content>
+        <app-single-reservation-vehicule *ngFor="let reservationVehicule of listReservationVehicule$ | async " [reservationVehicule]="reservationVehicule"></app-single-reservation-vehicule>
+    </mat-card-content>
+</mat-card>
+<!-- <mat-card *ngIf="isEmpty">
+    <mat-card-content>
+        <mat-card-title>Vous n'avez pas de réservations en cours ou historique</mat-card-title>
+    </mat-card-content>
+</mat-card> -->
+<div class="bookingButton">
+    <button mat-raised-button color="primary" routerLink="../create">Réserver un Véhicule</button>
+</div>

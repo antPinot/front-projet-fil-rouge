@@ -1,0 +1,18 @@
+<form [formGroup]="searchForm">
+    <label for="searchAdresseDepart">Adresse de départ</label>
+    <input type="text" id="searchAdresseDepart" placeholder="Non implémenté">
+    <label for="searchAdresseDepart">Adresse d'Arrivée</label>
+    <input type="text" id="searchAdresseArrivee" placeholder="Non implémenté">
+    <label for="searchDateDepart">Date de départ</label>
+    <input type="text" id="searchDateDepart" formControlName="searchDateDepart" matInput [min]= "minDate" [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <div *ngIf="searchForm.get('searchDateDepart')?.hasError('invalidDate')">Entrez une date valide</div>
+    <button mat-raised-button type="submit" (click)="onSearch()" [disabled]="searchForm.invalid">Rechercher</button>
+</form>
+
+<app-single-reservation-covoiturage *ngFor="let covoiturage of searchResults$ | async" [reservationCovoiturage]="covoiturage"></app-single-reservation-covoiturage>
+
+<div>
+    <button mat-raised-button class="back" color="primary" routerLink="../list">Revenir à la liste de mes réservations</button>
+</div>

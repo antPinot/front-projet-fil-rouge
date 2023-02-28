@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <mat-card *ngIf="currentVehiculeSociete">
+                <div class="container">
+                    <div class="row">
+                        <button mat-button class="col" (click)="previous()">Previous</button>
+                        <button mat-button class="col" (click)="next()">Next</button>
+                    </div>
+                </div>
+                <img src="{{currentVehiculeSociete.photo}}" alt="">
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><strong>Marque : </strong>{{currentVehiculeSociete.marque}}</mat-list-item>
+                        <mat-list-item><strong>Modèle : </strong>{{currentVehiculeSociete.modele}}</mat-list-item>
+                        <mat-list-item><strong>Places : </strong>{{currentVehiculeSociete.places}}</mat-list-item>
+                        <mat-list-item><strong>Immatriculation :
+                            </strong>{{currentVehiculeSociete.immatriculation}}</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col">
+            <div class="container">
+                <form [formGroup]="reservationVehiculeEditForm" class="form-group">
+                    <div>
+                        <label for="dateDepart">Modèle</label>
+                        <input type="text" id="dateDepart" formControlName="dateDepart">
+                        <div *ngIf="reservationVehiculeEditForm.get('dateDepart')?.hasError('required')"
+                            class="alert-message">Ce champ est requis</div>
+                    </div>
+                    <div>
+                        <label for="dateRetour">Places</label>
+                        <input type="text" id="dateRetour" formControlName="dateRetour">
+                        <div *ngIf="reservationVehiculeEditForm.get('dateRetour')?.hasError('required')"
+                            class="alert-message">Ce champ est requis</div>
+                    </div>
+                    <button mat-raised-button color="accent"
+                        [disabled]="reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required')">Rechercher</button>
+                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()"
+                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required')">Modifier 
+                        la réservation</button>
+                </form>
+                <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de
+                    vos réservations</button>
+            </div>
+        </div>
+    </div>
+</div>

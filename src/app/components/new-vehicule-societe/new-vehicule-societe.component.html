@@ -1,0 +1,94 @@
+<h1>Créer un véhicule de service</h1>
+<div class="container">
+    <form [formGroup]="vSForm" class="form-group">
+
+        <div>
+            <label for="immatriculation">Immatriculation</label>
+            <input type="text" id="immatriculation" formControlName="immatriculation">
+            <div *ngIf="vSForm.get('immatriculation')?.invalid && vSForm.get('immatriculation')?.touched" class="error">
+                L'immatriculation est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="marque">Marque</label>
+            <input type="text" id="marque" formControlName="marque">
+            <div *ngIf="vSForm.get('marque')?.invalid && vSForm.get('marque')?.touched" class="error">
+                La marque est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="modele">Modèle</label>
+            <input type="text" id="modele" formControlName="modele">
+            <div *ngIf="vSForm.get('modele')?.invalid && vSForm.get('modele')?.touched" class="error">
+                Le modèle est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="places">Places</label>
+            <input type="number" id="places" formControlName="places">
+            <div *ngIf="vSForm.get('places')?.invalid && vSForm.get('places')?.touched" class="error">
+                Le nombre de places est requis
+            </div>
+        </div>
+
+        <div>
+            <label for="photo">Photo</label>
+            <input type="text" id="photo" formControlName="photo">
+            <div *ngIf="vSForm.get('photo')?.invalid && vSForm.get('photo')?.touched" class="error">
+                La photo est requis
+            </div>
+        </div>
+
+        <div>
+            <input name="disponible" type="radio" id="disponible" value="true">
+            <label for="disponible">Disponible</label>
+            <input name="disponible" type="radio" id="indisponible" value="false">
+            <label for="indisponible">Indisponible</label>
+        </div>
+
+        <div>
+
+            <label for="statut">Statut</label>
+            <input type="number" id="statut" formControlName="statut" min="-1" max="1">
+            <div *ngIf="vSForm.get('statut')?.invalid && vSForm.get('statut')?.touched" class="error">
+                La statut est requis
+            </div>
+            <!--<label for="statut">Statut</label>
+            <select id="statut">
+                <option value="1" selected>En service</option>
+                <option value="0" >En attente</option>
+                <option value="-1">Hors service</option>
+              </select>
+            <div *ngIf="vSForm.get('statut')?.invalid && vSForm.get('statut')?.touched" class="error">
+              Le statut est requis
+            </div>-->
+        </div>
+
+        <div>
+            <!--<label for="categorie">Categorie</label>
+            <input type="text" id="categorie" formControlName="categorie">
+            <div *ngIf="vSForm.get('categorie')?.invalid && vSForm.get('categorie')?.touched" class="error">
+                La categorie est requis
+            </div>-->
+            <label for="categorie">Categorie</label>
+            <select id="categorie">
+                <option value="Micro-urbaines" selected>Micro-urbaines</option>
+                <option value="Mini-citadines">Mini-citadines</option>
+                <option value="Citadines polyvalentes">Citadines polyvalentes</option>
+                <option value="Compactes">Compactes</option>
+                <option value="Berlines Taille S">Berlines Taille S</option>
+                <option value="Berlines Taille M">Berlines Taille M</option>
+                <option value="Berlines Taille L">Berlines Taille L</option>
+                <option value="SUV tout terrains/pick-up">SUV tout terrains/pick-up</option>
+              </select>
+            <div *ngIf="vSForm.get('categorie')?.invalid && vSForm.get('categorie')?.touched" class="error">
+              La categorie est requis
+            </div>
+        </div>
+
+        <button type="submit" (click)="onSubmit()">Créer véhicule de societe</button>
+    </form>
+</div>

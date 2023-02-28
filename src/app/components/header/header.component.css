@@ -1,0 +1,18 @@
+.navbar{
+    background-color: cornflowerblue;
+    height: 75px;
+}
+
+h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: cornflowerblue;
+    height: 150px;
+    z-index: 1000;
+    background-image:url('../../../assets/erik-mclean-ZRns2R5azu0-unsplash.jpg');
+}
+
+.cover-image{
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+}

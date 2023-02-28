@@ -1,0 +1,45 @@
+<p>single-covoiturage works!</p>
+
+<div *ngIf="covoituragePersonnel" class="container border border-dark rounded m-3 p-2">
+    <div class="row">
+        <div class="col">
+            Date de départ : {{covoituragePersonnel.dateDepart}}
+        </div>
+        <div class="col">
+            Places restantes : {{covoituragePersonnel.placesRestantes}}
+        </div>
+        <div class="col">
+            Nombres de personnes : {{covoituragePersonnel.nbPersonnes}}
+        </div>
+        <div class="col">
+            dureeTrajet : {{covoituragePersonnel.dureeTrajet}}
+        </div>
+        <div class="col">
+            distance km : {{covoituragePersonnel.distance}}
+        </div>
+
+        <div class="col">
+            organisateur : {{covoituragePersonnel.organisateurId}}
+        </div>
+
+        <div class="col">
+            vehicule personnel : {{covoituragePersonnel.vehiculePersonnelId}}
+        </div>
+
+        <div class="col">
+            adresse de depart : {{covoituragePersonnel.adresseDepart}}
+        </div>
+
+        <div class="col">
+            adresse arrivée : {{covoituragePersonnel.adresseArrivee}}
+        </div>
+        <div class="col">
+            <button mat-raised-button color="warn" (click)="deleteCovoiturage(covoituragePersonnel)">
+                Supprimer
+            </button>
+            <button mat-raised-button color="primary" [routerLink]="['/covoiturage', covoituragePersonnel.id, 'edit']">
+                Editer
+            </button>
+        </div>
+    </div>
+</div>

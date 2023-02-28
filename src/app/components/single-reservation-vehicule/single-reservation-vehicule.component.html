@@ -1,0 +1,25 @@
+<div *ngIf="reservationVehicule" class="container border border-dark rounded m-3 p-2">
+    <div class="row">
+        <div class="col">
+            Date de départ : {{reservationVehicule.dateDepart}}
+        </div>
+        <div class="col">
+            Date de retour : {{reservationVehicule.dateRetour}}
+        </div>
+        <div class="col">
+            Immatriculation: {{reservationVehicule.vehiculeSociete?.immatriculation}}
+        </div>
+        <div class="col">
+            Marque : {{reservationVehicule.vehiculeSociete?.marque}}
+        </div>
+        <div class="col">
+            Modèle : {{reservationVehicule.vehiculeSociete?.modele}}
+        </div>
+        <div class="col">
+            <div class="container">
+                <button class="row" mat-raised-button color="primary" (click)="onEdit()">Modifier</button>
+                <button class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+            </div> 
+        </div>
+    </div>
+</div>

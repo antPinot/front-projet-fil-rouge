@@ -1,0 +1,73 @@
+html,body {
+    height:100%;
+    width:100%;
+    margin:0;
+  }
+  .form1 {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  form {
+    /*display:table;/* shrinks to fit content */
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+  }
+
+  html,body {
+    height:100%;
+    width:100%;
+    margin:0;
+  }
+ 
+  form {
+    display:table;/* shrinks to fit content */
+    margin:auto;
+  }
+
+  
+
+  input,label{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+/* Media query for small screens */
+@media screen and (max-width: 768px) {
+  form {
+      max-width: 90%;
+  }
+
+  input {
+      width: 100%;
+  }
+}
+
+/* Media query for medium screens */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  form {
+      max-width: 70%;
+  }
+}
+
+/* Media query for large screens */
+@media screen and (min-width: 1025px) {
+  form {
+      max-width: 50%;
+  }
+}

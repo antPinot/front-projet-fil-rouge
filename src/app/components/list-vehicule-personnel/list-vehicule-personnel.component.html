@@ -1,0 +1,4 @@
+<app-single-vehicule-personnel *ngFor="let vehiculePersonnel of vehiculePersonnelList$ | async" [vehiculePersonnel]="vehiculePersonnel"></app-single-vehicule-personnel>
+<div>
+    <button mat-raised-button color="primary" routerLink="/vehicule-personnel/create">Ajouter un nouveau véhicule</button>
+</div>

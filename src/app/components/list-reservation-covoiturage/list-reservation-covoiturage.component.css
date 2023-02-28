@@ -1,0 +1,33 @@
+h1{
+    font: 2em sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.col-1{
+    margin-left: 8%;
+    margin-top: 20px;
+}
+
+mat-card{
+    min-height: 440px;
+    width: 1600px;
+    margin: auto;
+    margin-top: 15px;
+
+}
+
+.searchingButton{
+    margin-left: 80%;
+    margin-top: 15px;
+}
+
+mat-card-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+

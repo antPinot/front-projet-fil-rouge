@@ -1,0 +1,30 @@
+<div *ngIf="reservationCovoiturage" class="container border border-dark rounded m-3 p-2">
+    <div class="row">
+        <div class="col">
+            Date de depart : {{reservationCovoiturage.dateDepart}}
+        </div>
+        <div class="col">
+            Adresse de départ : {{reservationCovoiturage.adresseDepart?.numero}}  {{reservationCovoiturage.adresseDepart?.complementNumero}} {{reservationCovoiturage.adresseDepart?.voie}} {{reservationCovoiturage.adresseDepart?.ville}}
+        </div>
+        <div class="col">
+            Adresse d'arrivée : {{reservationCovoiturage.adresseArrivee?.numero}}  {{reservationCovoiturage.adresseArrivee?.complementNumero}} {{reservationCovoiturage.adresseArrivee?.voie}} {{reservationCovoiturage.adresseArrivee?.ville}}
+        </div>
+        <div class="col">
+            PlacesRestantes : {{reservationCovoiturage.placesRestantes}}
+        </div>
+<!--         <div class="col">
+            Distance : {{reservationCovoiturage.distance}}
+        </div>
+        <div class="col">
+            <button (click)="onDelete(vehiculePersonnel.id)">Supprimer</button>
+        </div>  -->
+        <div class="col">
+            <div class="container alternative">
+                <button *ngIf="!reservable" class="row" mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
+                <button *ngIf="enCours && !reservable" class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+                <button *ngIf="reservable" class="row mt-3" mat-raised-button color="accent" (click)="displayDetails()">Réserver</button>
+            </div> 
+        </div>
+        
+    </div>
+</div>

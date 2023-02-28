@@ -1,0 +1,7 @@
+<h1>Liste des véhicules de société</h1>
+
+<app-single-vehicule-societe *ngFor="let vehiculeSociete of vSList$ | async" 
+[vehiculeSociete]="vehiculeSociete">
+</app-single-vehicule-societe>
+
+<div><button routerLink="/vehicule-societe/create">Ajout Vehicule Societe</button></div>
