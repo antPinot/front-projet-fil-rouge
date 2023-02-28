@@ -14,46 +14,54 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class VehiculePersonnelService {
 
+  /** Véhicule personnel à modifier */
   vehiculePersonnelToEdit!: VehiculePersonnel
 
+  /** Liste des véhicules personnels d'un collaborateur */
   vehiculePersonnelListByCollaborateurId$ = new BehaviorSubject<VehiculePersonnel[]>([])
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   /**
-   * Requête POST de création d'un véhicule personnel
+   * Requête POST de création d'un véhicule personnel du collaborateur connecté
    * 
    * @param vehiculePersonnel Véhicule personnel à créer
    * @returns 
    */
-  createVehiculePersonnel(vehiculePersonnel : VehiculePersonnel): Observable<VehiculePersonnel>{
+  createVehiculePersonnel(vehiculePersonnel: VehiculePersonnel): Observable<VehiculePersonnel> {
     return this.http.post<VehiculePersonnel>('http://localhost:8080/rest/vehicule-personnel', vehiculePersonnel).pipe(
       tap((vehiculeToCreate) => console.log(vehiculeToCreate))
     );
   }
 
-  editVehiculePersonnel(vehiculePersonnel : VehiculePersonnel): Observable<VehiculePersonnel>{
+  /**
+   * Requête PUT de modification d'un véhicule personnel
+   * 
+   * @param vehiculePersonnel Véhicule personnel à modifier
+   * @returns 
+   */
+  editVehiculePersonnel(vehiculePersonnel: VehiculePersonnel): Observable<VehiculePersonnel> {
     return this.http.put<VehiculePersonnel>('http://localhost:8080/rest/vehicule-personnel', vehiculePersonnel);
   }
 
   /**
-   * Requête GET de recherche d'un véhicule personnel
+   * Requête GET récupérant la liste des véhicules personnels d'un collaborateur connecté
    * 
-   * @param collaborateurId 
+   * @param collaborateurId en fonction de l'Id du collaborateur connecté
    * @returns 
    */
-  getVehiculePersonnelListByCollaborateurId(collaborateurId?: number | undefined ): Observable<VehiculePersonnel[]>{
+  getVehiculePersonnelListByCollaborateurId(collaborateurId?: number | undefined): Observable<VehiculePersonnel[]> {
     return this.http.get<VehiculePersonnel[]>(`http://localhost:8080/rest/vehicule-personnel/collaborateur/${collaborateurId}`).pipe(
       tap((vehiculePersonnel) => this.vehiculePersonnelListByCollaborateurId$.next(vehiculePersonnel)));
   }
 
   /**
-   * Requête DELETE de suppression d'un véhicule personnel
+   * Requête DELETE de suppression d'un véhicule personnel du collaborateur connecté
    * 
-   * @param vehiculePersonnelId 
+   * @param vehiculePersonnelId en fonction de l'Id du véhicule personnel à supprimer
    * @returns 
    */
-  deleteVehiculePersonnel(vehiculePersonnelId: number): Observable<VehiculePersonnel>{
+  deleteVehiculePersonnel(vehiculePersonnelId: number): Observable<VehiculePersonnel> {
     return this.http.delete<VehiculePersonnel>(`http://localhost:8080/rest/vehicule-personnel/${vehiculePersonnelId}`).pipe(
       tap(() => this.vehiculePersonnelListByCollaborateurId$.next(
         this.vehiculePersonnelListByCollaborateurId$.value.filter(v => v.id != vehiculePersonnelId)
