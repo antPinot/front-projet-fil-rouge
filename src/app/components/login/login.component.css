@@ -11,7 +11,12 @@
 
 .form_container label{
     display: block;
+    margin-left: 18%;
      
+}
+
+#loginLabel{
+    margin-left: 22%;
 }
 
 
@@ -29,5 +34,14 @@ mat-card{
     width: 500px;
     margin: auto;
     margin-top: 8%;
+}
+
+#loginButton{
+    margin-top: 10px;
+    margin-left: 5%;
+}
+
+#alert{
+    margin-right: 35%;
 }
  

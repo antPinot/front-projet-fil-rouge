@@ -9,7 +9,7 @@
     <mat-list-item> <strong>Organisateur : </strong> {{data.organisateur?.prenom}} {{data.organisateur?.nom}}</mat-list-item>
     <mat-list-item> <strong>Véhicule Personnel : </strong>{{data.vehiculePersonnel?.marque}} {{data.vehiculePersonnel?.modele}}</mat-list-item>
 </mat-list>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="alternative">
     <button mat-button color="warn" mat-dialog-close >Annuler</button>
-    <button *ngIf="reservable" mat-button color="primary" mat-dialog-close (click)="onBook()">Réserver</button>
+    <button *ngIf="reservable" mat-button color="accent" mat-dialog-close (click)="onBook()">Réserver</button>
 </div>

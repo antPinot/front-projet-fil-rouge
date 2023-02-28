@@ -19,10 +19,10 @@
             <button (click)="onDelete(vehiculePersonnel.id)">Supprimer</button>
         </div>  -->
         <div class="col">
-            <div class="container">
+            <div class="container alternative">
                 <button *ngIf="!reservable" class="row" mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
                 <button *ngIf="enCours && !reservable" class="row mt-3" mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
-                <button *ngIf="reservable" class="row mt-3" mat-raised-button color="success" (click)="displayDetails()">Réserver</button>
+                <button *ngIf="reservable" class="row mt-3" mat-raised-button color="accent" (click)="displayDetails()">Réserver</button>
             </div> 
         </div>
         

@@ -1,4 +1,8 @@
 <form [formGroup]="searchForm">
+    <label for="searchAdresseDepart">Adresse de départ</label>
+    <input type="text" id="searchAdresseDepart">
+    <label for="searchAdresseDepart">Adresse d'Arrivée</label>
+    <input type="text" id="searchAdresseArrivee">
     <label for="searchDateDepart">Date de départ</label>
     <input type="text" id="searchDateDepart" formControlName="searchDateDepart" matInput [min]= "minDate" [matDatepicker]="picker">
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -10,7 +14,5 @@
 <app-single-reservation-covoiturage *ngFor="let covoiturage of searchResults$ | async" [reservationCovoiturage]="covoiturage"></app-single-reservation-covoiturage>
 
 <div>
-    <button mat-raised-button color="primary" routerLink="../list">Revenir à la liste de mes réservations</button>
+    <button mat-raised-button class="back" color="primary" routerLink="../list">Revenir à la liste de mes réservations</button>
 </div>
-
-<button mat-raised-button color="success">Test</button>

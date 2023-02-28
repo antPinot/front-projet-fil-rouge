@@ -5,14 +5,14 @@
       <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
 
         <div class="group">
-          <label for="login">Login</label>
+          <label id="loginLabel" for="login"><strong>Login</strong></label>
           <input type="text" name="login" id="login" [(ngModel)]="form.login" #login="ngModel" required>
           <div class="form_error" *ngIf="login.errors && f.submitted">
             email requis.
           </div>
         </div>
         <div>
-          <label for="password">password</label>
+          <label for="password"><strong>Password</strong></label>
           <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel" required
             minlength="5">
           <div class="form_error" *ngIf="password.errors && f.submitted">
@@ -22,18 +22,18 @@
         </div>
 
         <div class="group">
-          <button mat-raised-button color="primary"> login</button>
+          <button id="loginButton" mat-raised-button color="primary"> login</button>
         </div>
       </form>
 
-      <div *ngIf="failedLogin" class="alert alert-danger">
+      <div *ngIf="failedLogin" id="alert" class="alert alert-danger">
         Identifiants invalides
       </div>
-      <div>
+<!--       <div>
         <div> test login : {{form.login}}</div>
 
         <div> test password : {{form.password}}</div>
-      </div>
+      </div> -->
 
     </div>
   </mat-card-content>
