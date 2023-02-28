@@ -1,4 +1,4 @@
-<p>login works!</p>
+<h2>formulaire de connexion</h2>
 <div class="form_container">
 
   <form name="form"
@@ -26,7 +26,17 @@
     <div class="group">
         <button> login</button>
     </div>
+    <div class="group">
+      <button   routerLink="/Register"> Register</button>
+  </div>
   </form>
+
+
+  <div *ngIf="isLoggedIn()">
+    <div class="group">
+      <button (click)="onLogout()">logout</button>
+    </div>
+  </div>
 
 
 

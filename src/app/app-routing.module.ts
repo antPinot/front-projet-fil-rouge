@@ -15,6 +15,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
+import { RegisterComponent } from './components/register/register.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 
 
@@ -29,6 +30,9 @@ const routes: Routes = [
   {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent},
   {path: 'Login', component: LoginComponent},
   {path: 'Logout', component: LogoutComponent},
+
+
+  {path: 'Register', component: RegisterComponent}, /**ajout register */
 
   {path: '', redirectTo: 'Login', pathMatch: 'full'}, /**redirection */
   {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent},
