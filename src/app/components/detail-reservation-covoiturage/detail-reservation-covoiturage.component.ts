@@ -6,6 +6,11 @@ import { Covoiturage } from 'src/app/models/covoiturage';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
+/**
+ * Component gérant l'ouverture d'une boite de dialogue (Dialog de Angular Material)
+ * lors de différentes actions : Affichage des détails, Suppression d'une réservation, Confirmation de réservation
+ * 
+ */
 @Component({
   selector: 'app-detail-reservation-covoiturage',
   templateUrl: './detail-reservation-covoiturage.component.html',
@@ -13,10 +18,13 @@ import { ReservationCovoiturageService } from 'src/app/services/reservation-covo
 })
 export class DetailReservationCovoiturageComponent implements OnInit {
 
+  /** Id du collaborateur connecté */
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
+  /** Covoiturage a réserver, récupéré depuis le component parent (single-covoiturage) */
   covoiturage!: Covoiturage
 
+  /** Booléen permettant de gérer l'affichage du bouton "réserver" */
   reservable!: boolean
 
   constructor(public dialogRef: MatDialogRef<DetailReservationCovoiturageComponent>,
@@ -24,10 +32,13 @@ export class DetailReservationCovoiturageComponent implements OnInit {
     private authService: AuthService) {
     this.covoiturage = { ...data }
   }
+
+  /** Affecte le booléen reservable en fonction de l'url du component parent*/
   ngOnInit(): void {
     this.router.url == '/covoiturage/reservation/search' ? this.reservable = true : this.reservable = false
   }
 
+  /** Méthode de réservation d'un covoiturage */
   onBook() {
     if (this.collaborateurId) {
       this.reservationCovoiturageService.reserverCovoiturage(this.collaborateurId, this.covoiturage).pipe(
