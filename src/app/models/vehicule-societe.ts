@@ -1,3 +1,7 @@
+/**
+ * Modèle représentant un véhicule de société
+ * 
+ */
 export interface VehiculeSociete {
     id?: number;
     immatriculation?: string;

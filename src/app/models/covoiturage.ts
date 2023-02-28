@@ -2,6 +2,10 @@ import { Adresse } from "./adresse";
 import { Collaborateur } from "./collaborateur.model";
 import { VehiculePersonnel } from "./vehicule-personnel";
 
+/**
+ * Modèle de covoiturage
+ * 
+ */
 export interface Covoiturage {
     id?: any;
     dateDepart?: string,

@@ -1,3 +1,7 @@
+/**
+ * Modèle de collaborateur
+ * 
+ */
 export interface Collaborateur{
     id?: number,
     matricule?: number,

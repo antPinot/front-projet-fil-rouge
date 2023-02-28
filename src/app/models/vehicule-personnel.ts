@@ -1,3 +1,7 @@
+/**
+ * Modèle représentant un véhicule personnel
+ * 
+ */
 export interface VehiculePersonnel {
     id?: number,
     immatriculation?: string,

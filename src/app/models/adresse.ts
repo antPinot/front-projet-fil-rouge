@@ -1,3 +1,7 @@
+/**
+ * Modèle représentant une adresse
+ * 
+ */
 export interface Adresse {
     
     id?:number,
