@@ -14,7 +14,11 @@ import { NgxMatMomentModule } from '@angular-material-components/moment-adapter'
 
 
 
-
+/**
+ * Module gérant l'import  et l'export 
+ * des components Angular Material et Moment
+ * 
+ */
 @NgModule({
   declarations: [],
   imports: [
