@@ -5,6 +5,14 @@ import { tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { VehiculePersonnelService } from 'src/app/services/vehicule-personnel.service';
 
+/**
+ * 
+ * Validateur de vérifier que la limite de place alloué par le propriétaire du véhicule personnel
+ * n'est pas supérieure au nombre de places disponibles dans le véhicule
+ * 
+ * @param control 
+ * @returns 
+ */
 const limitePlacesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const places = control.get('places')?.value;
   const limitePlace = control.get('limitePlace')?.value;
@@ -15,6 +23,11 @@ const limitePlacesValidator: ValidatorFn = (control: AbstractControl): Validatio
   }
 }
 
+/**
+ * 
+ * Component qui gère la modification d'un véhicule personnel
+ * 
+ */
 @Component({
   selector: 'app-edit-vehicule-personnel',
   templateUrl: './edit-vehicule-personnel.component.html',
@@ -22,15 +35,22 @@ const limitePlacesValidator: ValidatorFn = (control: AbstractControl): Validatio
 })
 export class EditVehiculePersonnelComponent implements OnInit {
 
+  /** Id du collaborateur connecté */
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
+  /** Véhicule personnel à éditer récupéré depuis le service */
   vehiculePersonnelToEdit = this.vehiculePersonnelService.vehiculePersonnelToEdit;
 
+  /** Formulaire de modification du véhicule personnel */
   vehiculePersonnelToEditForm!: FormGroup
 
   constructor(private vehiculePersonnelService: VehiculePersonnelService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
   }
 
+  /**
+   * Initialisation du formulaire de modification d'un véhicule personnel
+   * Vérification que l'immatriculation est bien au format AA-123-BB
+   */
   ngOnInit(): void {
     this.vehiculePersonnelToEditForm = this.formBuilder.group({
       immatriculation: [this.vehiculePersonnelToEdit.immatriculation, [Validators.required, Validators.pattern('[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}')]],
@@ -42,6 +62,7 @@ export class EditVehiculePersonnelComponent implements OnInit {
       { validators: [limitePlacesValidator] })
   }
 
+  /** Soummission du formulaire */
   onSubmitForm() {
     if (this.collaborateurId) {
       this.vehiculePersonnelToEdit.immatriculation = this.vehiculePersonnelToEditForm.value.immatriculation;
