@@ -13,7 +13,7 @@
         <div>
             <label for="password">password</label>
             <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel"
-                required minlength="5">
+                required minlength="5" required>
             <div class="form_error" *ngIf="password.errors && f.submitted">
                 <div *ngIf="password.errors['required']"> mots de passe requis .</div>
                 <div *ngIf="password.errors['minlength']"> mot de passe incomplet .</div>
