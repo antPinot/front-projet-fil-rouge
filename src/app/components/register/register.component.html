@@ -81,7 +81,7 @@
 
         <div class="group">
 
-            <button (click)="onRegister()"> s'inscrire</button>
+            <button  [disabled]="f.form.invalid" (click)="onRegister()"> s'inscrire</button>
         </div>
     </form>
 </div>
