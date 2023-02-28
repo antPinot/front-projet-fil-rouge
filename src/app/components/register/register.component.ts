@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICredentials } from 'src/app/models/credentials';
+import { ICredentials1 } from 'src/app/models/credentials1';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -13,12 +13,21 @@ export class RegisterComponent {
 
 
   /**objet form */
-form: ICredentials ={
-
-  email: '',
+form: ICredentials1 = {
+    
+  matricule: 0,
+  nom: '',
+  prenom: '',
+  dateNaissance: '',
+  telephone: 0,
+  mail: '',
+  login: '',
   password: '',
+  dateCreation: ''
+   
 
 }
+
   
 
 constructor( private authService: AuthService, 
@@ -33,9 +42,9 @@ constructor( private authService: AuthService,
     this.authService.register(this.form).subscribe(
       data => {
         console.log('Response:', data);
-        const token = data && data.token;
+        const token =  data.token;
         this.tokenService.saveToken(token);
-        this.router.navigate(['admin']);
+        //this.router.navigate(['admin']);
       },
       error => console.log(error)
     );

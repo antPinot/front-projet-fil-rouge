@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LogoutComponent } from '../components/logout/logout.component';
 import { ICredentials } from '../models/credentials';
+import { ICredentials1 } from '../models/credentials1';
 import { IToken } from '../models/token';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class AuthService {
 
   url = 'http://localhost:8080/rest/collaborateur/login'; /*url pas fonctionnel en back*/
   
-  
+  url1 = 'http://localhost:8080/rest/collaborateur'
 
   constructor(private _http: HttpClient,private router: Router,  ) { }
 
@@ -33,8 +34,8 @@ export class AuthService {
 
 
   /**methode register */
-  register(credentials: ICredentials): Observable<IToken> {
-  return this._http.post<IToken>(`${this.url}/register`, credentials);
+  register(credentials: ICredentials1): Observable<IToken> {
+  return this._http.post<IToken>(`${this.url1}/register`, credentials);
 }
 
 }
