@@ -24,7 +24,17 @@
         <div class="group">
           <button id="loginButton" mat-raised-button color="primary"> login</button>
         </div>
-      </form>
+        <div class="group">
+      <button   routerLink="/Register"> Register</button>
+  </div>
+  </form>
+
+
+<!--  <div *ngIf="isLoggedIn()">
+    <div class="group">
+      <button (click)="onLogout()">logout</button>
+    </div>
+  </div> -->
 
       <div *ngIf="failedLogin" id="alert" class="alert alert-danger">
         Identifiants invalides

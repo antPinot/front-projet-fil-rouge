@@ -52,5 +52,24 @@ export class LoginComponent implements OnInit {
     );
 
   }
-  ngOnInit(): void { }
+
+
+
+  /**methode pour savoir si user est connecté */
+  
+
+  /**methode onLogout au click  FONCTIONNE*/
+  onLogout(){
+    console.log("coucou");
+    return this.tokenService.clearToken();
+  }
+   
+  ngOnInit(): void {
+    
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.tokenService.getToken(); // renvoie true si le token existe, false sinon
+  }
+   
 }

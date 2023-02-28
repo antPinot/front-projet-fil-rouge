@@ -1,8 +1,8 @@
 <form [formGroup]="searchForm">
     <label for="searchAdresseDepart">Adresse de départ</label>
-    <input type="text" id="searchAdresseDepart">
+    <input type="text" id="searchAdresseDepart" placeholder="Non implémenté">
     <label for="searchAdresseDepart">Adresse d'Arrivée</label>
-    <input type="text" id="searchAdresseArrivee">
+    <input type="text" id="searchAdresseArrivee" placeholder="Non implémenté">
     <label for="searchDateDepart">Date de départ</label>
     <input type="text" id="searchDateDepart" formControlName="searchDateDepart" matInput [min]= "minDate" [matDatepicker]="picker">
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

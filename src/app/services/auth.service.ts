@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { Collaborateur } from '../models/collaborateur.model';
+import { LogoutComponent } from '../components/logout/logout.component';
 import { ICredentials } from '../models/credentials';
+import { ICredentials1 } from '../models/credentials1';
 import { IToken } from '../models/token';
 
 @Injectable({
@@ -10,7 +13,7 @@ import { IToken } from '../models/token';
 })
 export class AuthService {
 
-  baseUrl = 'http://localhost:8080/rest/collaborateur/'; /*url pas fonctionnel en back*/
+  baseUrl = 'http://localhost:8080/rest/collaborateur/';
 
   currentCollaborateur!: Collaborateur;
 
@@ -18,7 +21,8 @@ export class AuthService {
 
   //collaborateurId = localStorage?.getItem('collaborateurId') as unknown as number;
   
-  constructor(private _http: HttpClient) { }
+  url1 = 'http://localhost:8080/rest/collaborateur'
+  constructor(private _http: HttpClient,private router: Router,  ) { }
 
   /**methode login  recois un Icredentials  et retourne un observable ITOKEN*/
   login(credentials: ICredentials): Observable<IToken>{
@@ -36,5 +40,20 @@ export class AuthService {
   logout(): Observable<IToken>{
     return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken);
   }
+
+
+
+/*
+  //methode logout  //
+  logout(): void {
+    localStorage.removeItem('token');
+  }*/
+
+
+
+  /**methode register */
+  register(credentials: ICredentials1): Observable<IToken> {
+  return this._http.post<IToken>(`${this.url1}/register`, credentials);
+}
 
 }
