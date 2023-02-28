@@ -6,8 +6,8 @@
         <div> Places : {{vehiculeSociete.places}}</div>
         <div>Photo : <img src="{{vehiculeSociete.photo}}" alt="Photo" width="350" height="200"/></div>
         <div>
-            <button (click)="onEdit(vehiculeSociete)">Modifier</button><br/><br/>
-            <button (click)="onDelete(vehiculeSociete)">Supprimer</button>
+            <button (click)="onEdit()">Modifier</button><br/><br/>
+            <button (click)="onDelete(vehiculeSociete.id)">Supprimer</button>
         </div>
     </div>
 </div>

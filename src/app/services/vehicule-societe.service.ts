@@ -8,6 +8,8 @@ import { VehiculeSociete } from '../models/vehicule-societe';
 })
 export class VehiculeSocieteService {
 
+  vehiculeSocieteToEdit!: VehiculeSociete
+
   public vehiculesSociete$= new BehaviorSubject<VehiculeSociete[]>([]);
 
   constructor(private _http: HttpClient) { }
@@ -24,32 +26,17 @@ export class VehiculeSocieteService {
 
   editOne(vS: VehiculeSociete): Observable<VehiculeSociete>{
     return this._http
-    .put<VehiculeSociete>(`'http://localhost:8080/rest/vehicule-societe'/${vS.id}`, vS)
-    .pipe(
-      tap( vehiculeSocieteToUpdate => {
-          const vehiculesSociete = this.vehiculesSociete$.value;
-          const id = vehiculesSociete.findIndex(t => t.id === vehiculeSocieteToUpdate.id);
-          if(id !== -1){
-            vehiculesSociete[id] = vehiculeSocieteToUpdate;
-            this.vehiculesSociete$.next(vehiculesSociete);
-          }
-        })
-    );
+    .put<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe', vS);
   }
-
-  deleteOne(vS: VehiculeSociete): Observable<VehiculeSociete>{
+  
+  deleteOne(idVs: number): Observable<VehiculeSociete>{
     return this._http
-    .delete<VehiculeSociete>(`'http://localhost:8080/rest/vehicule-societe'/${vS.id}`)
+    .delete<VehiculeSociete>(`http://localhost:8080/rest/vehicule-societe/${idVs}`)
     .pipe(
-      tap( vehiculeSocieteToDelete => {
-        const vehiculesSociete = this.vehiculesSociete$.value;
-        const index = vehiculesSociete.findIndex(t => t.id === vehiculeSocieteToDelete.id);
-        if(index !== -1){
-          vehiculesSociete[index] = vehiculeSocieteToDelete;
-          this.vehiculesSociete$.next(vehiculesSociete);
-        }
-      })
-    );
+      tap(() => this.vehiculesSociete$.next(
+        this.vehiculesSociete$.value.filter(vS => vS.id != idVs)
+      ))
+    )
   }
 
 }

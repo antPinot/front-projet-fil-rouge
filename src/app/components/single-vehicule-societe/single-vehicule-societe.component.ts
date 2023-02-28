@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { VehiculeSociete } from 'src/app/models/vehicule-societe';
 import { VehiculeSocieteService } from 'src/app/services/vehicule-societe.service';
 
@@ -9,20 +10,19 @@ import { VehiculeSocieteService } from 'src/app/services/vehicule-societe.servic
 })
 export class SingleVehiculeSocieteComponent {
 
-  constructor(private _vehiculeSocieteService: VehiculeSocieteService) { }
+  constructor(private _vehiculeSocieteService: VehiculeSocieteService, private router:Router) { }
 
   @Input()
   vehiculeSociete!: VehiculeSociete
 
-  onEdit(vehiculeSociete: VehiculeSociete){
-    if(vehiculeSociete.id){
-      this._vehiculeSocieteService.editOne(vehiculeSociete).subscribe();
-    }
+  onEdit(){
+    this._vehiculeSocieteService.vehiculeSocieteToEdit = this.vehiculeSociete;
+    this.router.navigateByUrl('vehicule-societe/edit');
   }
 
-  onDelete(vehiculeSociete: VehiculeSociete) {
-    if (vehiculeSociete.id) {
-      this._vehiculeSocieteService.deleteOne(vehiculeSociete).subscribe();
+  onDelete(idVs?: number) {
+    if (idVs) {
+      this._vehiculeSocieteService.deleteOne(idVs).subscribe();
     }
   }
 
