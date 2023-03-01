@@ -1,47 +1,47 @@
-.form_container{
+.form_container {
     width: 300px;
     margin: 135px;
     margin-top: 20px;
 }
 
-.form_container .group{
+.form_container .group {
     margin-bottom: 15px;
-     
+
 }
 
-.form_container label{
+.form_container label {
     display: block;
     margin-left: 18%;
-     
+
 }
 
-#loginLabel{
+#loginLabel {
     margin-left: 22%;
 }
 
 
-.form_container button{
+.form_container button {
     width: 150px;
     margin: 0 auto;
 }
 
-.form_error{
-    color : red;
+.form_error {
+    color: red;
 }
 
-mat-card{
+mat-card {
     min-height: 200px;
     width: 500px;
     margin: auto;
     margin-top: 8%;
 }
 
-#loginButton{
+#loginButton {
     margin-top: 10px;
     margin-left: 5%;
 }
 
-#alert{
+#alert {
     margin-right: 35%;
 }
- 
+

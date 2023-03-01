@@ -1,0 +1,9 @@
+<mat-drawer-container>
+    <mat-drawer #drawer mode="side" position="end">
+      <button mat-button>Test</button>
+      <button mat-button>Test 2</button>
+    </mat-drawer>
+    <mat-drawer-content>
+      <button mat-raised-button (click)="drawer.toggle()">Mon compte</button>
+    </mat-drawer-content>
+  </mat-drawer-container>

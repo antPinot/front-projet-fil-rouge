@@ -36,6 +36,7 @@ import { SingleReservationVehiculeComponent } from './components/single-reservat
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { EditVehiculeSocieteComponent } from './components/edit-vehicule-societe/edit-vehicule-societe.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { RegisterComponent } from './components/register/register.component';
     EditReservationVehiculeComponent,
     LandingPageComponent,
     EditVehiculeSocieteComponent,
-    RegisterComponent
+    RegisterComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
