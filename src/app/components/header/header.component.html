@@ -45,5 +45,15 @@
 
     <button mat-raised-button class="navbar-brand" (click)="onLogout()">Se déconnecter</button>
 
+    <mat-drawer-container autosize class="navbar-brand">
+      <mat-drawer #drawer mode="side">
+          <button mat-button>Test</button>
+          <button mat-button>Test 2</button>  
+      </mat-drawer>
+      <div><button mat-raised-button  (click)="drawer.toggle()">Mon compte</button></div>
+    </mat-drawer-container>
+
+    
+
   </nav>
 </header>

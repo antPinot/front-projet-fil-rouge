@@ -16,6 +16,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
 
+  logged : boolean = localStorage.length > 0
+
   constructor(private authService: AuthService, private router:Router){ }
 
   /** Gère la déconnexion : Vide le local storage et redirige vers le component de connexion */

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { Collaborateur } from '../models/collaborateur.model';
-import { LogoutComponent } from '../components/logout/logout.component';
 import { ICredentials } from '../models/credentials';
 import { ICredentials1 } from '../models/credentials1';
 import { IToken } from '../models/token';
@@ -38,7 +37,7 @@ export class AuthService {
   }
 
   logout(): Observable<IToken>{
-    return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken);
+    return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken)
   }
 
 
