@@ -37,6 +37,7 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAda
 import { EditVehiculeSocieteComponent } from './components/edit-vehicule-societe/edit-vehicule-societe.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FontAwesomeModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},

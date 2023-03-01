@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { faUser, faIdCard, faCar, faUsers, faDoorOpen, faTaxi, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+
 
 /** 
  * 
@@ -17,6 +19,14 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent {
 
   logged : boolean = localStorage.length > 0
+
+  faUser = faUser
+  faIdCard = faIdCard
+  faCar = faCar
+  faUsers = faUsers
+  faDoorOpen = faDoorOpen
+  faTaxi = faTaxi
+  faBuilding = faBuilding
 
   constructor(private authService: AuthService, private router:Router){ }
 

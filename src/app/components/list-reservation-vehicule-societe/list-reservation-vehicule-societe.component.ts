@@ -37,11 +37,13 @@ export class ListReservationVehiculeSocieteComponent implements OnInit {
   /** Liste des réservations de véhicules de société en cours */
   enCours(): void {
     this.reservationVehiculeService.getReservationVehiculeSocieteByCollaborateur(this.collaborateurId, states.enCours).subscribe();
+    this.reservationVehiculeService.enCours = true;
   }
 
   /** Liste des réservations de véhicule de société passées (historique) */
   historique(): void {
     this.reservationVehiculeService.getReservationVehiculeSocieteByCollaborateur(this.collaborateurId, states.historique).subscribe();
+    this.reservationVehiculeService.enCours = false;
   }
 
 }

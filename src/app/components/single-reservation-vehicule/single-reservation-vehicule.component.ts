@@ -19,6 +19,8 @@ export class SingleReservationVehiculeComponent{
   @Input()
   reservationVehicule!: ReservationVehiculeSociete
 
+  enCours = this.reservationVehiculeService.enCours
+
   constructor(private reservationVehiculeService: ReservationVehiculeService, private router:Router){}
 
   /** Affecte le véhicule à modifier dans le service correspondant et redirige vers le formulaire de modification*/
