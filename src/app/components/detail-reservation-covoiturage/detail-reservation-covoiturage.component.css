@@ -1,3 +1,7 @@
 .mat-mdc-dialog-actions{
     justify-content: flex-end;
 }
+
+.title{
+    text-decoration: underline;
+}

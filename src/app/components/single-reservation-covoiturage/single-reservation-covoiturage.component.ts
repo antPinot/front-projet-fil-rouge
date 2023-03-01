@@ -61,12 +61,4 @@ export class SingleReservationCovoiturageComponent implements OnInit {
     },)
   }
 
-  /** Annule la participation à un covoiturage */
-  onDelete() {
-    if (this.collaborateurId) {
-      this.reservationCovoiturageService.annulerReservationCovoiturage(this.collaborateurId, this.reservationCovoiturage).subscribe()
-    }
-
-  }
-
 }

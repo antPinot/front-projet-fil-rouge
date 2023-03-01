@@ -27,6 +27,8 @@ export class DetailReservationCovoiturageComponent implements OnInit {
   /** Booléen permettant de gérer l'affichage du bouton "réserver" */
   reservable!: boolean
 
+  enCours = this.reservationCovoiturageService.enCours
+
   constructor(public dialogRef: MatDialogRef<DetailReservationCovoiturageComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Covoiturage, private reservationCovoiturageService: ReservationCovoiturageService, private router: Router,
     private authService: AuthService) {
@@ -49,7 +51,12 @@ export class DetailReservationCovoiturageComponent implements OnInit {
         tap(() => this.router.navigateByUrl('/covoiturage/reservation/list'))
       ).subscribe()
     }
+  }
 
+  onDelete(){
+    if (this.collaborateurId) {
+      this.reservationCovoiturageService.annulerReservationCovoiturage(this.collaborateurId, this.covoiturage).subscribe()
+    }
   }
 
 }
