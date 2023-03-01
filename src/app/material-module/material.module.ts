@@ -12,6 +12,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -36,7 +37,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatMomentModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDividerModule
   ],
   exports:[
     MatButtonModule,
@@ -50,7 +52,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatMomentModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }
