@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Êtes vous sûr de vouloir supprimer la réservation suivante ?</h1>
+
+<mat-list>
+    <mat-list-item> <strong> Date de départ : </strong>{{data.dateDepart}}</mat-list-item>
+    <mat-list-item> <strong> Date de retour : </strong>{{data.dateRetour}}</mat-list-item>
+    <mat-list-item> <strong> Immatriculation: </strong>{{data.vehiculeSociete?.immatriculation}}</mat-list-item>
+    <mat-list-item> <strong> Marque : </strong>{{data.vehiculeSociete?.marque}}</mat-list-item>
+    <mat-list-item> <strong> Modèle : </strong>{{data.vehiculeSociete?.modele}}</mat-list-item>
+</mat-list>
+<div mat-dialog-actions class="alternative">
+    <button mat-button color="primary" mat-dialog-close >Précédent</button>
+    <button mat-button color="warn" mat-dialog-close (click)="onDelete()">Supprimer</button>
+</div>

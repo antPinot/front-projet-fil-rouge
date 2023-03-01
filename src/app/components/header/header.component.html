@@ -1,49 +1,61 @@
 <header>
-<!--   <div class="cover-image"><img
-      src="../../../assets/erik-mclean-ZRns2R5azu0-unsplash (1).jpg"
-      alt="Image de couverture"> -->
-      <h1>GP3 Covoiturage Series</h1>
-<!--     </div> -->
-  <nav class="navbar navbar-expand-lg">
-    <button mat-raised-button class="navbar-brand" routerLink="covoiturage/reservation/search"
-      routerLinkActive="active">Rechercher un covoiturage</button>
-    <button mat-raised-button class="navbar-brand" routerLink="covoiturage/reservation/list"
-      routerLinkActive="active">Mes covoiturages</button>
-    <button mat-raised-button class="navbar-brand" routerLink="vehicule-personnel/list" routerLinkActive="active">Mes
-      véhicules personnels</button>
-    <button mat-raised-button class="navbar-brand" routerLink="covoiturage/list-covoiturage"
-      routerLinkActive="active">Mes annonces</button>
-    <button mat-raised-button class="navbar-brand" [matMenuTriggerFor]="vehiculeSocieteReservation">Mes réservations de
-      véhicule</button>
-
-    <mat-menu #vehiculeSocieteReservation="matMenu">
-      <button mat-menu-item routerLink='vehicule-societe/reservation/list'>Mes réservations</button>
-      <button mat-menu-item routerLink='vehicule-societe/reservation/create'>Réserver un véhicule</button>
-    </mat-menu>
-
-    <button mat-raised-button class="navbar-brand" [matMenuTriggerFor]="administrateur">Administrateur</button>
-    <mat-menu #administrateur="matMenu">
-      <button mat-menu-item [matMenuTriggerFor]="collaborateurs">Collaborateurs</button>
-      <button mat-menu-item [matMenuTriggerFor]="vehiculeSociete">Véhicules de Société</button>
-    </mat-menu>
-
-    <mat-menu #collaborateurs="matMenu">
-      <button mat-menu-item>Créer un collaborateur</button>
-      <button mat-menu-item>Modifier un collaborateur</button>
-      <button mat-menu-item>Supprimer un collaborateur</button>
-    </mat-menu>
-
-    <mat-menu #vehiculeSociete="matMenu">
-      <button mat-menu-item routerLink="vehicule-societe" routerLinkActive="active">Lister les véhicules de
-        société</button>
-      <button mat-menu-item routerLink="vehicule-societe/create" routerLinkActive="active">Créer un véhicule de
-        société</button>
-      <!-- <button mat-menu-item routerLink="vehicule-societe/edit" routerLinkActive="active">Modifier un véhicule de société</button> -->
-      <!-- <button mat-menu-item>Supprimer un véhicule de société</button> -->
-      <button mat-menu-item>Lister les réservations en cours</button>
-    </mat-menu>
-
-    <button mat-raised-button class="navbar-brand" (click)="onLogout()">Se déconnecter</button>
-
-  </nav>
+  <h1>GP3 Covoiturage Series</h1>
+  <mat-sidenav-container class="navbar navbar-expand-lg">
+    <mat-sidenav #drawer mode="side" position="end" [fixedInViewport]="true">
+      <mat-list>
+        <mat-list-item><button mat-button routerLink="home"><fa-icon [icon]="faIdCard"></fa-icon> Mes informations
+            personnelles</button></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item> <button mat-button class="navbar-brand" routerLink="covoiturage/reservation/list"
+            routerLinkActive="active"><fa-icon [icon]="faUsers"></fa-icon> Mes réservations de
+            covoiturage</button></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item> <button mat-button class="navbar-brand" routerLink="covoiturage/list-covoiturage"
+            routerLinkActive="active"><fa-icon [icon]="faTaxi"></fa-icon> Mes annonces de
+            covoiturage</button></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><button mat-button routerLink='vehicule-societe/reservation/list'><fa-icon
+              [icon]="faBuilding"></fa-icon> Mes réservations de véhicule</button></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><button mat-button routerLink="vehicule-personnel/list"><fa-icon [icon]="faCar"></fa-icon> Mes
+            véhicules
+            personnels</button></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><button mat-button class="navbar-brand" (click)="onLogout()"><fa-icon
+              [icon]="faDoorOpen"></fa-icon> Se
+            déconnecter</button></mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <button mat-raised-button class="navbar-brand" routerLink="covoiturage/reservation/search"
+        routerLinkActive="active">Rechercher un covoiturage</button>
+      <!--       <button mat-raised-button class="navbar-brand" [matMenuTriggerFor]="vehiculeSocieteReservation">Mes réservations
+        de
+        véhicule</button>
+      <mat-menu #vehiculeSocieteReservation="matMenu"> -->
+      <!--         <button mat-menu-item routerLink='vehicule-societe/reservation/list'>Mes réservations</button> -->
+      <button mat-raised-button class="navbar-brand" routerLink='vehicule-societe/reservation/create'>Réserver un
+        véhicule</button>
+      <!--       </mat-menu> -->
+      <button mat-raised-button class="navbar-brand" [matMenuTriggerFor]="administrateur">Administrateur</button>
+      <mat-menu #administrateur="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="collaborateurs">Collaborateurs</button>
+        <button mat-menu-item [matMenuTriggerFor]="vehiculeSociete">Véhicules de Société</button>
+      </mat-menu>
+      <mat-menu #collaborateurs="matMenu">
+        <button mat-menu-item>Créer un collaborateur</button>
+        <button mat-menu-item>Modifier un collaborateur</button>
+        <button mat-menu-item>Supprimer un collaborateur</button>
+      </mat-menu>
+      <mat-menu #vehiculeSociete="matMenu">
+        <button mat-menu-item routerLink="vehicule-societe" routerLinkActive="active">Lister les véhicules de
+          société</button>
+        <button mat-menu-item routerLink="vehicule-societe/create" routerLinkActive="active">Créer un véhicule de
+          société</button>
+        <button mat-menu-item>Lister les réservations en cours</button>
+      </mat-menu>
+      <button mat-raised-button class="navbar-brand" (click)="drawer.toggle()"><fa-icon [icon]="faUser"></fa-icon>
+        Mon compte</button>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </header>

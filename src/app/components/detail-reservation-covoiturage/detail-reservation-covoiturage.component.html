@@ -1,4 +1,8 @@
 <mat-list>
+    <mat-list-item *ngIf="reservable" class="title"> <strong>Vous êtes sur le point de réserver le covoiturage suivant :</strong></mat-list-item>
+    <mat-list-item *ngIf="!reservable && enCours" class="title"> <strong>Vous êtes sur le point de supprimer la réservation de covoiturage suivante :</strong></mat-list-item>
+<!--     <mat-list-item> <strong>Vous êtes sur le point de réserver le véhicule suivant</strong></mat-list-item>
+    <mat-list-item> <strong>Vous êtes sur le point de supprimer la réservation de véhicule suivante</strong></mat-list-item> -->
     <mat-list-item> <strong>Date de Départ : </strong>  {{data.dateDepart}}</mat-list-item>
     <mat-list-item> <strong>Adresse de Départ : </strong> {{data.adresseDepart?.numero}}  {{data.adresseDepart?.complementNumero}} {{data.adresseDepart?.voie}} {{data.adresseDepart?.ville}} {{data.adresseDepart?.codePostal}} {{data.adresseDepart?.departement}} {{data.adresseDepart?.pays}}</mat-list-item>
     <mat-list-item><strong>Adresse d'arrivée : </strong> {{data.adresseArrivee?.numero}}  {{data.adresseArrivee?.complementNumero}} {{data.adresseArrivee?.voie}} {{data.adresseArrivee?.ville}} {{data.adresseArrivee?.codePostal}} {{data.adresseArrivee?.departement}} {{data.adresseArrivee?.pays}}</mat-list-item>
@@ -10,6 +14,7 @@
     <mat-list-item> <strong>Véhicule Personnel : </strong>{{data.vehiculePersonnel?.marque}} {{data.vehiculePersonnel?.modele}}</mat-list-item>
 </mat-list>
 <div mat-dialog-actions class="alternative">
-    <button mat-button color="warn" mat-dialog-close >Annuler</button>
+    <button mat-button color="primary" mat-dialog-close >Précédent</button>
     <button *ngIf="reservable" mat-button color="accent" mat-dialog-close (click)="onBook()">Réserver</button>
+    <button *ngIf="!reservable && enCours" mat-button color="warn" mat-dialog-close (click)="onDelete()">Supprimer</button>
 </div>

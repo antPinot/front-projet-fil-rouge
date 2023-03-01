@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ReservationVehiculeSociete } from 'src/app/models/reservationVehiculeSociete.model';
 import { ReservationVehiculeService } from 'src/app/services/reservation-vehicule.service';
+import { DetailVehiculeSocieteComponent } from '../detail-vehicule-societe/detail-vehicule-societe.component';
 
 /**
  * Component gérant l'affichage d'une réservation individuelle d'un véhicule
@@ -19,7 +21,9 @@ export class SingleReservationVehiculeComponent{
   @Input()
   reservationVehicule!: ReservationVehiculeSociete
 
-  constructor(private reservationVehiculeService: ReservationVehiculeService, private router:Router){}
+  enCours = this.reservationVehiculeService.enCours
+
+  constructor(private reservationVehiculeService: ReservationVehiculeService, private router:Router, private dialog:MatDialog){}
 
   /** Affecte le véhicule à modifier dans le service correspondant et redirige vers le formulaire de modification*/
   onEdit(){
@@ -29,7 +33,15 @@ export class SingleReservationVehiculeComponent{
 
   /** Annule une réservation de véhicule de société */
   onDelete(){
-    this.reservationVehiculeService.annulerReservationVehiculeSociete(this.reservationVehicule.id).subscribe()
+    this.dialog.open(DetailVehiculeSocieteComponent, {
+      height: '400px', width: '700px', data:
+      {
+        id: this.reservationVehicule.id,
+        dateDepart: this.reservationVehicule.dateDepart,
+        dateRetour: this.reservationVehicule.dateRetour,
+        vehiculeSociete: this.reservationVehicule.vehiculeSociete
+      }
+    })
   }
 
 }

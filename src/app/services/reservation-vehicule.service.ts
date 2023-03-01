@@ -24,6 +24,9 @@ export class ReservationVehiculeService {
   /** Liste des véhicules de société disponibles en fonction d'une date de départ et d'une date de retour(Résultats de recherche)*/
   listVehicule$ = new BehaviorSubject<VehiculeSociete[]>([])
 
+  /** Booléen permettant de gérer l'affichage du bouton de suppression d'une réservation de véhicule de service */
+  enCours: boolean = true
+
   constructor(private http:HttpClient) { }
 
   /**
