@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { Covoiturage } from 'src/app/models/covoiturage';
 import { CovoiturageService } from 'src/app/services/covoiturage.service';
@@ -79,8 +80,9 @@ export class CovoiturageDetailsComponent {
   
   editerCovoiturage(covoiturage: Covoiturage) {
     const formData = this.covoiturageFormGroup?.value;
+    let formattedDateDepart = moment(this.covoiturageFormGroup.value.dateDepart).format("DD/MM/YYYY HH:mm")
     covoiturage = {
-      dateDepart: formData.dateDepart,
+      dateDepart: formData.dateDepart = formattedDateDepart,
       placesRestantes: formData.placesRestantes,
       nbPersonnes: formData.nbPersonnes,
       dureeTrajet: formData.dureeTrajet,
@@ -89,7 +91,7 @@ export class CovoiturageDetailsComponent {
       vehiculePersonnelId: formData.vehiculePersonnel,
       adresseDepart: formData.adresseDepart,
       adresseArrivee: formData.adresseArrivee,
-      id : this.covoiturage$.value.id
+      id : this.covoiturage$.value.id,
     };
     console.log(covoiturage);
 
