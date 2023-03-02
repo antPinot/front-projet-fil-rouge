@@ -71,7 +71,8 @@ input[type="text"]:focus, input[type="password"]:focus {
   background: currentColor;
   border: 1px solid currentColor;
   font-size: 1.1rem;
-  color: #4f93ce;
+  color: #1a73e8;
+  border-radius: 2rem;
   margin: 3rem 0;
   padding: 0.75rem 3rem;
   cursor: pointer;

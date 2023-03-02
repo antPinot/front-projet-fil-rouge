@@ -6,8 +6,7 @@
             <mat-form-field appearance="fill">
             <label for="mail">email</label>
             <input type="text" name="mail" id="mail" [(ngModel)]="form.mail" #mail="ngModel" required>
-            <mat-error *ngIf="mail.errors && f.submitted">Email requis.</mat-error>
-                email requis.
+            <div *ngIf="mail.errors && f.submitted">Email requis.</div>
             </mat-form-field>
         </div>
         <div class="group" >

@@ -1,5 +1,6 @@
-<!--
+ 
 
+<!--
 <mat-card> 
   <mat-card-content>
     <div class="form_container">
@@ -53,9 +54,10 @@
     </div>
   </mat-card-content>
 </mat-card>
-
 -->
-
+ 
+<mat-card> 
+  <mat-card-content>
 <main class="main">
 	<div class="container">
 		<section class="wrapper">
@@ -67,14 +69,14 @@
 			<form name="form" class="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  >
 				<div class="input-control">
 					<label for="email" class="input-label" id="login" for="login"   hidden>Login</label>
-					<input type="email" name="email" id="email" class="input-field" placeholder="login" [(ngModel)]="form.login" #login="ngModel" required>
+					<input type="email" name="email" id="login" class="input-field" placeholder="login" [(ngModel)]="form.login" #login="ngModel" required>
           <div class="form_error" *ngIf="login.errors && f.submitted">
             email requis.
           </div>
 				</div>
 				<div class="input-control">
 					<label for="password" class="input-label" id="password" hidden>Password</label>
-					<input type="password" name="password" id="password" class="input-field" placeholder="Password" id="password" [(ngModel)]="form.password" #password="ngModel" required
+					<input type="password" name="password" id="password" class="input-field" placeholder="Password"  [(ngModel)]="form.password" #password="ngModel" required
           minlength="5"  >
 
           <div class="form_error" *ngIf="password.errors && f.submitted">
@@ -85,7 +87,7 @@
 				</div>
 				<div class="input-control">
 					<a href="#" class="text text-links">Forgot Password</a>
-					<input type="submit" name="submit" class="input-submit" value="Sign In" disabled>
+					<input type="submit" name="submit" class="input-submit" value="Sign In"  >
 				</div>
 			</form>
 
@@ -98,8 +100,7 @@
       </div>
     </div>
 
-    <mat-card> 
-      <mat-card-content>
+    
         <div *ngIf="failedLogin" id="alert" class="alert alert-danger">
           Identifiants invalides
         </div>
@@ -108,9 +109,13 @@
   
           <div> test password : {{form.password}}</div>
         </div>  
-      </mat-card-content>
-    </mat-card>
+     
       </div>
   
 	
 </main>
+
+
+</mat-card-content>
+</mat-card>
+
