@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Covoiturage } from 'src/app/models/covoiturage';
 import { CovoiturageService } from 'src/app/services/covoiturage.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-covoiturage',
@@ -64,8 +65,11 @@ export class CovoiturageComponent implements OnInit{
 
   /**methode Onsubmit */ onSubmit() {
     const formData = this.covoiturageForm?.value;
+    let formattedDateDepart = moment(this.covoiturageForm.value.dateDepart).format("DD/MM/YYYY HH:mm")
     const covoiturage: Covoiturage = {
-      dateDepart: formData.dateDepart,
+      //formattedDateDepart = moment(this.formData.value.dateDepart).format("DD/MM/YYYY HH:mm")
+      //this.reservationVehiculeSociete.dateDepart = formattedDateDepart;
+      dateDepart: formData.dateDepart = formattedDateDepart,
       placesRestantes: formData.placesRestantes,
       nbPersonnes: formData.nbPersonnes,
       dureeTrajet: formData.dureeTrajet,
@@ -74,7 +78,7 @@ export class CovoiturageComponent implements OnInit{
       vehiculePersonnelId: formData.vehiculePersonnel,
       adresseDepart: formData.adresseDepart,
       adresseArrivee: formData.adresseArrivee,
-      id: undefined
+      id: undefined,
     };
     console.log(covoiturage);
     this._covoiturageService.createOne(covoiturage).subscribe();

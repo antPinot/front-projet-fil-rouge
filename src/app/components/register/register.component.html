@@ -1,87 +1,104 @@
-<h2>formulaire inscription</h2>
+
 <div class="form_container">
-
-    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid ">
-
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid " class="mat-elevation-z8">
+        <h3>Inscription</h3>
         <div class="group">
+            <mat-form-field appearance="fill">
             <label for="mail">email</label>
             <input type="text" name="mail" id="mail" [(ngModel)]="form.mail" #mail="ngModel" required>
-            <div class="form_error" *ngIf="mail.errors && f.submitted">
-                email requis.
-            </div>
+            <div *ngIf="mail.errors && f.submitted">Email requis.</div>
+            </mat-form-field>
         </div>
-        <div>
+        <div class="group" >
+            <mat-form-field appearance="fill">
             <label for="password">password</label>
             <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel"
-                required minlength="5" required>
-            <div class="form_error" *ngIf="password.errors && f.submitted">
+                 minlength="5" required>
+            <div  *ngIf="password.errors && f.submitted">
                 <div *ngIf="password.errors['required']"> mots de passe requis .</div>
+            </div>
+            <div class="form_error" *ngIf="password.errors && f.submitted">
                 <div *ngIf="password.errors['minlength']"> mot de passe incomplet .</div>
             </div>
+            </mat-form-field>  
         </div>
 
         <div class="group">
+            <mat-form-field appearance="fill">
             <label for="nom">nom</label>
             <input type="text" name="nom" id="nom" [(ngModel)]="form.nom" #nom="ngModel" required>
             <div class="form_error" *ngIf="nom.errors && f.submitted">
                 nom requis.
             </div>
+        </mat-form-field>  
         </div>
 
 
         <div class="group">
+            <mat-form-field appearance="fill">
             <label for="nom">prenom</label>
             <input type="text" name="prenom" id="prenom" [(ngModel)]="form.prenom" #prenom="ngModel" required>
             <div class="form_error" *ngIf="prenom.errors && f.submitted">
                 prenom requis.
             </div>
+           </mat-form-field>
         </div>
 
 
         <div class="group">
+        <mat-form-field>
             <label for="dateNaissance">date de naissance</label>
             <input type="text" name="dateNaissance" id="dateNaissance" [(ngModel)]="form.dateNaissance" #dateNaissance="ngModel" required>
             <div class="form_error" *ngIf="dateNaissance.errors && f.submitted">
                 date de naissance requis.
             </div>
+        </mat-form-field>
         </div>
 
         <div class="group">
+            <mat-form-field>
             <label for="telephone">telephone</label>
             <input type="text" name="telephone" id="telephone" [(ngModel)]="form.telephone" #telephone="ngModel" required>
             <div class="form_error" *ngIf="telephone.errors && f.submitted">
                 telephone requis.
             </div>
+           </mat-form-field>
         </div>
 
         <div class="group">
+        <mat-form-field>
             <label for="login">Login</label>
             <input type="text" name="login" id="login" [(ngModel)]="form.login" #login="ngModel" required>
             <div class="form_error" *ngIf="login.errors && f.submitted">
                 Login requis.
             </div>
+        </mat-form-field>
         </div>
 
 
         <div class="group">
-            <label for="matricule">matricule</label>
-            <input type="text" name="matricule" id="matricule" [(ngModel)]="form.matricule" #matricule="ngModel" required>
-            <div class="form_error" *ngIf="matricule.errors && f.submitted">
-                matricule requis.
+            <mat-form-field>
+                <label for="matricule">matricule</label>
+                <input type="text" name="matricule" id="matricule" [(ngModel)]="form.matricule" #matricule="ngModel" required>
+                <div class="form_error" *ngIf="matricule.errors && f.submitted">
+                    matricule requis.
+                </div>
+            </mat-form-field>
+        </div>
+
+        <div class="group">
+            <mat-form-field>
+                <label for="dateCreation">date creation</label>
+                <input type="text" name="dateCreation" id="dateCreation" [(ngModel)]="form.dateCreation" #dateCreation="ngModel"
+                    required>
+                <div class="form_error" *ngIf="dateCreation.errors && f.submitted">
+                    date de creation requis
+                </div>
+            </mat-form-field>
+        </div>
+            <div class="button-container"> 
+                <button  [disabled]="f.form.invalid" (click)="onRegister()" class="button"> <span>Submit</span></button>
             </div>
-        </div>
-
-        <div class="group">
-            <label for="dateCreation">date creation</label>
-            <input type="text" name="dateCreation" id="dateCreation" [(ngModel)]="form.dateCreation" #dateCreation="ngModel" required>
-            <div class="form_error" *ngIf="dateCreation.errors && f.submitted">
-                date de creation requis
-            </div>
-        </div>
-
-        <div class="group">
-
-            <button  [disabled]="f.form.invalid" (click)="onRegister()"> s'inscrire</button>
-        </div>
     </form>
+
 </div>

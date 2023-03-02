@@ -144,7 +144,10 @@ form {
 .displayDate {
   display: flex;
   flex-wrap: wrap;
-  width:100%;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .column button {
@@ -177,6 +180,42 @@ form {
     padding: 20px; /* espace intérieur */
     text-align: center; /* centrage du contenu */
     
+  }
+
+
+  .buttonForm {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: auto;
+  width: 50%;
+  border-radius: 12px;
+  position: relative;
+  }
+
+  .buttonForm:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    font-weight: bold;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  
+  .buttonForm:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
   }
 
 
