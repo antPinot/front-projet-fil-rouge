@@ -1,13 +1,51 @@
-<mat-card *ngIf="currentCollaborateur">
-    <mat-card-content>
-        <mat-card-title>Bienvenue sur votre espace {{currentCollaborateur.prenom}} {{currentCollaborateur.nom}}</mat-card-title>
-        <mat-card-subtitle>Vos informations personnelles : </mat-card-subtitle>
-        <mat-list>
-            <mat-list-item><strong>Matricule : </strong> {{currentCollaborateur.matricule}}</mat-list-item>
-            <mat-list-item><strong>Vous êtes né le : </strong>{{currentCollaborateur.dateNaissance}}</mat-list-item>
-            <mat-list-item><strong>Mail : </strong>{{currentCollaborateur.mail}}</mat-list-item>
-            <mat-list-item><strong>Téléphone : </strong>{{currentCollaborateur.telephone}}</mat-list-item>
-            <mat-list-item><strong>Date de création : </strong>{{currentCollaborateur.dateCreation}}</mat-list-item>
-        </mat-list>
-    </mat-card-content>
-</mat-card>
+
+<div class="card" *ngIf="currentCollaborateur" >
+ 
+    <div class="text">
+     
+        
+        <img src="https://www.shareicon.net/data/512x512/2016/07/13/795285_user_512x512.png" alt="">
+         <h3>Bienvenue sur votre espace : <strong>{{currentCollaborateur.prenom}} {{currentCollaborateur.nom}}</strong> </h3>  
+         <p>  Vos informations personnelles : </p>  
+         
+              <p><strong>Matricule : </strong> {{currentCollaborateur.matricule}} </p> 
+              <p><strong>Vous êtes né le : </strong>{{currentCollaborateur.dateNaissance}} </p>  
+              <p> <strong>Mail : </strong>{{currentCollaborateur.mail}} </p>  
+              <p> <strong>Téléphone : </strong>{{currentCollaborateur.telephone}} </p>   
+              <p> <strong>Date de création : </strong>{{currentCollaborateur.dateCreation}} </p>  
+         
+
+        <div class="links">
+            <a target="_blank" href="www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+            <a target="_blank" href="https://www.waze.com/fr/live-map/ "><i class="fab fa-waze"></i></a>
+            <a target="_blank" href="https://www.booking.com/"><i class=" fas fa-hotel"></i> </a>
+        </div>
+
+   
+</div>
+ 
+</div>
+
+<!--
+ <div class="card">
+            <div class="text">
+                <img src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                <h3>Jane Smith</h3>
+                <p>Student | Coder</p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing 
+                    elit, sed do eiusmod tempor incididunt ut labore 
+                    et dolore magna aliqua. Ut enim ad minim veniam, 
+                    quis nostrud exercitation ullamco laboris nisi ut.
+                </p>
+            </div>
+            <div class="links">
+                <a target="_blank" href="https://codepen.io/l-e-e/"><i class="fab fa-codepen"></i></a>
+                <a target="_blank" href="https://github.com/Leena26"><i class="fab fa-github"></i></a>
+                <a target="_blank" href="https://www.youtube.com/channel/UCPOyUi82bRcPTdpDuSHVNbw"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+
+
+-->
