@@ -1,7 +1,5 @@
 
 <div class="form_container">
-    
-    
     <form name="form" #f="ngForm" (ngSubmit)="f.form.valid " class="mat-elevation-z8">
         <h3>Inscription</h3>
         <div class="group">
@@ -99,13 +97,9 @@
                 </div>
             </mat-form-field>
         </div>
-
-         
-
             <div class="button-container"> 
                 <button  [disabled]="f.form.invalid" (click)="onRegister()" class="button"> <span>Submit</span></button>
-         
-        </div>
+            </div>
     </form>
 
 </div>
