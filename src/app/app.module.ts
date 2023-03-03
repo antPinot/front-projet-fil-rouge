@@ -41,6 +41,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ErrorInterceptor } from './_helpers/interceptors/error.interceptor';
 import { ListReservationAdminComponent } from './components/list-reservation-admin/list-reservation-admin.component';
 import { SingleReservationAdminComponent } from './components/single-reservation-admin/single-reservation-admin.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { SingleReservationAdminComponent } from './components/single-reservation
     RegisterComponent,
     SidenavComponent,
     ListReservationAdminComponent,
-    SingleReservationAdminComponent
+    SingleReservationAdminComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

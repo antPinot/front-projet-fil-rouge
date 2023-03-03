@@ -20,10 +20,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { ListReservationAdminComponent } from './components/list-reservation-admin/list-reservation-admin.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
 const routes: Routes = [
+  
   {path: 'vehicule-personnel/create', component: NewVehiculePersonnelComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-personnel/list', component: ListVehiculePersonnelComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-personnel/edit', component: EditVehiculePersonnelComponent, canActivate: [AuthGuard]},
@@ -37,8 +39,7 @@ const routes: Routes = [
 
 
   {path: 'Register', component: RegisterComponent}, /**ajout register */
-
-  {path: '', redirectTo: 'home', pathMatch: 'full'}, /**redirection */
+  //{path: '', redirectTo: 'home', pathMatch: 'full'}, /**redirection */
   {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/edit', component: EditVehiculeSocieteComponent, canActivate: [AuthGuard]},
@@ -47,10 +48,8 @@ const routes: Routes = [
   {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/state', component: ListReservationAdminComponent, canActivate: [AuthGuard]},
 
-  {
-    path: 'covoiturage/:id/edit', 
-    component: CovoiturageDetailsComponent
-  } //faire loadchildrenRouting
+  {path: 'covoiturage/:id/edit', component: CovoiturageDetailsComponent }, //faire loadchildrenRouting
+  {path:'**',  component: NotFoundComponent  } ,//page 404 lors mauvais routing
 ];
 
 @NgModule({

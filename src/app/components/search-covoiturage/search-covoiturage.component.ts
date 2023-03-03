@@ -50,6 +50,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   onKeyupAdresseDepart() {
     let valueInput = this.searchForm.get('adresseDepart')?.value;
+    console.log(valueInput)
     this.adresseService.findByUserQuery(valueInput).subscribe()
   }
 
