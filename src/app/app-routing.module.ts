@@ -43,9 +43,9 @@ const routes: Routes = [
 
   {path: 'Register', component: RegisterComponent}, /**ajout register */
   //{path: '', redirectTo: 'home', pathMatch: 'full'}, /**redirection */
-  {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe', component: ListVehiculeSocieteComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe/edit', component: EditVehiculeSocieteComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent, canActivate: [AdminGuard]},
+  {path: 'vehicule-societe', component: ListVehiculeSocieteComponent, canActivate: [AdminGuard]},
+  {path: 'vehicule-societe/edit', component: EditVehiculeSocieteComponent, canActivate: [AdminGuard]},
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
