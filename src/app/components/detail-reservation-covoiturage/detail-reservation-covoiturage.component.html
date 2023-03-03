@@ -1,6 +1,6 @@
 <mat-list>
-    <mat-list-item *ngIf="reservable" class="title"> <strong>Vous êtes sur le point de réserver le covoiturage suivant :</strong></mat-list-item>
-    <mat-list-item *ngIf="!reservable && enCours" class="title"> <strong>Vous êtes sur le point de supprimer la réservation de covoiturage suivante :</strong></mat-list-item>
+    <h1 mat-dialog-title *ngIf="reservable" class="title"> <strong>Vous êtes sur le point de réserver le covoiturage suivant :</strong></h1>
+    <h1 mat-dialog-title *ngIf="!reservable && enCours" class="title"> <strong>Vous êtes sur le point de supprimer la réservation de covoiturage suivante :</strong></h1>
 <!--     <mat-list-item> <strong>Vous êtes sur le point de réserver le véhicule suivant</strong></mat-list-item>
     <mat-list-item> <strong>Vous êtes sur le point de supprimer la réservation de véhicule suivante</strong></mat-list-item> -->
     <mat-list-item> <strong>Date de Départ : </strong>  {{data.dateDepart}}</mat-list-item>
