@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe/reservation/state', component: ListReservationAdminComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-societe/reservation/state', component: ListReservationAdminComponent, canActivate: [AdminGuard]},
 
   {path: 'covoiturage/:id/edit', component: CovoiturageDetailsComponent }, //faire loadchildrenRouting
   {path:'**',  component: NotFoundComponent  } ,//page 404 lors mauvais routing
