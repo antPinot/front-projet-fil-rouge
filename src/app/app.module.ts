@@ -39,6 +39,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ErrorInterceptor } from './_helpers/interceptors/error.interceptor';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ErrorInterceptor } from './_helpers/interceptors/error.interceptor';
     LandingPageComponent,
     EditVehiculeSocieteComponent,
     RegisterComponent,
-    SidenavComponent
+    SidenavComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
