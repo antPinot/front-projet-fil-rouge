@@ -10,5 +10,5 @@ export interface ICredentials1 {
     login?: string,
     password?: string,
     dateCreation?: string
-    
+    rolesId?: number[]
   }

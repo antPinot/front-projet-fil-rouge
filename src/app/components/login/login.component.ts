@@ -37,9 +37,9 @@ export class LoginComponent implements OnInit {
           this.tokenService.saveToken(data)
           this.authService.findByToken(data.access_token).subscribe(
             collaborateur => {
-              console.log(collaborateur);
               this.failedLogin = false;
               this.router.navigate(['home']);
+              console.log(localStorage.getItem('isAdmin'));
             }
           )
 

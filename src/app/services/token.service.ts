@@ -15,7 +15,8 @@ export class TokenService {
 
   saveToken(token:IToken):void{
     localStorage.setItem('access_token', token.access_token) /**je sauvergarde le token dans le localStorage */
-    //localStorage.setItem('collaborateurId', token.collaborateurId);
+    if (token.isAdmin != undefined)
+    localStorage.setItem('isAdmin', token.isAdmin);
   }
 
   
