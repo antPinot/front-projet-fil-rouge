@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Collaborateur } from '../models/collaborateur.model';
 import { ICredentials } from '../models/credentials';
 import { ICredentials1 } from '../models/credentials1';
@@ -17,6 +17,10 @@ export class AuthService {
   currentCollaborateur!: Collaborateur;
 
   currentToken!: IToken;
+
+  logged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  adminLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   //collaborateurId = localStorage?.getItem('collaborateurId') as unknown as number;
   

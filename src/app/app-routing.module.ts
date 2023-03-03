@@ -18,7 +18,10 @@ import { NewVehiculePersonnelComponent } from './components/new-vehicule-personn
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
-import { AuthGuard } from './_helpers/auth.guard';
+import { AuthGuard } from './_helpers/guards/auth/auth.guard';
+import { AdminGuard } from './_helpers/guards/admin/admin.guard';
+import { NewReservationCovoiturageComponent } from './components/new-reservation-covoiturage/new-reservation-covoiturage.component';
+
 
 
 
@@ -38,9 +41,9 @@ const routes: Routes = [
   {path: 'Register', component: RegisterComponent}, /**ajout register */
 
   {path: '', redirectTo: 'home', pathMatch: 'full'}, /**redirection */
-  {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe', component: ListVehiculeSocieteComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe/edit', component: EditVehiculeSocieteComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent, canActivate: [AdminGuard]},
+  {path: 'vehicule-societe', component: ListVehiculeSocieteComponent, canActivate: [AdminGuard]},
+  {path: 'vehicule-societe/edit', component: EditVehiculeSocieteComponent, canActivate: [AdminGuard]},
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
@@ -48,7 +51,7 @@ const routes: Routes = [
   {
     path: 'covoiturage/:id/edit', 
     component: CovoiturageDetailsComponent
-  } //faire loadchildrenRouting
+  }, //faire loadchildrenRouting
 ];
 
 @NgModule({

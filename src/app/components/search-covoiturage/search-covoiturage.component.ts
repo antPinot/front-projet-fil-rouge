@@ -69,11 +69,11 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
     if (this.collaborateurId) {
       let formattedDate = moment(this.searchForm.value.searchDateDepart).format("DD/MM/YYYY");
       console.log(this.searchForm.value.adresseDepart)
-      if (this.searchForm.value.adresseDepart == null && this.searchForm.value.adresseArrivee == null) {
+      if ((this.searchForm.value.adresseDepart == null  || this.searchForm.value.adresseDepart == "") && (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "")) {
         this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, 0, 0, formattedDate).subscribe();
-      } else if (this.searchForm.value.adresseArrivee == null) {
+      } else if (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "") {
         this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, this.searchForm.value.adresseDepart.id, 0, formattedDate).subscribe();
-      } else if (this.searchForm.value.adresseDepart == null) {
+      } else if (this.searchForm.value.adresseDepart == null || this.searchForm.value.adresseDepart == "") {
         this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, 0, this.searchForm.value.adresseArrivee.id, formattedDate).subscribe();
       } else {
         console.log("erreur");

@@ -18,7 +18,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
 
-  logged : boolean = localStorage.length > 0
+  logged$ = this.authService.logged$;
+
+  adminLogged$ = this.authService.adminLogged$;
 
   faUser = faUser
   faIdCard = faIdCard
@@ -34,6 +36,10 @@ export class HeaderComponent {
   onLogout(){
     this.authService.logout().pipe(
       tap(() => localStorage.clear()),
+      tap(() => {
+        this.logged$.next(false);
+        this.adminLogged$.next(false);
+      }),
       tap(() => this.router.navigateByUrl('/Login'))
     ).subscribe()
   }

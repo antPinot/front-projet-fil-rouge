@@ -1,6 +1,6 @@
 <header>
   <h1>GP3 Covoiturage Series</h1>
-  <mat-sidenav-container class="navbar navbar-expand-lg">
+  <mat-sidenav-container *ngIf="logged$ | async " class="navbar navbar-expand-lg">
     <mat-sidenav #drawer mode="side" position="end" [fixedInViewport]="true">
       <mat-list>
         <mat-list-item><button mat-button routerLink="home"><fa-icon [icon]="faIdCard"></fa-icon> Mes informations
@@ -38,7 +38,7 @@
         véhicule</button>
       <!--       </mat-menu> -->
       <button mat-raised-button class="navbar-brand" routerLink='covoiturage/create'>Publier une annonce</button>
-      <button mat-raised-button class="navbar-brand" [matMenuTriggerFor]="administrateur">Administrateur</button>
+      <button *ngIf="adminLogged$ | async" mat-raised-button class="navbar-brand" [matMenuTriggerFor]="administrateur">Administrateur</button>
       <mat-menu #administrateur="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="collaborateurs">Collaborateurs</button>
         <button mat-menu-item [matMenuTriggerFor]="vehiculeSociete">Véhicules de Société</button>
