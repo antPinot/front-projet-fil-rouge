@@ -1,7 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment';
+import { map } from 'rxjs';
+import { AdresseService } from 'src/app/services/adresse.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationCovoiturageService } from 'src/app/services/reservation-covoiturage.service';
 
@@ -19,6 +21,8 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   /** Id du collaborateur connecté */
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
+  adressesResult = this.adresseService.listAdressesForAutocomplete$
+
   /** Formulaire de recherche */
   searchForm!: FormGroup;
 
@@ -28,14 +32,31 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   /** Date courante : Minimum pour effectuer une recherche par date */
   minDate = new Date();
 
-  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService,
+  constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService, private adresseService: AdresseService,
     private adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private locale: string) { }
 
   /** Initialisation du formulaire */
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
-      searchDateDepart: [null]
+      adresseDepart: [null],
+      adresseArrivee: [null],
+      searchDateDepart: [null, Validators.required]
     })
+
+    /*this.searchForm.get('adresseArrivee')?.valueChanges.pipe(
+      map((adresseSearch) => this.adresseService.findByUserQuery(adresseSearch).subscribe())
+    ).subscribe()*/
+  }
+
+  onKeyupAdresseDepart() {
+    let valueInput = this.searchForm.get('adresseDepart')?.value;
+    console.log(valueInput)
+    this.adresseService.findByUserQuery(valueInput).subscribe()
+  }
+
+  onKeyupAdresseArrivee() {
+    let valueInput = this.searchForm.get('adresseArrivee')?.value;
+    this.adresseService.findByUserQuery(valueInput).subscribe()
   }
 
   /** Réinitialisation de la liste des covoiturages disponbiles à la destruction du component */
@@ -47,9 +68,17 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   onSearch() {
     if (this.collaborateurId) {
       let formattedDate = moment(this.searchForm.value.searchDateDepart).format("DD/MM/YYYY");
-      this.reservationCovoiturageService.getCovoiturageByDateDepart(this.collaborateurId, formattedDate).subscribe();
+      console.log(this.searchForm.value.adresseDepart)
+      if ((this.searchForm.value.adresseDepart == null  || this.searchForm.value.adresseDepart == "") && (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "")) {
+        this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, 0, 0, formattedDate).subscribe();
+      } else if (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "") {
+        this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, this.searchForm.value.adresseDepart.id, 0, formattedDate).subscribe();
+      } else if (this.searchForm.value.adresseDepart == null || this.searchForm.value.adresseDepart == "") {
+        this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, 0, this.searchForm.value.adresseArrivee.id, formattedDate).subscribe();
+      } else {
+        console.log("erreur");
+      }
     }
-
   }
 
 

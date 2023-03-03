@@ -1,25 +1,27 @@
-<h2>formulaire creation covoiturage</h2>
-
 <div class="form1">
 
+    <h3>en voiture simone</h3>
+
     <form [formGroup]="covoiturageForm" (ngSubmit)="onSubmit()">
-        <div>
+
+        <div class="column displayDate">
+
             <label>Date de départ</label>
-            <input type="text" formControlName="dateDepart">
+            <input type="text" matInput [matDatepicker]="datePicker" formControlName="dateDepart">
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
             <div *ngIf="covoiturageForm.get('dateDepart')?.invalid && covoiturageForm.get('dateDepart')?.touched"
                 class="error">
                 La date de départ est requise
             </div>
-        </div>
-        <div>
+
+
             <label>Places restantes</label>
             <input type="number" formControlName="placesRestantes">
             <div *ngIf="covoiturageForm.get('placesRestantes')?.invalid && covoiturageForm.get('placesRestantes')?.touched"
                 class="error">
                 Le nombre de places restantes est requis
             </div>
-        </div>
-        <div>
             <label>Nombre de personnes</label>
             <input type="number" formControlName="nbPersonnes">
             <div *ngIf="covoiturageForm.get('nbPersonnes')?.invalid && covoiturageForm.get('nbPersonnes')?.touched"
@@ -27,31 +29,32 @@
                 Le nombre de personnes est requis
             </div>
         </div>
-        <div>
-            <label>Durée de trajet (en minutes)</label>
-            <input type="number" formControlName="dureeTrajet">
-            <div *ngIf="covoiturageForm.get('dureeTrajet')?.invalid && covoiturageForm.get('dureeTrajet')?.touched"
-                class="error">
-                La durée de trajet est requise
-            </div>
+        <div class="column displayDate">
+        <label>Durée de trajet (en minutes)</label>
+        <input type="number" formControlName="dureeTrajet">
+        <div *ngIf="covoiturageForm.get('dureeTrajet')?.invalid && covoiturageForm.get('dureeTrajet')?.touched"
+            class="error">
+            La durée de trajet est requise
         </div>
-        <div>
+       </div>
+       <div class="column displayDate">
+        
             <label>Distance (en km)</label>
             <input type="number" formControlName="distance">
             <div *ngIf="covoiturageForm.get('distance')?.invalid && covoiturageForm.get('distance')?.touched"
                 class="error">
                 La distance est requise
             </div>
-        </div>
-        <div>
+       </div>
+       <div class="column displayDate">
             <label>Organisateur</label>
             <input type="number" formControlName="organisateur">
             <div *ngIf="covoiturageForm.get('organisateur')?.invalid && covoiturageForm.get('organisateur')?.touched"
                 class="error">
                 L'organisateur est requis
             </div>
-        </div>
-        <div>
+       </div>
+        <div class="column displayDate">
             <label>Véhicule personnel</label>
             <input type="number" formControlName="vehiculePersonnel">
             <div *ngIf="covoiturageForm.get('vehiculePersonnel')?.invalid && covoiturageForm.get('vehiculePersonnel')?.touched"
@@ -61,152 +64,147 @@
         </div>
 
 
-        <div formGroupName="adresseDepart">
 
-            <div>
-                <label>Numero adresse</label>
-                <input type="text" formControlName="numero">
-                <div *ngIf="covoiturageForm.get('adresseDepart.numero')?.invalid && covoiturageForm.get('adresseDepart.numero')?.touched"
-                    class="error">
-                    Le numero est requise
-                </div>
-            </div>
+        <!-- ici faire une grid-->
 
-            <div>
-                <label>Complement Numero adresse</label>
-                <input type="text" formControlName="complementNumero">
-                <div *ngIf="covoiturageForm.get('adresseDepart.complementNumero')?.invalid && covoiturageForm.get('adresseDepart.complementNumero')?.touched"
-                    class="error">
-                    Le complement numero est requise
-                </div>
-            </div>
 
-            <div>
-                <label>Voie</label>
-                <input type="text" formControlName="voie">
-                <div *ngIf="covoiturageForm.get('adresseDepart.voie')?.invalid && covoiturageForm.get('adresseDepart.voie')?.touched"
-                    class="error">
-                    La voie est requise
-                </div>
-            </div>
-            <div>
-                <label>Ville</label>
-                <input type="text" formControlName="ville">
-                <div *ngIf="covoiturageForm.get('adresseDepart.ville')?.invalid && covoiturageForm.get('adresseDepart.ville')?.touched"
-                    class="error">
-                    La ville est invalide
-                </div>
-            </div>
+<div class="gridAdresse">   
+<div class="gridAdresseDepart column displayDate  ">
+    <div formGroupName="adresseDepart">
 
-            <div>
-                <label>Code Postal</label>
-                <input type="text" formControlName="codePostal">
-                <div *ngIf="covoiturageForm.get('adresseDepart.codePostal')?.invalid && covoiturageForm.get('adresseDepart.codePostal')?.touched"
-                    class="error">
-                    Le code postal est invalide
-                </div>
-            </div>
-
-            <div>
-                <label>Departement</label>
-                <input type="text" formControlName="departement">
-                <div *ngIf="covoiturageForm.get('adresseDepart.departement')?.invalid && covoiturageForm.get('adresseDepart.departement')?.touched"
-                    class="error">
-                    Le departement est invalide
-                </div>
-            </div>
-            <div>
-                <label>Pays</label>
-                <input type="text" formControlName="pays">
-                <div *ngIf="covoiturageForm.get('adresseDepart.pays')?.invalid && covoiturageForm.get('adresseDepart.pays')?.touched"
-                    class="error">
-                    Le pays est invalide
-                </div>
+        <div class="grid-item">
+    <label>N° adresse depart</label>
+            <input type="text" formControlName="numero">
+            <div *ngIf="covoiturageForm.get('adresseDepart.numero')?.invalid && covoiturageForm.get('adresseDepart.numero')?.touched"
+                class="error">
+                Le numero est requise
             </div>
         </div>
 
-
-
-        <div formGroupName="adresseArrivee">
-
-            <div>
-                <label>Numero</label>
-                <input type="text" formControlName="numero">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.numero')?.invalid && covoiturageForm.get('adresseArrivee.numero')?.touched"
-                    class="error">
-                    Le numero est requise
-                </div>
-            </div>
-
-
-            <div>
-                <label>Complement Numero</label>
-                <input type="text" formControlName="complementNumero">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.complementNumero')?.invalid && covoiturageForm.get('adresseArrivee.complementNumero')?.touched"
-                    class="error">
-                    Le complement numero est requise
-                </div>
-            </div>
-
-            <div>
-                <label>Voie</label>
-                <input type="text" formControlName="voie">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.voie')?.invalid && covoiturageForm.get('adresseArrivee.voie')?.touched"
-                    class="error">
-                    La voie est requise
-                </div>
-            </div>
-            <div>
-                <label>Ville</label>
-                <input type="text" formControlName="ville">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.ville')?.invalid && covoiturageForm.get('adresseArrivee.ville')?.touched"
-                    class="error">
-                    La ville est invalide
-                </div>
-            </div>
-            <div>
-                <label>Code Postal</label>
-                <input type="number" formControlName="codePostal">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.codePostal')?.invalid && covoiturageForm.get('adresseArrivee.codePostal')?.touched"
-                    class="error">
-                    Le code postal est invalide
-                </div>
-            </div>
-            <div>
-                <label>Departement</label>
-                <input type="text" formControlName="departement">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.departement')?.invalid && covoiturageForm.get('adresseArrivee.departement')?.touched"
-                    class="error">
-                    Le departement est invalide
-                </div>
-            </div>
-
-            <div>
-                <label>Pays</label>
-                <input type="text" formControlName="pays">
-                <div *ngIf="covoiturageForm.get('adresseArrivee.pays')?.invalid && covoiturageForm.get('adresseArrivee.pays')?.touched"
-                    class="error">
-                    Le pays est invalide
-                </div>
+        <div class="grid-item">
+            <label>Complement Numero </label>
+            <input type="text" formControlName="complementNumero">
+            <div *ngIf="covoiturageForm.get('adresseDepart.complementNumero')?.invalid && covoiturageForm.get('adresseDepart.complementNumero')?.touched"
+                class="error">
+                Le complement numero est requise
             </div>
         </div>
-        <button type="submit" [disabled]="covoiturageForm.invalid">Submit</button>
-   </form>
+
+        <div class="grid-item">
+            <label>Voie</label>
+            <input type="text" formControlName="voie">
+            <div *ngIf="covoiturageForm.get('adresseDepart.voie')?.invalid && covoiturageForm.get('adresseDepart.voie')?.touched"
+                class="error">
+                La voie est requise
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Ville</label>
+            <input type="text" formControlName="ville">
+            <div *ngIf="covoiturageForm.get('adresseDepart.ville')?.invalid && covoiturageForm.get('adresseDepart.ville')?.touched"
+                class="error">
+                La ville est invalide
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <label>Code Postal</label>
+            <input type="text" formControlName="codePostal">
+            <div *ngIf="covoiturageForm.get('adresseDepart.codePostal')?.invalid && covoiturageForm.get('adresseDepart.codePostal')?.touched"
+                class="error">
+                Le code postal est invalide
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <label>Departement</label>
+            <input type="text" formControlName="departement">
+            <div *ngIf="covoiturageForm.get('adresseDepart.departement')?.invalid && covoiturageForm.get('adresseDepart.departement')?.touched"
+                class="error">
+                Le departement est invalide
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Pays</label>
+            <input type="text" formControlName="pays">
+            <div *ngIf="covoiturageForm.get('adresseDepart.pays')?.invalid && covoiturageForm.get('adresseDepart.pays')?.touched"
+                class="error">
+                Le pays est invalide
+            </div>
+        </div>
+    </div>
 </div>
-<!--  Liste des covoiturages  
-    
-    numero?: number,
-    complementNumero?: string,
-    voie?: string,
-    codePostal?: number,
-    ville?:string
-    departement?: string,
-    pays?: string,
-    
-    
-    
-    
-    
-    
-    JUSTE UN EXEMPLE     -->
+<div class="gridAdresseDepart column displayDate ">
+    <div formGroupName="adresseArrivee">
+        <div class="grid-item">
+            <label>N° adresse arrivee</label>
+            <input type="text" formControlName="numero">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.numero')?.invalid && covoiturageForm.get('adresseArrivee.numero')?.touched"
+                class="error">
+                Le numero est requise
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Complement Numero</label>
+            <input type="text" formControlName="complementNumero">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.complementNumero')?.invalid && covoiturageForm.get('adresseArrivee.complementNumero')?.touched"
+                class="error">
+                Le complement numero est requise
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <label>Voie</label>
+            <input type="text" formControlName="voie">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.voie')?.invalid && covoiturageForm.get('adresseArrivee.voie')?.touched"
+                class="error">
+                La voie est requise
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Ville</label>
+            <input type="text" formControlName="ville">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.ville')?.invalid && covoiturageForm.get('adresseArrivee.ville')?.touched"
+                class="error">
+                La ville est invalide
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Code Postal</label>
+            <input type="number" formControlName="codePostal">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.codePostal')?.invalid && covoiturageForm.get('adresseArrivee.codePostal')?.touched"
+                class="error">
+                Le code postal est invalide
+            </div>
+        </div>
+        <div class="grid-item">
+            <label>Departement</label>
+            <input type="text" formControlName="departement">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.departement')?.invalid && covoiturageForm.get('adresseArrivee.departement')?.touched"
+                class="error">
+                Le departement est invalide
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <label>Pays</label>
+            <input type="text" formControlName="pays">
+            <div *ngIf="covoiturageForm.get('adresseArrivee.pays')?.invalid && covoiturageForm.get('adresseArrivee.pays')?.touched"
+                class="error">
+                Le pays est invalide
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<button class="buttonForm" [disabled]="covoiturageForm.invalid" type="submit" >Submit</button>
+
+</form>
+
  
+
+
+ 
+    
+    
+     

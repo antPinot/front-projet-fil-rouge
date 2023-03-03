@@ -44,9 +44,10 @@ export class ReservationCovoiturageService {
    * @param dateDepart en fonction de la date de départ fournie dans le formulaire de recherche
    * @returns 
    */
-  getCovoiturageByDateDepart(collaborateurId: number, dateDepart : string): Observable<Covoiturage[]>{
-    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/criteres?collaborateurId=${collaborateurId}&adresseDepart=none&adresseArrivee=none&dateDepart=${dateDepart}`)
+  getCovoiturageByCriteres(collaborateurId: number, adresseDepartId: number, adresseArriveeId: number, dateDepart : string): Observable<Covoiturage[]>{
+    return this.http.get<Covoiturage[]>(`http://localhost:8080/rest/covoiturage/criteres?collaborateurId=${collaborateurId}&adresseDepartId=${adresseDepartId}&adresseArriveeId=${adresseArriveeId}&dateDepart=${dateDepart}`)
     .pipe(
+      tap(() => console.log(adresseDepartId)),
       tap((covoituragesByDateDepart) => this.listCovoiturageByDateDepart$.next(covoituragesByDateDepart))
     );
   }

@@ -14,8 +14,9 @@ export class AdresseService {
 
   public adresses$= new BehaviorSubject<Adresse[]>([]); 
 
-  
   public adresse$  = new BehaviorSubject<Adresse>({}); ////pour la methode findOne
+
+  public listAdressesForAutocomplete$ = new BehaviorSubject<Adresse[]>([]);
 
   constructor(private _http:HttpClient) { }
 
@@ -33,6 +34,12 @@ export class AdresseService {
         }),
       )
     };
+
+    findByUserQuery(userQuery : string | unknown ) : Observable<Adresse[]>{
+      return this._http.get<Adresse[]>(`${this._baseUrl}/autocomplete?userQuery=${userQuery}`).pipe(
+        tap((adressesResult) => this.listAdressesForAutocomplete$.next(adressesResult))
+      );
+    }
 
 
     createOne(adresse: Adresse): Observable<Adresse> {

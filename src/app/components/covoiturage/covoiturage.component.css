@@ -1,3 +1,5 @@
+/*
+
 html,body {
   height:100%;
   width:100%;
@@ -9,7 +11,7 @@ html,body {
   align-items: center;
 }
 form {
-  /*display:table;/* shrinks to fit content */
+  display:table;  shrinks to fit content  
   margin:auto;
   display: flex;
   flex-direction: row;
@@ -24,7 +26,7 @@ html,body {
 }
 
 form {
-  display:table;/* shrinks to fit content */
+  display:table; shrinks to fit content 
   margin:auto;
 }
 
@@ -47,7 +49,7 @@ color: red;
 margin-top: 0.5rem;
 }
 
-/* Media query for small screens */
+
 @media screen and (max-width: 768px) {
 form {
     max-width: 90%;
@@ -58,16 +60,172 @@ input {
 }
 }
 
-/* Media query for medium screens */
+.displayDate{
+  display: flex;
+}
+ 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
 form {
     max-width: 70%;
 }
 }
-
-/* Media query for large screens */
+ 
 @media screen and (min-width: 1025px) {
 form {
     max-width: 50%;
 }
+}*/
+
+
+
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+
+.form1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 800px;
+  margin: auto;
+  margin-top:10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  gap: 20px;
+}
+
+.column {
+  width: 50%;
+}
+
+.column label,
+.column input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.column input[type="text"],
+.column input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.column label {
+  font-weight: bold;
+}
+
+.column .displayDate {
+  position: relative;
+}
+
+.column .displayDate label {
+  position: absolute;
+  top: -20px;
+  left: 0;
+}
+
+.column .displayDate input {
+  padding-left: 40px;
+}
+
+.column .displayDate .mat-datepicker-toggle {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.displayDate {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.column button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.column button:hover {
+  background-color: #0069d9;
+}
+
+
+/*grid adresse*/
+.gridAdresse{
+  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 colonnes de largeur égale */
+    grid-template-rows: auto auto; /* 2 lignes de hauteur automatiqalign-items: stretch;ue */
+    align-items: stretch;
+    grid-gap: 10px; /* espace entre les éléments */
+    width:100%;
+  }
+
+  .grid-item {
+    background-color: #eee; /* couleur de fond */
+    padding: 20px; /* espace intérieur */
+    text-align: center; /* centrage du contenu */
+    
+  }
+
+
+  .buttonForm {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: auto;
+  width: 50%;
+  border-radius: 12px;
+  position: relative;
+  }
+
+  .buttonForm:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    font-weight: bold;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  
+  .buttonForm:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+
+
+
+@media screen and (max-width: 768px) {
+  .form1 {
+    flex-direction: column;
+    max-width: 400px;
+  }
+  .column {
+    width: 100%;
+  }
 }

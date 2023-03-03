@@ -7,6 +7,7 @@ import { VehiculePersonnel } from "./vehicule-personnel";
  * 
  */
 export interface Covoiturage {
+    
     id?: any;
     dateDepart?: string,
     placesRestantes?: number,

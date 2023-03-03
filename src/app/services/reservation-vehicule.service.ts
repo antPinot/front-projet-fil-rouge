@@ -21,8 +21,13 @@ export class ReservationVehiculeService {
   /** Liste des réservations de véhicules de société d'un collaborateur */
   listReservationVehicule$ = new BehaviorSubject<ReservationVehiculeSociete[]>([])
 
+  listReservationVehiculeAdmin$ = new BehaviorSubject<ReservationVehiculeSociete[]>([])
+
   /** Liste des véhicules de société disponibles en fonction d'une date de départ et d'une date de retour(Résultats de recherche)*/
   listVehicule$ = new BehaviorSubject<VehiculeSociete[]>([])
+
+  /** Booléen permettant de gérer l'affichage du bouton de suppression d'une réservation de véhicule de service */
+  enCours: boolean = true
 
   constructor(private http:HttpClient) { }
 
@@ -36,6 +41,12 @@ export class ReservationVehiculeService {
   getReservationVehiculeSocieteByCollaborateur(collaborateurId: number | undefined, state: string): Observable<ReservationVehiculeSociete[]>{
     return this.http.get<ReservationVehiculeSociete[]>(`http://localhost:8080/rest/reservation-vehicule/?collaborateurId=${collaborateurId}&state=${state}`).pipe(
       tap((listReservations) => this.listReservationVehicule$.next(listReservations))
+    );
+  }
+
+  getReservationVehiculeSocieteByState(state: string): Observable<ReservationVehiculeSociete[]>{
+    return this.http.get<ReservationVehiculeSociete[]>(`http://localhost:8080/rest/reservation-vehicule/state/state=${state}`).pipe(
+      tap((listReservationsAdmin) => this.listReservationVehiculeAdmin$.next(listReservationsAdmin))
     );
   }
 

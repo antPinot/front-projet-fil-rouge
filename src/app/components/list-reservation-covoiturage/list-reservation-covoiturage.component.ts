@@ -37,6 +37,8 @@ export class ListReservationCovoiturageComponent implements OnInit {
   */
   enCours(): void {
     if (this.collaborateurId) {
+
+      console.log(this.collaborateurId)
       this.reservationCovoiturageService.getListReservationCovoiturageByCollaborateur(this.collaborateurId, 'en-cours').subscribe();
       this.reservationCovoiturageService.enCours = true;
     }

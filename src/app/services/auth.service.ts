@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Collaborateur } from '../models/collaborateur.model';
-import { LogoutComponent } from '../components/logout/logout.component';
 import { ICredentials } from '../models/credentials';
 import { ICredentials1 } from '../models/credentials1';
 import { IToken } from '../models/token';
@@ -18,6 +17,10 @@ export class AuthService {
   currentCollaborateur!: Collaborateur;
 
   currentToken!: IToken;
+
+  logged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  adminLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   //collaborateurId = localStorage?.getItem('collaborateurId') as unknown as number;
   
@@ -38,7 +41,7 @@ export class AuthService {
   }
 
   logout(): Observable<IToken>{
-    return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken);
+    return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken)
   }
 
 
