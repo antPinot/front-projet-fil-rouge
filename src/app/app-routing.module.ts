@@ -19,6 +19,7 @@ import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/n
 import { RegisterComponent } from './components/register/register.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { ListReservationAdminComponent } from './components/list-reservation-admin/list-reservation-admin.component';
 
 
 
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
   {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
+  {path: 'vehicule-societe/reservation/state', component: ListReservationAdminComponent, canActivate: [AuthGuard]},
 
   {
     path: 'covoiturage/:id/edit', 
