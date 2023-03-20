@@ -7,6 +7,7 @@ import { NewVehiculePersonnelComponent } from './components/new-vehicule-personn
 import { ListVehiculePersonnelComponent } from './components/list-vehicule-personnel/list-vehicule-personnel.component';
 import { SingleVehiculePersonnelComponent } from './components/single-vehicule-personnel/single-vehicule-personnel.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
+import { MaterialModule } from '../core/material-module/material.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditVehiculePersonnelComponent } from './components/edit-vehicule-perso
   imports: [
     CommonModule,
     VehiculePersonnelRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports :[NewVehiculePersonnelComponent,
     ListVehiculePersonnelComponent,

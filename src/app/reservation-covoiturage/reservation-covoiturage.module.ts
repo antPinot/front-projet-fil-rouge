@@ -7,6 +7,7 @@ import { DetailReservationCovoiturageComponent } from './components/detail-reser
 import { ListReservationCovoiturageComponent } from './components/list-reservation-covoiturage/list-reservation-covoiturage.component';
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 import { SingleReservationCovoiturageComponent } from './components/single-reservation-covoiturage/single-reservation-covoiturage.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SingleReservationCovoiturageComponent } from './components/single-reser
   imports: [
     CommonModule,
     ReservationCovoiturageRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   exports: [
     SingleReservationCovoiturageComponent,

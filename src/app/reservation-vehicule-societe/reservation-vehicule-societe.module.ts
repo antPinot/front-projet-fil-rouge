@@ -6,6 +6,8 @@ import { EditReservationVehiculeComponent } from './components/edit-reservation-
 import { ListReservationVehiculeSocieteComponent } from './components/list-reservation-vehicule-societe/list-reservation-vehicule-societe.component';
 import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
 import { SingleReservationVehiculeComponent } from './components/single-reservation-vehicule/single-reservation-vehicule.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../core/material-module/material.module';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { SingleReservationVehiculeComponent } from './components/single-reservat
   ],
   imports: [
     CommonModule,
-    ReservationVehiculeSocieteRoutingModule
+    ReservationVehiculeSocieteRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports: [
     ListReservationVehiculeSocieteComponent,

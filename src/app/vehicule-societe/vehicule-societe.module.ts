@@ -7,6 +7,8 @@ import { EditVehiculeSocieteComponent } from './components/edit-vehicule-societe
 import { ListVehiculeSocieteComponent } from './components/list-vehicule-societe/list-vehicule-societe.component';
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
 import { SingleVehiculeSocieteComponent } from './components/single-vehicule-societe/single-vehicule-societe.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../core/material-module/material.module';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SingleVehiculeSocieteComponent } from './components/single-vehicule-soc
   ],
   imports: [
     CommonModule,
-    VehiculeSocieteRoutingModule
+    VehiculeSocieteRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports: [
     NewVehiculeSocieteComponent,

@@ -6,6 +6,8 @@ import { CovoiturageDetailsComponent } from './components/covoiturage-details/co
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
 import { SingleCovoiturageComponent } from './components/single-covoiturage/single-covoiturage.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../core/material-module/material.module';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { SingleCovoiturageComponent } from './components/single-covoiturage/sing
   ],
   imports: [
     CommonModule,
-    CovoiturageRoutingModule
+    CovoiturageRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports: [
     CovoiturageComponent,
