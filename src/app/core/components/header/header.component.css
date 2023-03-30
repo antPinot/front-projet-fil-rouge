@@ -8,7 +8,7 @@ h1 {
     color: cornflowerblue;
     height: 150px;
     z-index: 1000;
-    background-image: url('../../../assets/erik-mclean-ZRns2R5azu0-unsplash.jpg');
+    background-image: url('../../../../assets/erik-mclean-ZRns2R5azu0-unsplash.jpg');
 }
 
 .cover-image {

@@ -31,7 +31,6 @@ export class TokenService {
   getToken(): boolean {
 
     const token = localStorage.getItem('token')
-    console.log(token)
     return !!token
 
   }

@@ -5,8 +5,8 @@ import { ListReservationCovoiturageComponent } from './components/list-reservati
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 
 const routes: Routes = [
-  {path: 'covoiturage/reservation/list', component: ListReservationCovoiturageComponent, canActivate: [AuthGuard]},
-  {path: 'covoiturage/reservation/search', component: SearchCovoiturageComponent, canActivate: [AuthGuard]},
+  {path: "list", component: ListReservationCovoiturageComponent, canActivate: [AuthGuard]},
+  {path: "search", component: SearchCovoiturageComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

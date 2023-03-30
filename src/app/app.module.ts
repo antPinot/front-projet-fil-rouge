@@ -35,15 +35,9 @@ import { NotFoundModule } from './not-found/not-found.module';
     BrowserAnimationsModule,
     MaterialModule,
     FontAwesomeModule,
-    VehiculePersonnelModule,
-    VehiculeSocieteModule,
-    ReservationCovoiturageModule,
-    ReservationVehiculeSocieteModule,
-    CovoiturageModule,
     LandingPageModule,
     NotFoundModule,
     CoreModule,
-    AuthModule,
     AdminModule
   ],
   providers: [

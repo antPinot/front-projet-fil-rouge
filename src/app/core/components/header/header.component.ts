@@ -40,8 +40,12 @@ export class HeaderComponent {
         this.logged$.next(false);
         this.adminLogged$.next(false);
       }),
-      tap(() => this.router.navigateByUrl('/Login'))
+      tap(() => this.router.navigateByUrl('/login'))
     ).subscribe()
+  }
+
+  toUrl(url:string){
+    this.router.navigate([url]);
   }
 
 }

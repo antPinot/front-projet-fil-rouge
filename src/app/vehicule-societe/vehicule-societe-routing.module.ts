@@ -6,9 +6,9 @@ import { ListVehiculeSocieteComponent } from './components/list-vehicule-societe
 import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/new-vehicule-societe.component';
 
 const routes: Routes = [
-  {path: 'vehicule-societe/create', component: NewVehiculeSocieteComponent, canActivate: [AdminGuard]},
+  {path: 'create', component: NewVehiculeSocieteComponent, canActivate: [AdminGuard]},
   {path: 'vehicule-societe', component: ListVehiculeSocieteComponent, canActivate: [AdminGuard]},
-  {path: 'vehicule-societe/edit', component: EditVehiculeSocieteComponent, canActivate: [AdminGuard]},
+  {path: 'edit', component: EditVehiculeSocieteComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({

@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
 
   /**methode onLogout au click  FONCTIONNE*/
   onLogout(){
-    console.log("coucou");
     return this.tokenService.clearToken();
   }
    

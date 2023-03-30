@@ -6,9 +6,9 @@ import { ListReservationVehiculeSocieteComponent } from './components/list-reser
 import { NewReservationVehiculeSocieteComponent } from './components/new-reservation-vehicule-societe/new-reservation-vehicule-societe.component';
 
 const routes: Routes = [
-  {path: 'vehicule-societe/reservation/list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe/reservation/create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
-  {path: 'vehicule-societe/reservation/edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
+  {path: 'list', component: ListReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
+  {path: 'create', component: NewReservationVehiculeSocieteComponent, canActivate: [AuthGuard]},
+  {path: 'edit', component: EditReservationVehiculeComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
