@@ -9,12 +9,12 @@ import { Covoiturage } from '../models/covoiturage';
 })
 export class CovoiturageService {
 
-
   private _baseUrl = 'http://localhost:8080/rest/covoiturage';
 
   public covoiturages$= new BehaviorSubject<Covoiturage[]>([]);
 
   public covoiturage$  = new BehaviorSubject<Covoiturage>({}); ////pour la methode findOne
+  
   covoiturageList$: any;
 
   /**utiliser httpclient */
@@ -79,7 +79,7 @@ createOne(covoiturage: Covoiturage): Observable<Covoiturage> {
 
 
   /** deleteOne */
-  deleteOne(id:string): Observable<Covoiturage>{
+  deleteOne(id:number): Observable<Covoiturage>{
     return this._http.delete<Covoiturage>(`${this._baseUrl}/${id}`).pipe(
       tap(deleteCovoit => {
         const covoits = this.covoiturages$.value;

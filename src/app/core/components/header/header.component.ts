@@ -40,7 +40,7 @@ export class HeaderComponent {
         this.logged$.next(false);
         this.adminLogged$.next(false);
       }),
-      tap(() => this.router.navigateByUrl('/login'))
+      tap(() => this.router.navigate(['auth/login']))
     ).subscribe()
   }
 

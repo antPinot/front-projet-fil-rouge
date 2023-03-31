@@ -38,9 +38,9 @@ export class CovoiturageListService {
    * @returns 
    */
   deleteCovoituragePersonnel(covoituragePersonnelId: number): Observable<Covoiturage>{
-    return this.http.delete<Covoiturage>(`http://localhost:8080/rest/covoiturage-list/${covoituragePersonnelId}`).pipe(
+    return this.http.delete<Covoiturage>(`http://localhost:8080/rest/covoiturage/${covoituragePersonnelId}`).pipe(
       tap(() => this.covoiturageListByOrganisateurId$.next(
-        this.covoiturageListByOrganisateurId$.value.filter(v => v.id != covoituragePersonnelId)
+        this.covoiturageListByOrganisateurId$.value.filter(c => c.id != covoituragePersonnelId)
       ))
     )
   }

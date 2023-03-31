@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { CovoiturageListService } from 'src/app/core/services/covoiturage-list.service';
 import { Covoiturage } from '../../../core/models/covoiturage';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationCovoiturageService } from '../../../core/services/reservation-covoiturage.service';
@@ -30,14 +31,14 @@ export class DetailReservationCovoiturageComponent implements OnInit {
   enCours = this.reservationCovoiturageService.enCours
 
   constructor(public dialogRef: MatDialogRef<DetailReservationCovoiturageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Covoiturage, private reservationCovoiturageService: ReservationCovoiturageService, private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: Covoiturage, private covoiturageService: CovoiturageListService, private reservationCovoiturageService: ReservationCovoiturageService, private router: Router,
     private authService: AuthService) {
     this.covoiturage = { ...data }
   }
 
   /** Affecte le booléen reservable en fonction de l'url du component parent*/
   ngOnInit(): void {
-    this.router.url == '/covoiturage/reservation/search' ? this.reservable = true : this.reservable = false
+    this.router.url == '/covoiturage/reservation/search' ? this.reservable = true : this.reservable = false;
   }
 
   /** Méthode de réservation d'un covoiturage */
@@ -53,8 +54,10 @@ export class DetailReservationCovoiturageComponent implements OnInit {
     }
   }
 
-  onDelete(){
-    if (this.collaborateurId) {
+  onDelete() {
+    if (this.collaborateurId == this.covoiturage.organisateur?.id) {
+      this.covoiturageService.deleteCovoituragePersonnel(this.covoiturage.id).subscribe();
+    } else if (this.collaborateurId != this.covoiturage.organisateur?.id && this.collaborateurId) {
       this.reservationCovoiturageService.annulerReservationCovoiturage(this.collaborateurId, this.covoiturage).subscribe()
     }
   }
