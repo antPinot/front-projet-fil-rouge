@@ -7,13 +7,15 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material-module/material.module';
+import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgottenPasswordComponent,
   ],
   imports: [
     CommonModule,

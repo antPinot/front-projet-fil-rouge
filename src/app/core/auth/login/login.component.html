@@ -63,8 +63,8 @@
 		<section class="wrapper">
 			<div class="heading">
 				<h1 class="text text-large" >Connexion</h1>
-				<p class="text text-normal">Nouveau utilisateur? <span><a href="#" class="text text-links" routerLink="../register"   >Cree un compte</a></span>
-				</p>
+				<!-- <p class="text text-normal">Nouveau utilisateur? <span><a href="#" class="text text-links" routerLink="../register"   >Cree un compte</a></span>
+				</p> -->
 			</div>
 			<form name="form" class="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  >
 				<div class="input-control">
@@ -86,7 +86,7 @@
 
 				</div>
 				<div class="input-control">
-					<a href="#" class="text text-links">Forgot Password</a>
+					<a href="#" class="text text-links" routerLink="../forgotten-password">Forgot Password</a>
 					<input type="submit" name="submit" class="input-submit" value="Sign In"  >
 				</div>
 			</form>

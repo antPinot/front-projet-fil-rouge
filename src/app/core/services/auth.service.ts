@@ -44,6 +44,10 @@ export class AuthService {
     return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken)
   }
 
+  passwordReset(mail: String): Observable<boolean>{
+    return this._http.post<boolean>(`http://localhost:8080/rest/collaborateur/passwordreset`, mail);
+  }
+
 
 
 /*
