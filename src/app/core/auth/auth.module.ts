@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material-module/material.module';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ForgottenPasswordComponent } from './forgotten-password/forgotten-passw
     LogoutComponent,
     RegisterComponent,
     ForgottenPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,
