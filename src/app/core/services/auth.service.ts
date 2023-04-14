@@ -6,6 +6,7 @@ import { Collaborateur } from '../models/collaborateur.model';
 import { ICredentials } from '../models/credentials';
 import { ICredentials1 } from '../models/credentials1';
 import { IToken } from '../models/token';
+import { IPasswordReset } from '../models/IPasswordReset';
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,12 @@ export class AuthService {
     return this._http.post<IToken>(`http://localhost:8080/rest/collaborateur/logout`, this.currentToken)
   }
 
-  passwordReset(mail: String): Observable<boolean>{
-    return this._http.post<boolean>(`http://localhost:8080/rest/collaborateur/passwordreset`, mail);
+  passwordReset(passwordReset: IPasswordReset): Observable<boolean>{
+    return this._http.post<boolean>(`http://localhost:8080/rest/collaborateur/passwordreset`, passwordReset);
+  }
+
+  passwordResetToken(mail: String): Observable<boolean>{
+    return this._http.post<boolean>(`http://localhost:8080/rest/collaborateur/passwordresettoken`, mail);
   }
 
 

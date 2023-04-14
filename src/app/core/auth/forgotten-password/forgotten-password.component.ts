@@ -13,7 +13,7 @@ export class ForgottenPasswordComponent {
   constructor(private authService : AuthService){}
 
   onSubmit(): void{
-    this.authService.passwordReset(this.mail).subscribe();
+    this.authService.passwordResetToken(this.mail).subscribe();
   }
 
 }
