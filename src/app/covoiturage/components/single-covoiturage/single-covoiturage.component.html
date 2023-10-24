@@ -1,41 +1,41 @@
-<div *ngIf="covoituragePersonnel" class="container border border-dark rounded m-3 p-2">
+<div *ngIf="covoituragePersonnel" class="container-s border border-dark rounded m-3 p-2">
     <div class="row">
-        <div class="col">
-            Date de départ : {{covoituragePersonnel.dateDepart}}
+        <div class="col-auto">
+            <strong>Date de départ</strong> : <p>{{covoituragePersonnel.dateDepart}}</p>
         </div>
-        <div class="col">
-            Places restantes : {{covoituragePersonnel.placesRestantes}}
+        <div class="col-auto">
+            <strong>Places restantes</strong> : <p>{{covoituragePersonnel.placesRestantes}}</p>
         </div>
-        <div class="col">
-            Nombres de personnes : {{covoituragePersonnel.nbPersonnes}}
+        <div class="col-auto">
+            <strong>Nombres de personnes</strong> : <p>{{covoituragePersonnel.nbPersonnes}}</p>
         </div>
-        <div class="col">
-            dureeTrajet : {{covoituragePersonnel.dureeTrajet}}
+        <div class="col-auto">
+            <strong>dureeTrajet</strong> : <p>{{covoituragePersonnel.dureeTrajet}}</p>
         </div>
-        <div class="col">
-            distance km : {{covoituragePersonnel.distance}}
-        </div>
-
-        <div class="col">
-            organisateur : {{covoituragePersonnel.organisateurId}}
+        <div class="col-auto">
+            <strong>distance km</strong> : <p>{{covoituragePersonnel.distance}}</p>
         </div>
 
-        <div class="col">
-            vehicule personnel : {{covoituragePersonnel.vehiculePersonnelId}}
+        <div class="col-auto">
+            <strong>organisateur</strong> : <p>{{covoituragePersonnel.organisateurId}}</p>
         </div>
 
-        <div class="col">
-            adresse de depart : {{covoituragePersonnel.adresseDepart?.voie}}
+        <div class="col-auto">
+            <strong>vehicule personnel</strong> : <p>{{covoituragePersonnel.vehiculePersonnelId}}</p>
         </div>
 
-        <div class="col">
-            adresse arrivée : {{covoituragePersonnel.adresseArrivee?.voie}}
+        <div class="col-auto">
+            <strong>adresse de depart</strong> : <p>{{covoituragePersonnel.adresseDepart?.voie}}</p>
         </div>
-        <div class="col">
-            <button class="row" mat-raised-button color="primary" [routerLink]="['/covoiturage', covoituragePersonnel.id, 'edit']">
+
+        <div class="col-auto">
+            <strong>adresse arrivée</strong> : <p>{{covoituragePersonnel.adresseArrivee?.voie}}</p>
+        </div>
+        <div class="col-auto">
+            <button mat-raised-button color="primary" [routerLink]="['/covoiturage', covoituragePersonnel.id, 'edit']">
                 Editer
             </button>
-            <button class="row mt-3" mat-raised-button color="warn" (click)="displayDetails()">
+            <br><button class= mt-3 mat-raised-button color="warn" (click)="displayDetails()">
                 Supprimer
             </button>
         </div>

@@ -9,6 +9,7 @@ h1 {
     height: 150px;
     z-index: 1000;
     background-image: url('../../../../assets/erik-mclean-ZRns2R5azu0-unsplash.jpg');
+    
 }
 
 .cover-image {
@@ -21,4 +22,8 @@ mat-sidenav{
     background-color:antiquewhite;
     width: 20vw;
     height: 100vh !important;
+}
+
+mat-sidenav-container{
+    margin-top: 0;
 }

@@ -2,14 +2,14 @@
             <div class="search">
                 <label for="searchAdresseDepart"><strong>Adresse de départ</strong></label>
                 <input type="text" id="searchAdresseDepart" formControlName ="adresseDepart" [matAutocomplete]="auto" (keyup)="onKeyupAdresseDepart()">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500" [displayWith]="displayAdresse">
                     <mat-option *ngFor="let adresse of adressesResult | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
                 </mat-autocomplete>
             </div>
             <div class="search">
                 <label for="searchAdresseDepart"><strong>Adresse d'Arrivée</strong></label>
                 <input type="text" id="searchAdresseArrivee" formControlName ="adresseArrivee" [matAutocomplete]="autoTwo" (keyup)="onKeyupAdresseArrivee()">
-                <mat-autocomplete autoActiveFirstOption #autoTwo="matAutocomplete" [panelWidth]="500">
+                <mat-autocomplete autoActiveFirstOption #autoTwo="matAutocomplete" [panelWidth]="500" [displayWith]="displayAdresse">
                     <mat-option *ngFor="let adresse of adressesResult | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
                 </mat-autocomplete>
             </div>

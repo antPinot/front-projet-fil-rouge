@@ -1,19 +1,20 @@
 <div *ngIf="vehiculePersonnel" class="container border border-dark rounded m-3 p-2">
     <div class="row">
         <div class="col">
-            Immatriculation : {{vehiculePersonnel.immatriculation}}
+            <strong>Immatriculation</strong> : 
+            <p>{{vehiculePersonnel.immatriculation}}</p>
         </div>
         <div class="col">
-            Marque : {{vehiculePersonnel.marque}}
+            <strong>Marque</strong> : <p>{{vehiculePersonnel.marque}}</p>
         </div>
         <div class="col">
-            Modèle : {{vehiculePersonnel.modele}}
+            <strong>Modèle</strong> : <p>{{vehiculePersonnel.modele}}</p>
         </div>
         <div class="col">
-            Places : {{vehiculePersonnel.places}}
+            <strong>Places</strong> : <p>{{vehiculePersonnel.places}}</p>
         </div>
         <div class="col">
-            Limite de places : {{vehiculePersonnel.limitePlace}}
+            <strong>Limite de places</strong> : <p>{{vehiculePersonnel.limitePlace}}</p>
         </div>
         <div class="col">
             <button mat-raised-button color="primary" class="row" (click)="onEdit()">Modifier</button>

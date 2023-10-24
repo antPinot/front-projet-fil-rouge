@@ -2,6 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment';
+import { Adresse } from 'src/app/core/models/adresse';
 import { AdresseService } from '../../../core/services/adresse.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationCovoiturageService } from '../../../core/services/reservation-covoiturage.service';
@@ -49,13 +50,21 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   onKeyupAdresseDepart() {
     let valueInput = this.searchForm.get('adresseDepart')?.value;
-    console.log(valueInput)
-    this.adresseService.findByUserQuery(valueInput).subscribe()
+    this.adresseService.findByUserQueryWithPhotonAPI(valueInput).subscribe();
   }
 
   onKeyupAdresseArrivee() {
     let valueInput = this.searchForm.get('adresseArrivee')?.value;
-    this.adresseService.findByUserQuery(valueInput).subscribe()
+    this.adresseService.findByUserQueryWithPhotonAPI(valueInput).subscribe()
+  }
+
+  displayAdresse(adresse : Adresse): string{
+    if (adresse !== null){
+      let complementNum : boolean;
+      adresse.complementNumero ? complementNum = true : complementNum = false;
+      return complementNum ? `${adresse.numero} ${adresse.complementNumero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} ` : `${adresse.numero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} `
+    }
+    return '';
   }
 
   /** Réinitialisation de la liste des covoiturages disponbiles à la destruction du component */
