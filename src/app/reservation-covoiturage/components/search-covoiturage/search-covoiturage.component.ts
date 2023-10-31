@@ -6,6 +6,7 @@ import { Adresse } from 'src/app/core/models/adresse';
 import { AdresseService } from '../../../core/services/adresse.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationCovoiturageService } from '../../../core/services/reservation-covoiturage.service';
+import { tileLayer, latLng, circle, polygon, marker, Icon, icon, Map } from 'leaflet'
 
 /**
  * Component gérant la recherche d'un covoiturage
@@ -18,10 +19,20 @@ import { ReservationCovoiturageService } from '../../../core/services/reservatio
 })
 export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
+  map?: Map;
+
   /** Id du collaborateur connecté */
   collaborateurId?= this.authService.currentCollaborateur?.id;
 
-  adressesResult = this.adresseService.listAdressesForAutocomplete$
+  adressesDepartResult = this.adresseService.listAdressesForAutocompleteDepart$
+
+  adressesArriveeResult = this.adresseService.listAdressesForAutocompleteArrivee$
+
+  departCoordinates = this.adresseService.departCoordinates$
+
+  arriveeCoordinates = this.adresseService.arriveeCoordinates$
+
+  routeDuration = this.adresseService.routeDuration$
 
   /** Formulaire de recherche */
   searchForm!: FormGroup;
@@ -31,6 +42,40 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   /** Date courante : Minimum pour effectuer une recherche par date */
   minDate = new Date();
+
+  options = {
+    layers: [
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    ],
+    zoom: 13,
+    center: latLng(43.6112422, 3.8767337)
+  };
+
+  layersControl = {
+    baseLayers: {
+      'Open Street Map': tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    },
+    overlays: {
+    }
+  }
+
+  departPin = marker([0, 0], {
+    icon: icon({
+      ...Icon.Default.prototype.options,
+      iconUrl: 'assets/marker-icon.png',
+      iconRetinaUrl: 'assets/marker-icon-2x.png',
+      shadowUrl: 'assets/marker-shadow.png'
+    })
+  })
+
+  arriveePin = marker([0, 0], {
+    icon: icon({
+      ...Icon.Default.prototype.options,
+      iconUrl: 'assets/marker-icon.png',
+      iconRetinaUrl: 'assets/marker-icon-2x.png',
+      shadowUrl: 'assets/marker-shadow.png'
+    })
+  })
 
   constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService, private adresseService: AdresseService,
     private adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private locale: string) { }
@@ -46,21 +91,22 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
     /*this.searchForm.get('adresseArrivee')?.valueChanges.pipe(
       map((adresseSearch) => this.adresseService.findByUserQuery(adresseSearch).subscribe())
     ).subscribe()*/
+
   }
 
   onKeyupAdresseDepart() {
     let valueInput = this.searchForm.get('adresseDepart')?.value;
-    this.adresseService.findByUserQueryWithPhotonAPI(valueInput).subscribe();
+    this.adresseService.findByUserQueryWithPhotonAPI(valueInput, true).subscribe();
   }
 
   onKeyupAdresseArrivee() {
     let valueInput = this.searchForm.get('adresseArrivee')?.value;
-    this.adresseService.findByUserQueryWithPhotonAPI(valueInput).subscribe()
+    this.adresseService.findByUserQueryWithPhotonAPI(valueInput, false).subscribe()
   }
 
-  displayAdresse(adresse : Adresse): string{
-    if (adresse !== null){
-      let complementNum : boolean;
+  displayAdresse(adresse: Adresse): string {
+    if (adresse !== null) {
+      let complementNum: boolean;
       adresse.complementNumero ? complementNum = true : complementNum = false;
       return complementNum ? `${adresse.numero} ${adresse.complementNumero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} ` : `${adresse.numero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} `
     }
@@ -77,7 +123,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
     if (this.collaborateurId) {
       let formattedDate = moment(this.searchForm.value.searchDateDepart).format("DD/MM/YYYY");
       console.log(this.searchForm.value.adresseDepart)
-      if ((this.searchForm.value.adresseDepart == null  || this.searchForm.value.adresseDepart == "") && (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "")) {
+      if ((this.searchForm.value.adresseDepart == null || this.searchForm.value.adresseDepart == "") && (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "")) {
         this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, 0, 0, formattedDate).subscribe();
       } else if (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "") {
         this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, this.searchForm.value.adresseDepart.id, 0, formattedDate).subscribe();
@@ -87,6 +133,24 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
         console.log("erreur");
       }
     }
+  }
+
+  onMapReady(map: Map) {
+    this.map = map;
+  }
+
+  addMarker(depart: boolean) {
+    depart ? this.departCoordinates.subscribe() : this.arriveeCoordinates.subscribe();
+    depart ? this.departPin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])
+           : this.arriveePin.setLatLng([this.arriveeCoordinates.getValue().coordinates[1], this.arriveeCoordinates.getValue().coordinates[0]])
+    if (this.map != null) {
+      depart ? this.departPin.addTo(this.map) : this.arriveePin.addTo(this.map);
+    }
+  }
+
+  calculateRouteDuration(){
+    this.adresseService.calculateTimeBetweenAdresses([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe();
+    console.log(this.routeDuration)
   }
 
 

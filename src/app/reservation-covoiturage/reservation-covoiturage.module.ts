@@ -8,6 +8,7 @@ import { ListReservationCovoiturageComponent } from './components/list-reservati
 import { SearchCovoiturageComponent } from './components/search-covoiturage/search-covoiturage.component';
 import { SingleReservationCovoiturageComponent } from './components/single-reservation-covoiturage/single-reservation-covoiturage.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReservationCovoiturageRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LeafletModule
   ],
   exports: [
     SingleReservationCovoiturageComponent,

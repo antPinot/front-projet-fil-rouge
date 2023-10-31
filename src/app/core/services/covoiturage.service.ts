@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { core } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
+import { Adresse } from '../models/adresse';
 import { Covoiturage } from '../models/covoiturage';
 
 @Injectable({
@@ -16,6 +17,12 @@ export class CovoiturageService {
   public covoiturage$  = new BehaviorSubject<Covoiturage>({}); ////pour la methode findOne
   
   covoiturageList$: any;
+
+  /**Stockage adresse départ */
+  adresseDepart! : Adresse;
+
+  /**Stockage adresse arrivée */
+  adresseArrivee! : Adresse;
 
   /**utiliser httpclient */
   constructor(private _http:HttpClient) {}

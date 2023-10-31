@@ -21,6 +21,7 @@ import { AuthModule } from './core/auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { LandingPageModule } from './landing-page/landing-page.module';
 import { NotFoundModule } from './not-found/not-found.module';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NotFoundModule } from './not-found/not-found.module';
     LandingPageModule,
     NotFoundModule,
     CoreModule,
-    AdminModule
+    AdminModule,
+    LeafletModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Feature, FeatureCollection } from 'geojson';
+import { Feature, FeatureCollection, GeoJsonProperties, Geometry, Point } from 'geojson';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Adresse } from '../models/adresse';
@@ -10,14 +10,25 @@ import { Adresse } from '../models/adresse';
 })
 export class AdresseService {
 
-
   private _baseUrl = 'http://localhost:8080/rest/adresse';
+
+  private _osrmBaseUrl = 'http://router.project-osrm.org/route/v1/driving/';
+
+  private _photonBaseUrl = 'https://photon.komoot.io/api/'
 
   public adresses$ = new BehaviorSubject<Adresse[]>([]);
 
   public adresse$ = new BehaviorSubject<Adresse>({}); ////pour la methode findOne
 
-  public listAdressesForAutocomplete$ = new BehaviorSubject<Adresse[]>([]);
+  public listAdressesForAutocompleteDepart$ = new BehaviorSubject<Adresse[]>([]);
+
+  public listAdressesForAutocompleteArrivee$ = new BehaviorSubject<Adresse[]>([]);
+
+  public departCoordinates$ = new BehaviorSubject<Point>({type: 'Point', coordinates: []})
+
+  public arriveeCoordinates$ = new BehaviorSubject<Point>({type: 'Point', coordinates: []})
+
+  public routeDuration$ = new BehaviorSubject<number>(0);
 
   constructor(private _http: HttpClient) { }
 
@@ -36,20 +47,21 @@ export class AdresseService {
       )
   };
 
-  findByUserQuery(userQuery: string | unknown): Observable<Adresse[]> {
-    return this._http.get<Adresse[]>(`${this._baseUrl}/autocomplete?userQuery=${userQuery}`).pipe(
-      tap((adressesResult) => this.listAdressesForAutocomplete$.next(adressesResult))
-    );
-  }
+  // findByUserQuery(userQuery: string | unknown): Observable<Adresse[]> {
+  //   return this._http.get<Adresse[]>(`${this._baseUrl}/autocomplete?userQuery=${userQuery}`).pipe(
+  //     tap((adressesResult) => this.listAdressesForAutocomplete$.next(adressesResult))
+  //   );
+  // }
 
   /**
    * Méthode d'appel à l'API externe Photon pour l'autocomplétion basée sur l'API OpenStreetMap
+   * (+ Récupération des coordonnées GPS de l'adresse pour pointer sur la carte leaflet)
    * 
    * @param userQuery 
    * @returns 
    */
-  findByUserQueryWithPhotonAPI(userQuery: string | unknown): Observable<Adresse[]> {
-    this._http.get<FeatureCollection>(`https://photon.komoot.io/api/?q=${userQuery}`).pipe(
+  findByUserQueryWithPhotonAPI(userQuery: string | unknown, depart: boolean): Observable<FeatureCollection<Geometry, GeoJsonProperties>> {
+    return this._http.get<FeatureCollection>(`${this._photonBaseUrl}?q=${userQuery}`).pipe(
       tap((photonResultsGEOJSON: FeatureCollection) => {
         let adressesResults: Adresse[] = [];
         photonResultsGEOJSON.features.forEach((singleResult: Feature) => {
@@ -62,12 +74,30 @@ export class AdresseService {
             pays: singleResult.properties?.['country']
           };
           adressesResults.push(adresse);
+          if (singleResult.geometry.type === 'Point'){
+            let coordinates: Point = {
+              type: 'Point',
+              coordinates: [singleResult.geometry?.['coordinates'][0], singleResult.geometry?.['coordinates'][1]]
+            };
+            depart ? this.departCoordinates$.next(coordinates) : this.arriveeCoordinates$.next(coordinates)
+          }
         })
-        this.listAdressesForAutocomplete$.next(adressesResults)
-      })).subscribe();
-    return this.listAdressesForAutocomplete$;
+        
+        depart ? this.listAdressesForAutocompleteDepart$.next(adressesResults) : this.listAdressesForAutocompleteArrivee$.next(adressesResults);
+      }))
   }
 
+  calculateTimeBetweenAdresses(adresses : Point[]): Observable<any>{
+    let adresseDepart : string = `${adresses[0].coordinates[0].toString()},${adresses[0].coordinates[1].toString()}`;
+    let adresseArrivee : string = `${adresses[1].coordinates[0].toString()},${adresses[1].coordinates[1].toString()}`;
+    return this._http.get<any>(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=false`).pipe(
+      tap((osrmResult) => {
+        let durationInMinutes : number = Math.ceil(parseFloat(osrmResult['routes'][0]['duration']) / 60.00);
+        console.log(durationInMinutes);
+        this.routeDuration$.next(durationInMinutes);
+      })
+    );
+  }
 
   createOne(adresse: Adresse): Observable<Adresse> {
     return this._http.post<Adresse>(this._baseUrl, adresse)
@@ -119,7 +149,14 @@ export class AdresseService {
     );
   }
 
-
+  displayAdresse(adresse: Adresse): string {
+    if (adresse !== null) {
+      let complementNum: boolean;
+      adresse.complementNumero ? complementNum = true : complementNum = false;
+      return complementNum ? `${adresse.numero} ${adresse.complementNumero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} ` : `${adresse.numero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} `
+    }
+    return '';
+  }
 
 }
 

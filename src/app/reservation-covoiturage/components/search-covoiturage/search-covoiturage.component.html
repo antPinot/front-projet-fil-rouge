@@ -2,15 +2,15 @@
             <div class="search">
                 <label for="searchAdresseDepart"><strong>Adresse de départ</strong></label>
                 <input type="text" id="searchAdresseDepart" formControlName ="adresseDepart" [matAutocomplete]="auto" (keyup)="onKeyupAdresseDepart()">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500" [displayWith]="displayAdresse">
-                    <mat-option *ngFor="let adresse of adressesResult | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500" [displayWith]="displayAdresse" (optionSelected)="addMarker(true)">
+                    <mat-option *ngFor="let adresse of adressesDepartResult | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
                 </mat-autocomplete>
             </div>
             <div class="search">
-                <label for="searchAdresseDepart"><strong>Adresse d'Arrivée</strong></label>
+                <label for="searchAdresseArrivee"><strong>Adresse d'Arrivée</strong></label>
                 <input type="text" id="searchAdresseArrivee" formControlName ="adresseArrivee" [matAutocomplete]="autoTwo" (keyup)="onKeyupAdresseArrivee()">
-                <mat-autocomplete autoActiveFirstOption #autoTwo="matAutocomplete" [panelWidth]="500" [displayWith]="displayAdresse">
-                    <mat-option *ngFor="let adresse of adressesResult | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+                <mat-autocomplete autoActiveFirstOption #autoTwo="matAutocomplete" [panelWidth]="500" [displayWith]="displayAdresse" (optionSelected)="addMarker(false)">
+                    <mat-option *ngFor="let adresse of adressesArriveeResult | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
                 </mat-autocomplete>
             </div>
             <div class="search">
@@ -22,6 +22,24 @@
     <div *ngIf="searchForm.get('searchDateDepart')?.hasError('invalidDate')">Entrez une date valide</div>
     <button mat-raised-button type="submit" (click)="onSearch()" [disabled]="searchForm.invalid">Rechercher</button>
 </form>
+
+<div class=" d-flex align-items-center justify-content-center">
+    <div style="height: 500px; width: 75%;"
+        leaflet
+        [leafletOptions]="options"
+        [leafletLayersControl]="layersControl"
+        (leafletMapReady)="onMapReady($event)"
+        >
+    </div>
+</div>
+
+<button mat-raised-button class="back" color="primary" (click) = addMarker(true)>Adresse Depart Pin</button>
+
+<button mat-raised-button class="back" color="primary" (click) = addMarker(false)>Adresse Arrivee Pin</button>
+
+<button mat-raised-button class="back" color="primary" (click) = calculateRouteDuration()>Calculer itinéraire</button>
+
+<div *ngIf="routeDuration">{{routeDuration.getValue()}}</div>
 
 <app-single-reservation-covoiturage *ngFor="let covoiturage of searchResults$ | async" [reservationCovoiturage]="covoiturage"></app-single-reservation-covoiturage>
 
