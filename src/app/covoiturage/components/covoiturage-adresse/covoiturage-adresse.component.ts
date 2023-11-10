@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Icon, icon, latLng, Map, marker, tileLayer } from 'leaflet';
+import { Adresse } from 'src/app/core/models/adresse';
 import { AdresseService } from 'src/app/core/services/adresse.service';
 import { CovoiturageService } from 'src/app/core/services/covoiturage.service';
 
@@ -10,7 +11,7 @@ import { CovoiturageService } from 'src/app/core/services/covoiturage.service';
   templateUrl: './covoiturage-adresse.component.html',
   styleUrls: ['./covoiturage-adresse.component.css']
 })
-export class CovoiturageAdresseComponent implements OnInit{
+export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
 
   isAdresseDepart!: boolean;
 
@@ -24,7 +25,9 @@ export class CovoiturageAdresseComponent implements OnInit{
 
   arriveeCoordinates = this.adresseService.arriveeCoordinates$
 
-  adressesResults = this.adresseService.listAdressesForAutocompleteDepart$;
+  adressesDepartResults =this.adresseService.listAdressesForAutocompleteDepart$;
+
+  adressesArriveeResults = this.adresseService.listAdressesForAutocompleteArrivee$;
 
   adresseDepart = this.covoiturageService.adresseDepart;
 
@@ -56,6 +59,7 @@ export class CovoiturageAdresseComponent implements OnInit{
   })
 
   constructor(private formBuilder: FormBuilder, protected adresseService: AdresseService, private covoiturageService: CovoiturageService, private router:Router){}
+  
 
   ngOnInit(): void {
     this.adresseDepart == null ? this.isAdresseDepart = true : this.isAdresseDepart = false;
@@ -66,21 +70,55 @@ export class CovoiturageAdresseComponent implements OnInit{
   }
 
   onKeyup() {
-    let valueInput = this.adresseForm.get('adresse')?.value;
-    this.adresseService.findByUserQueryWithPhotonAPI(valueInput, true).subscribe();
+    this.searchAdresseWithPhoton();
   }
 
-  addMarker() {
-    this.isAdresseDepart ? this.departCoordinates.subscribe() : this.arriveeCoordinates.subscribe();
-    this.pin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])
+  displayAdresse(adresse: Adresse): string {
+    if (adresse !== null) {
+      let complementNum: boolean;
+      adresse.complementNumero ? complementNum = true : complementNum = false;
+      return complementNum ? `${adresse.numero} ${adresse.complementNumero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} ` : `${adresse.numero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} `
+    }
+    return '';
+  }
+
+  searchAdresseWithPhoton(adresse?: Adresse){
+    let valueInput;
+    adresse?  valueInput = this.displayAdresse(adresse) : valueInput = this.adresseForm.get('adresse')?.value;
+    console.log(this.isAdresseDepart)
+    this.isAdresseDepart ? this.adresseService.findByUserQueryWithPhotonAPI(valueInput, true).subscribe(() => {
+      this.pin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])
+      if (adresse){
+        this.map.panTo(latLng(this.pin.getLatLng()))
+      }
+    }) : this.adresseService.findByUserQueryWithPhotonAPI(valueInput, false).subscribe(() => {
+      this.pin.setLatLng([this.arriveeCoordinates.getValue().coordinates[1], this.arriveeCoordinates.getValue().coordinates[0]])
+      if (adresse){
+        this.map.panTo(latLng(this.pin.getLatLng()))
+      }
+    })
+  }
+
+  addMarker(adresse:Adresse) {
+    this.searchAdresseWithPhoton(adresse);
     if (this.map != null) {
+      // this.map.panTo(latLng(this.pin.getLatLng()));
       this.pin.addTo(this.map);
     }
+
+  }
+
+  onMapReady(map: Map) {
+    this.map = map;
   }
 
   onSubmit(){
-    this.adresseDepart = this.adresseForm.value.adresse;
-    this.router.navigateByUrl('/covoiturage/create/adresse-depart')
+    this.isAdresseDepart ? this.covoiturageService.adresseDepart = this.adresseForm.value.adresse : this.covoiturageService.adresseArrivee = this.adresseForm.value.adresse;
+    this.isAdresseDepart ? this.router.navigateByUrl('/covoiturage/create/adresse-arrivee') : this.router.navigateByUrl('/covoiturage/create/route');
+  }
+
+  ngOnDestroy(): void {
+    // this.adressesResults.next([]);
   }
 
 }

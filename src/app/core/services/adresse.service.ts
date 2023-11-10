@@ -24,11 +24,13 @@ export class AdresseService {
 
   public listAdressesForAutocompleteArrivee$ = new BehaviorSubject<Adresse[]>([]);
 
-  public departCoordinates$ = new BehaviorSubject<Point>({type: 'Point', coordinates: []})
+  public departCoordinates$ = new BehaviorSubject<Point>({ type: 'Point', coordinates: [] })
 
-  public arriveeCoordinates$ = new BehaviorSubject<Point>({type: 'Point', coordinates: []})
+  public arriveeCoordinates$ = new BehaviorSubject<Point>({ type: 'Point', coordinates: [] })
 
   public routeDuration$ = new BehaviorSubject<number>(0);
+
+  public routeDrawing$ = new BehaviorSubject<any>({});
 
   constructor(private _http: HttpClient) { }
 
@@ -74,7 +76,7 @@ export class AdresseService {
             pays: singleResult.properties?.['country']
           };
           adressesResults.push(adresse);
-          if (singleResult.geometry.type === 'Point'){
+          if (singleResult.geometry.type === 'Point') {
             let coordinates: Point = {
               type: 'Point',
               coordinates: [singleResult.geometry?.['coordinates'][0], singleResult.geometry?.['coordinates'][1]]
@@ -82,21 +84,32 @@ export class AdresseService {
             depart ? this.departCoordinates$.next(coordinates) : this.arriveeCoordinates$.next(coordinates)
           }
         })
-        
+
         depart ? this.listAdressesForAutocompleteDepart$.next(adressesResults) : this.listAdressesForAutocompleteArrivee$.next(adressesResults);
       }))
   }
 
-  calculateTimeBetweenAdresses(adresses : Point[]): Observable<any>{
-    let adresseDepart : string = `${adresses[0].coordinates[0].toString()},${adresses[0].coordinates[1].toString()}`;
-    let adresseArrivee : string = `${adresses[1].coordinates[0].toString()},${adresses[1].coordinates[1].toString()}`;
-    return this._http.get<any>(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=false`).pipe(
+  calculateTimeBetweenAdresses(adresses: Point[], drawRoutes: boolean): Observable<any> {
+    let adresseDepart: string = `${adresses[0].coordinates[0].toString()},${adresses[0].coordinates[1].toString()}`;
+    let adresseArrivee: string = `${adresses[1].coordinates[0].toString()},${adresses[1].coordinates[1].toString()}`;
+    let overview;
+    drawRoutes ? overview = 'full' : overview = 'false';
+    return this._http.get<any>(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=${overview}`).pipe(
       tap((osrmResult) => {
-        let durationInMinutes : number = Math.ceil(parseFloat(osrmResult['routes'][0]['duration']) / 60.00);
-        console.log(durationInMinutes);
-        this.routeDuration$.next(durationInMinutes);
+        if (drawRoutes) {
+          var polyline = require('@mapbox/polyline');
+          let geometry: Geometry = osrmResult['routes'][0]['geometry'];
+          this.routeDrawing$.next(polyline.decode(geometry));
+        } else {
+          let durationInMinutes: number = Math.ceil(parseFloat(osrmResult['routes'][0]['duration']) / 60.00);
+          this.routeDuration$.next(durationInMinutes);
+        }
       })
     );
+  }
+
+  drawRoutesBetweenAdresses(adresses: Point[]): Observable<any> {
+    return this.calculateTimeBetweenAdresses(adresses, true);
   }
 
   createOne(adresse: Adresse): Observable<Adresse> {

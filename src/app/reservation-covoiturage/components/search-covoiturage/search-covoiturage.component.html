@@ -39,6 +39,12 @@
 
 <button mat-raised-button class="back" color="primary" (click) = calculateRouteDuration()>Calculer itinéraire</button>
 
+<button mat-raised-button class="back" color="primary" (click) = changeCenter()>Centrer sur le FC Chômage</button>
+
+<button mat-raised-button class="back" color="primary" (click) = drawRoute()>Dessiner itinéraire</button>
+
+<button mat-raised-button class="back" color="primary" (click) = reset()>Réinitialiser</button>
+
 <div *ngIf="routeDuration">{{routeDuration.getValue()}}</div>
 
 <app-single-reservation-covoiturage *ngFor="let covoiturage of searchResults$ | async" [reservationCovoiturage]="covoiturage"></app-single-reservation-covoiturage>

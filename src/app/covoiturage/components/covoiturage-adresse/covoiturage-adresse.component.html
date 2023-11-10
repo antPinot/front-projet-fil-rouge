@@ -2,9 +2,27 @@
     <div class="search">
         <label for="searchAdresse"><strong>Adresse d{{step}}</strong></label>
         <input type="text" id="searchAdresse" formControlName ="adresse" [matAutocomplete]="auto" (keyup)="onKeyup()">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500" [displayWith]="adresseService.displayAdresse" (optionSelected)="addMarker()">
-            <mat-option *ngFor="let adresse of adressesResults | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500" [displayWith]="adresseService.displayAdresse" (optionSelected)="addMarker($event.option.value)">
+            <div *ngIf="isAdresseDepart; then adresseDepart else adresseArrivee"></div>
+            <ng-template #adresseDepart>
+                <mat-option *ngFor="let adresse of adressesDepartResults | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+            </ng-template>
+            <ng-template #adresseArrivee>
+                <mat-option *ngFor="let adresse of adressesArriveeResults | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+            </ng-template>
         </mat-autocomplete>
     </div>
+
+    <div class=" d-flex align-items-center justify-content-center">
+        <div style="height: 500px; width: 75%;"
+            leaflet
+            [leafletOptions]="options"
+            [leafletLayersControl]="layersControl"
+            (leafletMapReady)="onMapReady($event)"
+            >
+        </div>
+    </div>
+
     <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="adresseForm.invalid">Valider l'adresse d{{step}}</button>
 </form>
+

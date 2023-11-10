@@ -6,7 +6,7 @@ import { Adresse } from 'src/app/core/models/adresse';
 import { AdresseService } from '../../../core/services/adresse.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationCovoiturageService } from '../../../core/services/reservation-covoiturage.service';
-import { tileLayer, latLng, circle, polygon, marker, Icon, icon, Map } from 'leaflet'
+import { tileLayer, latLng, circle, polygon, marker, Icon, icon, Map, polyline, Polyline } from 'leaflet'
 
 /**
  * Component gérant la recherche d'un covoiturage
@@ -33,6 +33,8 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   arriveeCoordinates = this.adresseService.arriveeCoordinates$
 
   routeDuration = this.adresseService.routeDuration$
+
+  routeDrawing = this.adresseService.routeDrawing$
 
   /** Formulaire de recherche */
   searchForm!: FormGroup;
@@ -76,6 +78,8 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
       shadowUrl: 'assets/marker-shadow.png'
     })
   })
+
+  routePolyline!: Polyline;
 
   constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService, private adresseService: AdresseService,
     private adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private locale: string) { }
@@ -142,16 +146,39 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   addMarker(depart: boolean) {
     depart ? this.departCoordinates.subscribe() : this.arriveeCoordinates.subscribe();
     depart ? this.departPin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])
-           : this.arriveePin.setLatLng([this.arriveeCoordinates.getValue().coordinates[1], this.arriveeCoordinates.getValue().coordinates[0]])
+      : this.arriveePin.setLatLng([this.arriveeCoordinates.getValue().coordinates[1], this.arriveeCoordinates.getValue().coordinates[0]])
     if (this.map != null) {
       depart ? this.departPin.addTo(this.map) : this.arriveePin.addTo(this.map);
     }
   }
 
-  calculateRouteDuration(){
-    this.adresseService.calculateTimeBetweenAdresses([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe();
+  calculateRouteDuration() {
+    this.adresseService.calculateTimeBetweenAdresses([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()], false).subscribe();
     console.log(this.routeDuration)
   }
 
+  changeCenter() {
+    this.map?.panTo(latLng(45.4401467, 4.3873058))
+  }
 
+  drawRoute() {
+    this.adresseService.drawRoutesBetweenAdresses([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe(
+      () => {
+        if (this.map != null) {
+          console.log(this.routeDrawing.getValue())
+          this.routePolyline = polyline(this.routeDrawing.getValue());
+          this.routePolyline.addTo(this.map);
+        }
+      }
+    );
+  }
+
+  reset() {
+    if (this.map != null) {
+      this.departPin.removeFrom(this.map)
+      this.arriveePin.removeFrom(this.map)
+      this.routePolyline.removeFrom(this.map)
+    }
+
+  }
 }

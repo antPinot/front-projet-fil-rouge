@@ -4,13 +4,21 @@ import { AuthGuard } from '../core/guards/auth/auth.guard';
 import { CovoiturageAdresseComponent } from './components/covoiturage-adresse/covoiturage-adresse.component';
 import { CovoiturageDetailsComponent } from './components/covoiturage-details/covoiturage-details.component';
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
+import { CovoiturageRouteComponent } from './components/covoiturage-route/covoiturage-route.component';
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
 
 const routes: Routes = [
-  { path: 'create', component: CovoiturageComponent, canActivate: [AuthGuard] },
-  { path: 'create/adresse-depart', component: CovoiturageAdresseComponent, canActivate: [AuthGuard] },
+  // { path: 'create', component: CovoiturageComponent, canActivate: [AuthGuard] },
+  {
+    path: 'create',
+    children: [
+      {path: 'adresse-depart' , component: CovoiturageAdresseComponent, canActivate: [AuthGuard] },
+      {path: 'adresse-arrivee' , component: CovoiturageAdresseComponent, canActivate: [AuthGuard] },
+      {path: 'route' , component: CovoiturageRouteComponent, canActivate: [AuthGuard] },
+    ]
+  },
   { path: 'list-covoiturage', component: CovoiturageListComponent, canActivate: [AuthGuard] },
-  { path: ':id/edit', component: CovoiturageDetailsComponent, canActivate: [AuthGuard]}
+  { path: ':id/edit', component: CovoiturageDetailsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

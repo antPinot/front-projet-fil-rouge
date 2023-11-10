@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../core/material-module/material.module';
 import { ReservationCovoiturageModule } from '../reservation-covoiturage/reservation-covoiturage.module';
 import { CovoiturageAdresseComponent } from './components/covoiturage-adresse/covoiturage-adresse.component';
+import { CovoiturageRouteComponent } from './components/covoiturage-route/covoiturage-route.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 @NgModule({
@@ -19,13 +21,15 @@ import { CovoiturageAdresseComponent } from './components/covoiturage-adresse/co
     SingleCovoiturageComponent,
     CovoiturageDetailsComponent,
     CovoiturageAdresseComponent,
+    CovoiturageRouteComponent,
   ],
   imports: [
     CommonModule,
     CovoiturageRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
-    ReservationCovoiturageModule
+    ReservationCovoiturageModule,
+    LeafletModule
   ],
   exports: [
     CovoiturageComponent,
