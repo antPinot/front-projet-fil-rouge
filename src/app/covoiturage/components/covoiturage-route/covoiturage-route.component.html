@@ -1,1 +1,11 @@
-<p>covoiturage-route works!</p>
+<div class=" d-flex align-items-center justify-content-center">
+    <div style="height: 500px; width: 75%;"
+        leaflet
+        [leafletOptions]="options"
+        [leafletLayersControl]="layersControl"
+        (leafletMapReady)="onMapReady($event)"
+        >
+    </div>
+</div>
+
+<button mat-raised-button type="submit" (click)="onSubmit()">Suivant</button>

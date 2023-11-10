@@ -85,7 +85,7 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
   searchAdresseWithPhoton(adresse?: Adresse){
     let valueInput;
     adresse?  valueInput = this.displayAdresse(adresse) : valueInput = this.adresseForm.get('adresse')?.value;
-    console.log(this.isAdresseDepart)
+    console.log(valueInput)
     this.isAdresseDepart ? this.adresseService.findByUserQueryWithPhotonAPI(valueInput, true).subscribe(() => {
       this.pin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])
       if (adresse){
