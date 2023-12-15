@@ -32,6 +32,8 @@ export class AdresseService {
 
   public routeDrawing$ = new BehaviorSubject<any>({});
 
+  public zoom = 13;
+
   constructor(private _http: HttpClient) { }
 
 
@@ -89,27 +91,18 @@ export class AdresseService {
       }))
   }
 
-  calculateTimeBetweenAdresses(adresses: Point[], drawRoutes: boolean): Observable<any> {
+  calculateRoute(adresses: Point[]): Observable<any> {
     let adresseDepart: string = `${adresses[0].coordinates[0].toString()},${adresses[0].coordinates[1].toString()}`;
     let adresseArrivee: string = `${adresses[1].coordinates[0].toString()},${adresses[1].coordinates[1].toString()}`;
-    let overview;
-    drawRoutes ? overview = 'full' : overview = 'false';
-    return this._http.get<any>(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=${overview}`).pipe(
+    return this._http.get<any>(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=full`).pipe(
       tap((osrmResult) => {
-        if (drawRoutes) {
           var polyline = require('@mapbox/polyline');
           let geometry: Geometry = osrmResult['routes'][0]['geometry'];
           this.routeDrawing$.next(polyline.decode(geometry));
-        } else {
           let durationInMinutes: number = Math.ceil(parseFloat(osrmResult['routes'][0]['duration']) / 60.00);
           this.routeDuration$.next(durationInMinutes);
-        }
       })
     );
-  }
-
-  drawRoutesBetweenAdresses(adresses: Point[]): Observable<any> {
-    return this.calculateTimeBetweenAdresses(adresses, true);
   }
 
   createOne(adresse: Adresse): Observable<Adresse> {
@@ -145,8 +138,6 @@ export class AdresseService {
           })
       );
   }
-
-
 
   /** deleteOne */
   deleteOne(id: string): Observable<Adresse> {

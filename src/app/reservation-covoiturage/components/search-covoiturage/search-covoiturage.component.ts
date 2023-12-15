@@ -6,7 +6,7 @@ import { Adresse } from 'src/app/core/models/adresse';
 import { AdresseService } from '../../../core/services/adresse.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationCovoiturageService } from '../../../core/services/reservation-covoiturage.service';
-import { tileLayer, latLng, circle, polygon, marker, Icon, icon, Map, polyline, Polyline } from 'leaflet'
+import { tileLayer, latLng, marker, Icon, icon, Map, polyline, Polyline, control } from 'leaflet'
 
 /**
  * Component gérant la recherche d'un covoiturage
@@ -35,6 +35,8 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   routeDuration = this.adresseService.routeDuration$
 
   routeDrawing = this.adresseService.routeDrawing$
+
+  routePolyline!: Polyline;
 
   /** Formulaire de recherche */
   searchForm!: FormGroup;
@@ -79,7 +81,6 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
     })
   })
 
-  routePolyline!: Polyline;
 
   constructor(private reservationCovoiturageService: ReservationCovoiturageService, private formBuilder: FormBuilder, private authService: AuthService, private adresseService: AdresseService,
     private adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private locale: string) { }
@@ -141,6 +142,9 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
 
   onMapReady(map: Map) {
     this.map = map;
+    control.scale().addTo(map)
+    this.map?.on('zoom', () => console.log(this.map?.getZoom()))
+    
   }
 
   addMarker(depart: boolean) {
@@ -153,7 +157,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   }
 
   calculateRouteDuration() {
-    this.adresseService.calculateTimeBetweenAdresses([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()], false).subscribe();
+    this.adresseService.calculateRoute([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe();
     console.log(this.routeDuration)
   }
 
@@ -162,7 +166,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   }
 
   drawRoute() {
-    this.adresseService.drawRoutesBetweenAdresses([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe(
+    this.adresseService.calculateRoute([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe(
       () => {
         if (this.map != null) {
           console.log(this.routeDrawing.getValue())
@@ -179,6 +183,6 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
       this.arriveePin.removeFrom(this.map)
       this.routePolyline.removeFrom(this.map)
     }
-
   }
+
 }

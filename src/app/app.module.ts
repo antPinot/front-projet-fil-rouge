@@ -22,6 +22,7 @@ import { AdminModule } from './admin/admin.module';
 import { LandingPageModule } from './landing-page/landing-page.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     NotFoundModule,
     CoreModule,
     AdminModule,
-    LeafletModule
+    LeafletModule,
+    MatSelectModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

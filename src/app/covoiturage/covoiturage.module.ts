@@ -12,7 +12,10 @@ import { ReservationCovoiturageModule } from '../reservation-covoiturage/reserva
 import { CovoiturageAdresseComponent } from './components/covoiturage-adresse/covoiturage-adresse.component';
 import { CovoiturageRouteComponent } from './components/covoiturage-route/covoiturage-route.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-
+import { CovoiturageDetailedInfosComponent } from './components/covoiturage-detailed-infos/covoiturage-detailed-infos.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     CovoiturageDetailsComponent,
     CovoiturageAdresseComponent,
     CovoiturageRouteComponent,
+    CovoiturageDetailedInfosComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,10 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     ReactiveFormsModule,
     MaterialModule,
     ReservationCovoiturageModule,
-    LeafletModule
+    LeafletModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [
     CovoiturageComponent,
