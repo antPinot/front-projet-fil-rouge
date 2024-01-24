@@ -127,7 +127,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   onSearch() {
     if (this.collaborateurId) {
       let formattedDate = moment(this.searchForm.value.searchDateDepart).format("DD/MM/YYYY");
-      console.log(this.searchForm.value.adresseDepart)
+      // console.log(this.searchForm.value.adresseDepart)
       if ((this.searchForm.value.adresseDepart == null || this.searchForm.value.adresseDepart == "") && (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "")) {
         this.reservationCovoiturageService.getCovoiturageByCriteres(this.collaborateurId, 0, 0, formattedDate).subscribe();
       } else if (this.searchForm.value.adresseArrivee == null || this.searchForm.value.adresseArrivee == "") {
@@ -143,7 +143,7 @@ export class SearchCovoiturageComponent implements OnInit, OnDestroy {
   onMapReady(map: Map) {
     this.map = map;
     control.scale().addTo(map)
-    this.map?.on('zoom', () => console.log(this.map?.getZoom()))
+    // this.map?.on('zoom', () => console.log(this.map?.getZoom()))
     
   }
 

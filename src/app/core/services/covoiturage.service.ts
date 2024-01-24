@@ -19,10 +19,10 @@ export class CovoiturageService {
   covoiturageList$: any;
 
   /**Stockage adresse départ */
-  adresseDepart! : Adresse;
+  adresseDepart! : Adresse | null;
 
   /**Stockage adresse arrivée */
-  adresseArrivee! : Adresse;
+  adresseArrivee! : Adresse | null;
 
   /**utiliser httpclient */
   constructor(private _http:HttpClient) {}

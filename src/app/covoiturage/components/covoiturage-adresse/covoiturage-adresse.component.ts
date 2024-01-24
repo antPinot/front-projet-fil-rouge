@@ -62,11 +62,21 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
   
 
   ngOnInit(): void {
-    this.adresseDepart == null ? this.isAdresseDepart = true : this.isAdresseDepart = false;
+    /** Réinitialise les adresses si on est sur la page d'entrée de l'adresse de départ */
+    if (this.router.url == "/covoiturage/create/adresse-depart"){
+      this.adresseDepart = null
+      this.adresseArrivee = null
+      this.isAdresseDepart = true;
+      /** Réinitialise uniquement l'adresse d'arrivée si on est sur la page d'entrée de l'adresse d'arrivée */
+    } else {
+      this.adresseArrivee = null
+      this.isAdresseDepart = false;
+    }
     this.adresseForm = this.formBuilder.group({
       adresse : [null, Validators.required]
     })
     this.isAdresseDepart ? this.step = 'e départ' : this.step = '\' arrivée';
+    console.log(`Adresse de départ : ${this.adresseDepart?.voie}`);
   }
 
   onKeyup() {
@@ -85,7 +95,7 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
   searchAdresseWithPhoton(adresse?: Adresse){
     let valueInput;
     adresse?  valueInput = this.displayAdresse(adresse) : valueInput = this.adresseForm.get('adresse')?.value;
-    console.log(valueInput)
+    // console.log(valueInput)
     this.isAdresseDepart ? this.adresseService.findByUserQueryWithPhotonAPI(valueInput, true).subscribe(() => {
       this.pin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])
       if (adresse){
