@@ -76,7 +76,6 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
       adresse : [null, Validators.required]
     })
     this.isAdresseDepart ? this.step = 'e départ' : this.step = '\' arrivée';
-    console.log(`Adresse de départ : ${this.adresseDepart?.voie}`);
   }
 
   onKeyup() {

@@ -1,22 +1,68 @@
 <div class="container">
-    <form [formGroup]=covoiturageDetailsForm class="form-group">
-        <mat-form-field>
-            <mat-label>Date de départ</mat-label>
-            <input type="text" id="dateDepart" formControlName="dateDepart" matInput
-                placeholder="Entrez la date de départ" [ngxMatDatetimePicker]="dateDepartPicker" [min]="currentDate">
-            <mat-datepicker-toggle matIconSuffix [for]="$any(dateDepartPicker)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #dateDepartPicker [showSeconds]="false"></ngx-mat-datetime-picker>
-            <mat-error *ngIf="covoiturageDetailsForm.get('dateDepart')?.hasError('required')"
-                class="alert-message">Entrez la date et l'heure de départ</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Véhicule Personnel</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let vehiculePersonnel of vehiculePersonnelList$ | async" [value]="vehiculePersonnel">{{vehiculePersonnel.marque}} {{vehiculePersonnel.modele}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- <mat-select *ngIf="">
-            <mat-option *ngFor="let nbPlaces of limitePlace" [value]=""></mat-option>
-        </mat-select> -->
-</form>
+  <form [formGroup]="covoiturageDetailsForm" class="form-group">
+    <mat-form-field>
+      <mat-label>Date de départ</mat-label>
+      <input
+        type="text"
+        id="dateDepart"
+        formControlName="dateDepart"
+        matInput
+        placeholder="Entrez la date de départ"
+        [ngxMatDatetimePicker]="dateDepartPicker"
+        [min]="currentDate"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="$any(dateDepartPicker)"
+      ></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker
+        #dateDepartPicker
+        [showSeconds]="false"
+      ></ngx-mat-datetime-picker>
+      <mat-error
+        *ngIf="covoiturageDetailsForm.get('dateDepart')?.hasError('required')"
+        class="alert-message"
+        >Entrez la date et l'heure de départ</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Véhicule Personnel</mat-label>
+      <mat-select
+        (selectionChange)="fillPlacesSelector()"
+        formControlName="vehicule"
+      >
+        <mat-option
+          *ngFor="let vehiculePersonnel of vehiculePersonnelList$ | async"
+          [value]="vehiculePersonnel"
+          >{{ vehiculePersonnel.marque }}
+          {{ vehiculePersonnel.modele }}</mat-option
+        >
+      </mat-select>
+      <mat-error
+        *ngIf="covoiturageDetailsForm.get('vehicule')?.hasError('required')"
+        class="alert-message"
+        >Sélectionnez un véhicule</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre de places</mat-label>
+      <mat-select
+        formControlName = "nbPlaces"
+      >
+        <mat-option
+          *ngFor="let nbPlaces of placesSelector"
+          [value]="nbPlaces"
+        >{{nbPlaces}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="alternative">
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="covoiturageDetailsForm.invalid"
+      >
+        Publier
+      </button>
+    </div>
+  </form>
 </div>
