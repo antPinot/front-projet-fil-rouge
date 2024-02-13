@@ -1,11 +1,11 @@
 .navbar {
-    background-color: cornflowerblue;
+    background-color: #4A919E;
     height: 75px;
 }
 
 h1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: cornflowerblue;
+    color: #4A919E;
     height: 15vh;
     background-image: url('../../../../assets/erik-mclean-ZRns2R5azu0-unsplash.jpg');
     background-size: cover;
@@ -16,7 +16,7 @@ img{
 }
 
 mat-sidenav{
-    background-color:antiquewhite;
+    background-color: #D6955B;
     width: 20vw;
     height: 100vh !important;
 }
@@ -24,3 +24,4 @@ mat-sidenav{
 mat-sidenav-container{
     margin-top: 0;
 }
+

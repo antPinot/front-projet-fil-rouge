@@ -1,11 +1,23 @@
-<div class=" d-flex align-items-center justify-content-center">
-    <div style="height: 500px; width: 75%;"
-        leaflet
-        [leafletOptions]="options"
-        [leafletLayersControl]="layersControl"
-        (leafletMapReady)="onMapReady($event)"
-        >
+<div class="container" style="height: 70vh">
+  <h1 class="text-center pt-5">Détails de l'itinéraire</h1>
+  <div class="row h-75 pt-5">
+    <div
+      class="col-2"
+      style="height: 500px; width: 75%"
+      leaflet
+      [leafletOptions]="options"
+      [leafletLayersControl]="layersControl"
+      (leafletMapReady)="onMapReady($event)"
+    ></div>
+    <div class="col mx-5 container h-100 d-flex flex-column justify-content-center">
+        <h2 class="fs-4">Distance</h2>
+        <p class="fs-5">xx km</p>
+        <h2 class="fs-4">Durée</h2>
+        <p class="fs-5">xx h xx mn</p>
     </div>
+  </div>
 </div>
 
-<button mat-raised-button type="submit" (click)="onSubmit()">Suivant</button>
+<div class="d-flex align-items-center justify-content-center alternative pt-5">
+  <button mat-raised-button type="submit" (click)="onSubmit()">Suivant</button>
+</div>

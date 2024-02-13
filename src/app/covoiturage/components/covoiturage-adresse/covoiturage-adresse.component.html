@@ -1,28 +1,74 @@
 <form [formGroup]="adresseForm">
-    <div class="search">
-        <label for="searchAdresse"><strong>Adresse d{{step}}</strong></label>
-        <input type="text" id="searchAdresse" formControlName ="adresse" [matAutocomplete]="auto" (keyup)="onKeyup()">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500" [displayWith]="adresseService.displayAdresse" (optionSelected)="addMarker($event.option.value)">
-            <div *ngIf="isAdresseDepart; then adresseDepart else adresseArrivee"></div>
+  <!-- <div class=" d-flex align-items-center justify-content-center"> -->
+  <div class="container" style="height: 70vh;">
+    <div class="row h-75 align-items-center pt-5">
+        <div class="col search h-100 container d-flex flex-column justify-content-center ">
+            <h1 class="fs-2 mb-5">Quelle est votre adresse d{{ step }} ?</h1>
+          <!-- <label for="searchAdresse"
+            ><strong>Adresse d{{ step }}</strong></label
+          > -->
+          <input
+            class="rounded-3 w-75 mx-3 shadow bg-light-subtle"
+            type="text"
+            id="searchAdresse"
+            formControlName="adresse"
+            [matAutocomplete]="auto"
+            (keyup)="onKeyup()"
+            style="height: 5vh;"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [panelWidth]="500"
+            [displayWith]="adresseService.displayAdresse"
+            (optionSelected)="addMarker($event.option.value)"
+          >
+            <div
+              *ngIf="isAdresseDepart; then adresseDepart; else adresseArrivee"
+            ></div>
             <ng-template #adresseDepart>
-                <mat-option *ngFor="let adresse of adressesDepartResults | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+              <mat-option
+                *ngFor="let adresse of adressesDepartResults | async"
+                [value]="adresse"
+              >
+                {{ adresse.numero }} {{ adresse.complementNumero }}
+                {{ adresse.voie }} {{ adresse.ville }}
+                {{ adresse.departement }}</mat-option
+              >
             </ng-template>
             <ng-template #adresseArrivee>
-                <mat-option *ngFor="let adresse of adressesArriveeResults | async" [value]="adresse"> {{adresse.numero}} {{adresse.complementNumero}} {{adresse.voie}} {{adresse.ville}} {{adresse.departement}}</mat-option>
+              <mat-option
+                *ngFor="let adresse of adressesArriveeResults | async"
+                [value]="adresse"
+              >
+                {{ adresse.numero }} {{ adresse.complementNumero }}
+                {{ adresse.voie }} {{ adresse.ville }}
+                {{ adresse.departement }}</mat-option
+              >
             </ng-template>
-        </mat-autocomplete>
-    </div>
-
-    <div class=" d-flex align-items-center justify-content-center">
-        <div style="height: 500px; width: 75%;"
-            leaflet
-            [leafletOptions]="options"
-            [leafletLayersControl]="layersControl"
-            (leafletMapReady)="onMapReady($event)"
-            >
+          </mat-autocomplete>
         </div>
+        <div
+          class="col"
+          style="height: 500px; width: 50%"
+          leaflet
+          [leafletOptions]="options"
+          [leafletLayersControl]="layersControl"
+          (leafletMapReady)="onMapReady($event)"
+        ></div>
     </div>
+  </div>
 
-    <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="adresseForm.invalid">Valider l'adresse d{{step}}</button>
+  <div class="d-flex align-items-center justify-content-center alternative">
+      <button
+        mat-raised-button
+        type="submit"
+        (click)="onSubmit()"
+        [disabled]="adresseForm.invalid"
+        color="accent"
+        [ngClass]="{'text-light' : !adresseForm.invalid}"
+      >
+        Valider l'adresse d{{ step }}
+      </button>
+  </div>
 </form>
-

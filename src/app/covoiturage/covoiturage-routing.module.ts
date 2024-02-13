@@ -13,9 +13,9 @@ const routes: Routes = [
   {
     path: 'create',
     children: [
-      {path: 'adresse-depart' , component: CovoiturageAdresseComponent, canActivate: [AuthGuard] },
-      {path: 'adresse-arrivee' , component: CovoiturageAdresseComponent, canActivate: [AuthGuard] },
-      {path: 'route' , component: CovoiturageRouteComponent, canActivate: [AuthGuard] },
+    {path: 'adresse-depart' , component: CovoiturageAdresseComponent, /* canActivate: [AuthGuard] */},
+    {path: 'adresse-arrivee' , component: CovoiturageAdresseComponent,/* canActivate: [AuthGuard] */},
+    {path: 'route' , component: CovoiturageRouteComponent, /*canActivate: [AuthGuard] */},
     {path: 'details' , component: CovoiturageDetailedInfosComponent, /*canActivate: [AuthGuard] */},
     ]
   },
