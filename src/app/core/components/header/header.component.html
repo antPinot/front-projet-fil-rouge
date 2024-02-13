@@ -1,6 +1,9 @@
 <header>
-  <h1>GP3 Covoiturage Series</h1>
-  <mat-sidenav-container *ngIf="logged$ | async " class="navbar navbar-expand-lg">
+  <!-- <div style="height: 10vh;">
+    <img src="../../../../assets/erik-mclean-ZRns2R5azu0-unsplash.jpg" alt="Banner">
+  </div> -->
+  <h1 class="mb-0">GP3 Covoiturage Series</h1>
+  <mat-sidenav-container *ngIf="logged$ | async " class="navbar navbar-expand-lg shadow mb-3">
     <mat-sidenav #drawer mode="side" position="end" [fixedInViewport]="true">
       <mat-list>
         <mat-list-item><button mat-button (click)="toUrl('home')"><fa-icon [icon]="faIdCard"></fa-icon> Mes informations
@@ -26,7 +29,7 @@
             déconnecter</button></mat-list-item>
       </mat-list>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content class="mx-3 my-2">
       <button mat-raised-button class="navbar-brand" (click)="toUrl('covoiturage/reservation/search')"
         routerLinkActive="active">Rechercher un covoiturage</button>
       <!--       <button mat-raised-button class="navbar-brand" [matMenuTriggerFor]="vehiculeSocieteReservation">Mes réservations
