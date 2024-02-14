@@ -24,10 +24,11 @@ export class CovoiturageService {
   /**Stockage adresse arrivée */
   adresseArrivee! : Adresse | null;
 
+  /**Covoiturage à publier ( à envoyer au back-end) */
+  covoiturageToPublish! : Covoiturage;
+
   /**utiliser httpclient */
   constructor(private _http:HttpClient) {}
-
-
   
   /**ici faire les methodes de requetages */
   findAll(): Observable<Covoiturage[]>{
