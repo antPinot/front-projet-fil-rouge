@@ -7,6 +7,7 @@ import { CovoiturageDetailsComponent } from './components/covoiturage-details/co
 import { CovoiturageListComponent } from './components/covoiturage-list/covoiturage-list.component';
 import { CovoiturageRouteComponent } from './components/covoiturage-route/covoiturage-route.component';
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
+import { CovoiturageConfirmComponent } from './components/covoiturage-confirm/covoiturage-confirm.component';
 
 const routes: Routes = [
   // { path: 'create', component: CovoiturageComponent, canActivate: [AuthGuard] },
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'adresse-arrivee' , component: CovoiturageAdresseComponent,/* canActivate: [AuthGuard] */},
     {path: 'route' , component: CovoiturageRouteComponent, /*canActivate: [AuthGuard] */},
     {path: 'details' , component: CovoiturageDetailedInfosComponent, /*canActivate: [AuthGuard] */},
+    {path: 'confirm' , component: CovoiturageConfirmComponent, /*canActivate: [AuthGuard] */},
     ]
   },
   { path: 'list-covoiturage', component: CovoiturageListComponent, canActivate: [AuthGuard] },

@@ -16,6 +16,9 @@ export class AdresseService {
 
   private _photonBaseUrl = 'https://photon.komoot.io/api/'
 
+  /**Bounding box autour de la France pour limiter les résultats d'autocomplétion */
+  private _frenchBbox = '-5.56,42.2,8.53,51.1';
+
   public adresses$ = new BehaviorSubject<Adresse[]>([]);
 
   public adresse$ = new BehaviorSubject<Adresse>({}); ////pour la methode findOne
@@ -28,7 +31,11 @@ export class AdresseService {
 
   public arriveeCoordinates$ = new BehaviorSubject<Point>({ type: 'Point', coordinates: [] })
 
+  /**Durée du trajet en minutes */
   public routeDuration$ = new BehaviorSubject<number>(0);
+
+  /**Distance du trajet en km */
+  public routeDistance$ = new BehaviorSubject<number>(0);
 
   public routeDrawing$ = new BehaviorSubject<any>({});
 
@@ -65,7 +72,7 @@ export class AdresseService {
    * @returns 
    */
   findByUserQueryWithPhotonAPI(userQuery: string | unknown, depart: boolean): Observable<FeatureCollection<Geometry, GeoJsonProperties>> {
-    return this._http.get<FeatureCollection>(`${this._photonBaseUrl}?q=${userQuery}`).pipe(
+    return this._http.get<FeatureCollection>(`${this._photonBaseUrl}?q=${userQuery}&bbox=${this._frenchBbox}`).pipe(
       tap((photonResultsGEOJSON: FeatureCollection) => {
         let adressesResults: Adresse[] = [];
         photonResultsGEOJSON.features.forEach((singleResult: Feature) => {
@@ -96,11 +103,15 @@ export class AdresseService {
     let adresseArrivee: string = `${adresses[1].coordinates[0].toString()},${adresses[1].coordinates[1].toString()}`;
     return this._http.get<any>(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=full`).pipe(
       tap((osrmResult) => {
+          console.log(`${this._osrmBaseUrl}${adresseDepart};${adresseArrivee}?overview=full`)
           var polyline = require('@mapbox/polyline');
           let geometry: Geometry = osrmResult['routes'][0]['geometry'];
           this.routeDrawing$.next(polyline.decode(geometry));
           let durationInMinutes: number = Math.ceil(parseFloat(osrmResult['routes'][0]['duration']) / 60.00);
+          let distanceInKm: number = Math.ceil(parseFloat(osrmResult['routes'][0]['distance']) / 1000.00);
           this.routeDuration$.next(durationInMinutes);
+          this.routeDistance$.next(distanceInKm);
+
       })
     );
   }

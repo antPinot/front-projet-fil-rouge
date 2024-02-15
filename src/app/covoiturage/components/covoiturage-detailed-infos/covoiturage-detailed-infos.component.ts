@@ -7,8 +7,12 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { tap } from 'rxjs';
 import { VehiculePersonnel } from 'src/app/core/models/vehicule-personnel';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { CovoiturageService } from 'src/app/core/services/covoiturage.service';
 import { VehiculePersonnelService } from 'src/app/core/services/vehicule-personnel.service';
 
 /**
@@ -41,6 +45,7 @@ const coherentNbPlacesValidator: ValidatorFn = (
   styleUrls: ['./covoiturage-detailed-infos.component.css'],
 })
 export class CovoiturageDetailedInfosComponent implements OnInit {
+
   /** Id du collaborateur connecté */
   collaborateurId? = this.authService.currentCollaborateur?.id;
 
@@ -58,13 +63,14 @@ export class CovoiturageDetailedInfosComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private vehiculePersonnelService: VehiculePersonnelService,
-    private authService: AuthService
+    private covoiturageService: CovoiturageService,
+    private authService: AuthService,
+    private router:Router
   ) {}
   ngOnInit(): void {
     if (this.collaborateurId == null) {
       this.collaborateurId = 21;
     }
-
     this.covoiturageDetailsForm = this.formBuilder.group(
       {
         dateDepart: [null, Validators.required],
@@ -74,11 +80,11 @@ export class CovoiturageDetailedInfosComponent implements OnInit {
     {validators : [coherentNbPlacesValidator]}*/
     );
 
-    this.covoiturageDetailsForm.get('nbPlaces')?.disable()
+    this.covoiturageDetailsForm.get('nbPlaces')?.disable();
 
     this.vehiculePersonnelService
       .getVehiculePersonnelListByCollaborateurId(this.collaborateurId)
-      .subscribe();
+      .subscribe((vehicules) => console.log(vehicules[0]));
   }
 
   fillPlacesSelector() {
@@ -89,7 +95,29 @@ export class CovoiturageDetailedInfosComponent implements OnInit {
         this.placesSelector.push(i);
       }
     }
-    this.covoiturageDetailsForm.get('nbPlaces')?.enable()
+    this.covoiturageDetailsForm.get('nbPlaces')?.enable();
   }
-}
 
+  cancelPublication() {
+    this.covoiturageService.covoiturageToPublish = {}
+    this.router.navigateByUrl('/home')
+  }
+
+  onSubmit() {
+
+    let frenchDate = moment(this.covoiturageDetailsForm.value.dateDepart).locale('fr');
+    let formattedDateDepart = frenchDate.format("L").concat(" ").concat(frenchDate.format("LT"))
+
+    this.covoiturageService.covoiturageToPublish.organisateurId = this.collaborateurId;
+      this.covoiturageService.covoiturageToPublish.dateDepart = formattedDateDepart;
+      this.covoiturageService.covoiturageToPublish.vehiculePersonnelId = this.covoiturageDetailsForm.value.vehicule.id;
+      this.covoiturageService.covoiturageToPublish.placesRestantes = this.covoiturageDetailsForm.value.nbPlaces;
+    if (this.covoiturageService.covoiturageToPublish.placesRestantes != null){
+      this.covoiturageService.covoiturageToPublish.nbPersonnes = this.covoiturageDetailsForm.value.vehicule.limitePlace - this.covoiturageService.covoiturageToPublish.placesRestantes
+    }
+      console.log(this.covoiturageService.covoiturageToPublish)
+    this.covoiturageService.publish(this.covoiturageService.covoiturageToPublish).subscribe();
+    this.router.navigateByUrl('/covoiturage/create/confirm')
+  }
+
+}

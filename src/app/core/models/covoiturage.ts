@@ -16,8 +16,8 @@ export interface Covoiturage {
     distance?: number,
     organisateurId?: number,
     vehiculePersonnelId?: number,
-    adresseDepart?: Adresse,
-    adresseArrivee?: Adresse,
+    adresseDepart?: Adresse | null,
+    adresseArrivee?: Adresse | null,
     collaborateurs?: Collaborateur[]
     organisateur?: Collaborateur,
     vehiculePersonnel?: VehiculePersonnel

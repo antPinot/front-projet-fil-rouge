@@ -58,11 +58,23 @@
           >{{nbPlaces}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <div style="width: 127svh;" class="alternative d-flex justify-content-center align-items-center publish">
+      <div class="alternative d-flex justify-content-center align-items-center publish w-full">
         <button
+          class="mx-5"
+          style="width: 15vw;"
+          mat-raised-button
+          color="warn"
+          (click)="cancelPublication()"
+        >
+          Annuler la publication
+        </button>
+
+        <button
+          class="mx-5"
           mat-raised-button
           color="accent"
           [disabled]="covoiturageDetailsForm.invalid"
+          (click)="onSubmit()"
         >
           Publier
         </button>

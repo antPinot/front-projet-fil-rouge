@@ -49,14 +49,14 @@ export class CovoiturageService {
 createOne(covoiturage: Covoiturage): Observable<Covoiturage> {
   return this._http.post<Covoiturage>(this._baseUrl, covoiturage)
   .pipe(tap( (covoitCreate) => {  
-    console.log(covoitCreate.dateDepart)
    this.covoiturages$.next( [ covoitCreate, ...this.covoiturages$.value] )
    
    /* dans le tableau todos$ avec next() je lui passe la variable dans un nouveau tableau*/ 
   }))
+ }
 
-
-
+ publish(covoiturage: Covoiturage): Observable<Covoiturage>{
+  return this._http.post<Covoiturage>(this._baseUrl, covoiturage);
  }
 
 

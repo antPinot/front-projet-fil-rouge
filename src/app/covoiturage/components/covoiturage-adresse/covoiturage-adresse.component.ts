@@ -62,6 +62,7 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
   
 
   ngOnInit(): void {
+    console.log(this.covoiturageService.covoiturageToPublish)
     /** Réinitialise les adresses si on est sur la page d'entrée de l'adresse de départ */
     if (this.router.url == "/covoiturage/create/adresse-depart"){
       this.adresseDepart = null

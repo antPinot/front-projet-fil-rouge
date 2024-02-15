@@ -9,7 +9,7 @@ import { CovoiturageService } from 'src/app/core/services/covoiturage.service';
   templateUrl: './covoiturage-route.component.html',
   styleUrls: ['./covoiturage-route.component.css']
 })
-export class CovoiturageRouteComponent {
+export class CovoiturageRouteComponent{
 
   map!: Map;
 
@@ -17,7 +17,9 @@ export class CovoiturageRouteComponent {
 
   arriveeCoordinates = this.adresseService.arriveeCoordinates$
 
-  routeDuration = this.adresseService.routeDuration$
+  routeDurationFormatted!: string
+
+  routeDistance!: number
 
   routeDrawing = this.adresseService.routeDrawing$
 
@@ -70,18 +72,33 @@ export class CovoiturageRouteComponent {
     this.drawRoute()
   }
 
+  convertDurationInHoursAndMinutes(): void {
+    let durationInMinutes = this.adresseService.routeDuration$.getValue()
+    let numberOfHours = (durationInMinutes - durationInMinutes%60)/60
+    let numberOfMinutes = durationInMinutes%60
+    this.routeDurationFormatted = `${numberOfHours}h ${numberOfMinutes}min`
+  }
+
   drawRoute() {
     this.adresseService.calculateRoute([this.departCoordinates.getValue(), this.arriveeCoordinates.getValue()]).subscribe(
       () => {
         if (this.map != null) {
           this.routePolyline = polyline(this.routeDrawing.getValue());
           this.routePolyline.addTo(this.map);
+          this.routeDistance = this.adresseService.routeDistance$.getValue()
+          this.convertDurationInHoursAndMinutes();
         }
       }
     );
   }
 
   onSubmit(){
+    this.covoiturageService.covoiturageToPublish = {
+      adresseDepart : this.covoiturageService.adresseDepart,
+      adresseArrivee: this.covoiturageService.adresseArrivee,
+      dureeTrajet: this.adresseService.routeDuration$.getValue(),
+      distance: this.adresseService.routeDistance$.getValue()
+    }
     this.router.navigateByUrl('/covoiturage/create/details')
   }
 
