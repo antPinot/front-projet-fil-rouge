@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailReservationCovoiturageComponent } from 'src/app/reservation-covoiturage/components/detail-reservation-covoiturage/detail-reservation-covoiturage.component';
 import { Covoiturage } from '../../../core/models/covoiturage';
 import { CovoiturageService } from '../../../core/services/covoiturage.service';
+import { CovoiturageListService } from 'src/app/core/services/covoiturage-list.service';
 
 @Component({
   selector: 'app-single-covoiturage',
@@ -19,8 +20,9 @@ export class SingleCovoiturageComponent {
 
   hasPeople!: boolean
 
+  enCours : boolean = this.covoiturageListService.enCours;
 
-  constructor(private covoiturageService: CovoiturageService, private dialog: MatDialog) { }
+  constructor(private covoiturageService: CovoiturageService, private dialog: MatDialog, private covoiturageListService : CovoiturageListService) { }
 
 
   @Input()
