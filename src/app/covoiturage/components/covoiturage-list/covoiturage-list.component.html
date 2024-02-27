@@ -1,17 +1,12 @@
-<h2>Listes des annonces </h2>
-
-<div class="row">
-    <div class="col-1">
-        <button mat-raised-button (click)="enCours()">En Cours</button>
-    </div>
-    <div class="col-1">
-        <button mat-raised-button (click)="historique()">Historique</button>
-    </div>
+<div class="m-3 p-2">
+    <h2>Listes des annonces </h2>
+    <button mat-raised-button (click)="enCours()" class="me-2">En Cours</button>
+    <button mat-raised-button (click)="historique()">Historique</button>
+    
+    <app-single-covoiturage *ngFor="let covoituragePersonnel of covoiturageList$ | async" [covoituragePersonnel]="covoituragePersonnel"></app-single-covoiturage>
+    
+    <button mat-raised-button color="primary" routerLink="../create">Créer une annonce de covoiturage</button>
+    
 </div>
-
-
-<app-single-covoiturage     *ngFor="let covoituragePersonnel of covoiturageList$ | async" [covoituragePersonnel]="covoituragePersonnel"></app-single-covoiturage>
-
-<button mat-raised-button color="primary" routerLink="../create">Créer une annonce de covoiturage</button>
 
  

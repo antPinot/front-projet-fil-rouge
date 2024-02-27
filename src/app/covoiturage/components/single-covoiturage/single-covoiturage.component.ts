@@ -29,7 +29,9 @@ export class SingleCovoiturageComponent {
   }
 
 
-  /**methode supprime un covoiturage */
+  /**
+   * Ouvre la fenêtre de détails 
+   */
   displayDetails() {
     this.dialog.open(DetailReservationCovoiturageComponent, {
       height: '400px', width: '700px', data:
@@ -48,6 +50,10 @@ export class SingleCovoiturageComponent {
       }
     });
   }
+  /**
+   * 
+   * @param covoiturage 
+   */
   editerCovoiturage(covoiturage: Covoiturage) {
     if (covoiturage.id) {
       this.covoiturageService.editOne(covoiturage.id).subscribe();
