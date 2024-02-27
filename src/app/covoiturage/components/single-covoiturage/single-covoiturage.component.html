@@ -9,7 +9,7 @@
     </div>
 
     <div class="col">
-      <strong>adresse de depart</strong> :
+      <strong>Adresse de depart</strong> :
       <p>
         {{ covoituragePersonnel.adresseDepart?.numero }}
         {{ covoituragePersonnel.adresseDepart?.complementNumero }}
@@ -20,7 +20,7 @@
     </div>
 
     <div class="col">
-      <strong>adresse arrivée</strong> :
+      <strong>Adresse arrivée</strong> :
       <p>
         {{ covoituragePersonnel.adresseArrivee?.numero }}
         {{ covoituragePersonnel.adresseArrivee?.complementNumero }}
@@ -31,7 +31,7 @@
     </div>
 
     <div class="col">
-      <strong>Nombres de personnes</strong> :
+      <strong>Nombres de passagers</strong> :
       <p>{{ covoituragePersonnel.nbPersonnes }}</p>
     </div>
     <!-- <div class="col">
@@ -50,6 +50,7 @@
         mat-raised-button
         color="primary"
         [routerLink]="['/covoiturage', covoituragePersonnel.id, 'edit']"
+        [disabled]="hasPeople"
         class="row"
       >
         Editer

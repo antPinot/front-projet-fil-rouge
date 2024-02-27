@@ -17,6 +17,8 @@ import { CovoiturageService } from '../../../core/services/covoiturage.service';
  */
 export class SingleCovoiturageComponent {
 
+  hasPeople!: boolean
+
 
   constructor(private covoiturageService: CovoiturageService, private dialog: MatDialog) { }
 
@@ -26,6 +28,10 @@ export class SingleCovoiturageComponent {
 
 
   ngOnInit(): void {
+    if (this.covoituragePersonnel.nbPersonnes != null){
+      this.covoituragePersonnel.nbPersonnes > 0 ? this.hasPeople = true: this.hasPeople = false
+    }
+    
   }
 
 
