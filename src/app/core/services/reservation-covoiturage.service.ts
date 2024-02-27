@@ -23,6 +23,9 @@ export class ReservationCovoiturageService {
   /** Booléen permettant de gérer l'affichage du bouton de suppression d'une réservation de covoiturage */
   enCours: boolean = true;
 
+  /**Booléen permettant de savoir si une réservation en cours est consultée ou si elle est en cours de suppression */
+  isConsulted: boolean = true;
+
   constructor(private http:HttpClient) { }
 
   /**

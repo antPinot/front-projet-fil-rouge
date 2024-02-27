@@ -30,8 +30,12 @@ export class DetailReservationCovoiturageComponent implements OnInit {
 
   enCours = this.reservationCovoiturageService.enCours
 
+  annonceEnCours = this.covoiturageListService.enCours;
+  
+  isConsulted = this.reservationCovoiturageService.isConsulted;
+
   constructor(public dialogRef: MatDialogRef<DetailReservationCovoiturageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Covoiturage, private covoiturageService: CovoiturageListService, private reservationCovoiturageService: ReservationCovoiturageService, private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: Covoiturage, private covoiturageService: CovoiturageListService, private reservationCovoiturageService: ReservationCovoiturageService, private covoiturageListService : CovoiturageListService, private router: Router,
     private authService: AuthService) {
     this.covoiturage = { ...data }
   }

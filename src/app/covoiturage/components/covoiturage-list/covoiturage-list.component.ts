@@ -16,6 +16,12 @@ export class CovoiturageListComponent implements OnInit {
 
   constructor(private _covoiturageService: CovoiturageListService, private authService: AuthService) { }
 
+  ngOnInit(): void {
+    if (this.collaborateurId) {
+      this._covoiturageService.getCovoiturageListByOrganisateurId(this.collaborateurId, 'En-cours').subscribe()
+      this._covoiturageService.enCours = true;
+    }
+  }
 
   enCours(): void {
     if (this.collaborateurId) {
@@ -35,9 +41,4 @@ export class CovoiturageListComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    if (this.collaborateurId) {
-      this._covoiturageService.getCovoiturageListByOrganisateurId(this.collaborateurId, 'En-cours').subscribe()
-    }
-  }
 }

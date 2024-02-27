@@ -61,4 +61,14 @@ export class SingleReservationCovoiturageComponent implements OnInit {
     },)
   }
 
+  displayeDetailsForConsulting(){
+    this.reservationCovoiturageService.isConsulted = true;
+    this.displayDetails()
+  }
+
+  displayDetailsForCancel(){
+    this.reservationCovoiturageService.isConsulted = false;
+    this.displayDetails()
+  }
+
 }
