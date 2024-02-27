@@ -37,7 +37,7 @@ export class CovoiturageListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.collaborateurId) {
-      this._covoiturageService.getCovoiturageListByOrganisateurId(1, 'Historique').subscribe()
+      this._covoiturageService.getCovoiturageListByOrganisateurId(this.collaborateurId, 'Historique').subscribe()
     }
   }
 }
