@@ -20,7 +20,7 @@
                 </mat-card-content>
             </mat-card>
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div class="container">
                 <form [formGroup]="reservationVehiculeEditForm" class="form-group">
                     <div>
@@ -35,14 +35,46 @@
                         <div *ngIf="reservationVehiculeEditForm.get('dateRetour')?.hasError('required')"
                             class="alert-message">Ce champ est requis</div>
                     </div>
-                    <button mat-raised-button color="accent"
-                        [disabled]="reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required')">Rechercher</button>
+                   
                     <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()"
-                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required')">Modifier 
-                        la réservation</button>
+                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required') || reservationVehiculeEditForm.errors?.['minDate']">Réserver
+                        le véhicule</button>
                 </form>
                 <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de
-                    vos réservations</button>
+                    vos
+                    réservations</button>
+            </div>
+        </div> -->
+        <div class="col">
+            <div class="container">
+                <form [formGroup]="reservationVehiculeEditForm" class="form-group">
+                    <div>
+                        <mat-label for="dateDepart">Date de départ</mat-label>
+                        <input type="text" id="dateDepart" formControlName="dateDepart" matInput
+                            [ngxMatDatetimePicker]="dateDepartPicker" [min]="currentDate">
+                        <mat-datepicker-toggle matIconSuffix [for]="$any(dateDepartPicker)"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #dateDepartPicker [showSeconds]="false"></ngx-mat-datetime-picker>
+                        <div *ngIf="reservationVehiculeEditForm.get('dateDepart')?.hasError('required')"
+                            class="alert-message">Ce champ est requis</div>
+                    </div>
+                    <div>
+                        <mat-label for="dateRetour">Date de retour</mat-label>
+                        <input type="text" id="dateRetour" formControlName="dateRetour" matInput
+                            [ngxMatDatetimePicker]="dateRetourPicker">
+                        <mat-datepicker-toggle matIconSuffix [for]="$any(dateRetourPicker)"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #dateRetourPicker [showSeconds]="false"></ngx-mat-datetime-picker>
+                        <div *ngIf="reservationVehiculeEditForm.get('dateRetour')?.hasError('required')"
+                            class="alert-message danger">Ce champ est requis</div>
+                        <div *ngIf="reservationVehiculeEditForm.errors?.['minDate']" class="alert alert-danger">Entrez une
+                            date de retour postérieure à la date de départ</div>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()"
+                        [disabled]="listVehiculeSociete$.value.length==0 || reservationVehiculeEditForm.get('dateRetour')?.hasError('required') || reservationVehiculeEditForm.get('dateDepart')?.hasError('required') || reservationVehiculeEditForm.errors?.['minDate']">Réserver
+                        le véhicule</button>
+                </form>
+                <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de
+                    vos
+                    réservations</button>
             </div>
         </div>
     </div>

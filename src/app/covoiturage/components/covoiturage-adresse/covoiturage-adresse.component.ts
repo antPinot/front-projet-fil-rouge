@@ -62,7 +62,6 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
   
 
   ngOnInit(): void {
-    console.log(this.covoiturageService.covoiturageToPublish)
     /** Réinitialise les adresses si on est sur la page d'entrée de l'adresse de départ */
     if (this.router.url == "/covoiturage/create/adresse-depart"){
       this.adresseDepart = null
@@ -83,18 +82,18 @@ export class CovoiturageAdresseComponent implements OnInit, OnDestroy{
     this.searchAdresseWithPhoton();
   }
 
-  displayAdresse(adresse: Adresse): string {
-    if (adresse !== null) {
-      let complementNum: boolean;
-      adresse.complementNumero ? complementNum = true : complementNum = false;
-      return complementNum ? `${adresse.numero} ${adresse.complementNumero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} ` : `${adresse.numero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} `
-    }
-    return '';
-  }
+  // displayAdresse(adresse: Adresse): string {
+  //   if (adresse !== null) {
+  //     let complementNum: boolean;
+  //     adresse.complementNumero ? complementNum = true : complementNum = false;
+  //     return complementNum ? `${adresse.numero} ${adresse.complementNumero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} ` : `${adresse.numero} ${adresse.voie} ${adresse.codePostal} ${adresse.ville} ${adresse.departement} ${adresse.pays} `
+  //   }
+  //   return '';
+  // }
 
   searchAdresseWithPhoton(adresse?: Adresse){
     let valueInput;
-    adresse?  valueInput = this.displayAdresse(adresse) : valueInput = this.adresseForm.get('adresse')?.value;
+    adresse?  valueInput = this.adresseService.displayAdresse(adresse) : valueInput = this.adresseForm.get('adresse')?.value;
     // console.log(valueInput)
     this.isAdresseDepart ? this.adresseService.findByUserQueryWithPhotonAPI(valueInput, true).subscribe(() => {
       this.pin.setLatLng([this.departCoordinates.getValue().coordinates[1], this.departCoordinates.getValue().coordinates[0]])

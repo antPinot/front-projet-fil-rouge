@@ -8,6 +8,7 @@ import { CovoiturageListComponent } from './components/covoiturage-list/covoitur
 import { CovoiturageRouteComponent } from './components/covoiturage-route/covoiturage-route.component';
 import { CovoiturageComponent } from './components/covoiturage/covoiturage.component';
 import { CovoiturageConfirmComponent } from './components/covoiturage-confirm/covoiturage-confirm.component';
+import { CovoiturageEditComponent } from './components/covoiturage-edit/covoiturage-edit.component';
 
 const routes: Routes = [
   // { path: 'create', component: CovoiturageComponent, canActivate: [AuthGuard] },
@@ -22,7 +23,7 @@ const routes: Routes = [
     ]
   },
   { path: 'list-covoiturage', component: CovoiturageListComponent, canActivate: [AuthGuard] },
-  { path: ':id/edit', component: CovoiturageDetailsComponent, canActivate: [AuthGuard] }
+  { path: ':id/edit', component: CovoiturageEditComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

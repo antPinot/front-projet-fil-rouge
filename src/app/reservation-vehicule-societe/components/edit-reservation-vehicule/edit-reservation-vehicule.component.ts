@@ -1,9 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationVehiculeService } from '../../../core/services/reservation-vehicule.service';
+import * as moment from 'moment';
+import { NgxMatDatetimePicker } from '@angular-material-components/datetime-picker';
+
+/**
+ * 
+ * Validateur vérifiant que la date de retour n'est pas postérieure à la date 
+ * de départ dans le formulaire de recherche / réservation
+ * 
+ */
+const coherentDateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const dateDepart = control.get('dateDepart')?.value;
+  const dateRetour = control.get('dateRetour')?.value;
+  if (dateDepart !== null && dateRetour !== null && moment(dateDepart).isBefore(dateRetour)) {
+    return null
+  } else {
+    return { 'minDate': true }
+  }
+}
 
 /**
  * Component gérant la modification d'une réservation de véhicule de société
@@ -18,6 +36,13 @@ import { ReservationVehiculeService } from '../../../core/services/reservation-v
   styleUrls: ['./edit-reservation-vehicule.component.css']
 })
 export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
+
+  // @ViewChild('dateDepartPicker') dateDepartPicker!: NgxMatDatetimePicker<any>;
+
+  // @ViewChild('dateRetourPicker') dateRetourPicker!: NgxMatDatetimePicker<any>;
+
+  /** Date du jour */
+  currentDate = new Date();
 
   /** Id du collaborateur connecté */
   collaborateurId?= this.authService.currentCollaborateur?.id;
@@ -34,14 +59,17 @@ export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
   /** Véhicule de société faisant l'objet de la réservation à modifier */
   currentVehiculeSociete = this.reservationVehiculeService.reservationVehiculeSocieteToEdit.vehiculeSociete;
 
+  defaultDateDepart: any
+
   constructor(private reservationVehiculeService: ReservationVehiculeService, private formBuilder: FormBuilder, private router: Router, private authService:AuthService) { }
 
   /** Initialisation du formulaire */
   ngOnInit(): void {
     this.reservationVehiculeEditForm = this.formBuilder.group({
-      dateDepart: [this.reservationVehiculeToEdit.dateDepart, Validators.required],
-      dateRetour: [this.reservationVehiculeToEdit.dateRetour, Validators.required],
+      dateDepart: [moment(this.reservationVehiculeToEdit.dateDepart).format(), Validators.required],
+      dateRetour: [moment(this.reservationVehiculeToEdit.dateRetour).format(), Validators.required],
     })
+
     // Comportement à revoir éventuellement
     this.reservationVehiculeService.getAllVehiculeSociete().subscribe()
   }

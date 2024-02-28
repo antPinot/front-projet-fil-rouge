@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CovoiturageConfirmComponent } from './components/covoiturage-confirm/covoiturage-confirm.component';
+import { CovoiturageEditComponent } from './components/covoiturage-edit/covoiturage-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CovoiturageConfirmComponent } from './components/covoiturage-confirm/co
     CovoiturageRouteComponent,
     CovoiturageDetailedInfosComponent,
     CovoiturageConfirmComponent,
+    CovoiturageEditComponent,
   ],
   imports: [
     CommonModule,

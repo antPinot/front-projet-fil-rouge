@@ -46,6 +46,7 @@ const coherentNbPlacesValidator: ValidatorFn = (
 })
 export class CovoiturageDetailedInfosComponent implements OnInit {
 
+  //
   /** Id du collaborateur connecté */
   collaborateurId? = this.authService.currentCollaborateur?.id;
 
@@ -53,7 +54,8 @@ export class CovoiturageDetailedInfosComponent implements OnInit {
   vehiculePersonnelList$ =
     this.vehiculePersonnelService.vehiculePersonnelListByCollaborateurId$;
 
-  /** Date du jour */
+  //TODO: A mettre dans un service pour éviter duplication
+  /** Date du jour  */
   currentDate = new Date();
 
   covoiturageDetailsForm!: FormGroup;
@@ -84,7 +86,7 @@ export class CovoiturageDetailedInfosComponent implements OnInit {
 
     this.vehiculePersonnelService
       .getVehiculePersonnelListByCollaborateurId(this.collaborateurId)
-      .subscribe((vehicules) => console.log(vehicules[0]));
+      .subscribe();
   }
 
   fillPlacesSelector() {
