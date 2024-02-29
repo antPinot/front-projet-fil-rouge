@@ -21,7 +21,7 @@ export class SingleVehiculeSocieteComponent {
    */
   onEdit(){
     this._vehiculeSocieteService.vehiculeSocieteToEdit = this.vehiculeSociete;
-    this.router.navigateByUrl('vehicule-societe/edit');
+    this.router.navigateByUrl('vehicule-societe/create');
   }
 
   /**

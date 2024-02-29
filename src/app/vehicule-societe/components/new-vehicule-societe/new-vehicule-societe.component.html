@@ -48,7 +48,7 @@
       </div>
       <div class="row justify-content-center">
         <mat-radio-group formControlName="statut" id="statut" class="col-6">
-          <mat-radio-button value="1">En service</mat-radio-button>
+          <mat-radio-button [checked]="true" value="1">En service</mat-radio-button>
           <mat-radio-button [disabled]="true" value="0">En Réparation</mat-radio-button>
           <mat-radio-button [disabled]="true" value="-1">Hors service</mat-radio-button>
         </mat-radio-group>
