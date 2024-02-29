@@ -9,6 +9,8 @@ import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/n
 import { SingleVehiculeSocieteComponent } from './components/single-vehicule-societe/single-vehicule-societe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../core/material-module/material.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { MaterialModule } from '../core/material-module/material.module';
     CommonModule,
     VehiculeSocieteRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   exports: [
     NewVehiculeSocieteComponent,

@@ -7,7 +7,7 @@ import { NewVehiculeSocieteComponent } from './components/new-vehicule-societe/n
 
 const routes: Routes = [
   {path: 'create', component: NewVehiculeSocieteComponent, canActivate: [AdminGuard]},
-  {path: 'list', component: ListVehiculeSocieteComponent, canActivate: [AdminGuard]},
+{path: 'list', component: ListVehiculeSocieteComponent, /*canActivate: [AdminGuard]*/},
   {path: 'edit', component: EditVehiculeSocieteComponent, canActivate: [AdminGuard]},
 ];
 

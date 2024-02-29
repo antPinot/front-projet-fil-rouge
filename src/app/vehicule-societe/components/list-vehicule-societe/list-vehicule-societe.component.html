@@ -1,11 +1,27 @@
 <h1 class="d-flex flex-row justify-content-center">Liste des véhicules de société</h1>
 
+<!-- Filtres -->
+<div class="d-flex flex-row justify-content-around">
+    <!-- Filtre par Marque -->
+    <mat-form-field>
+        <mat-label>Marque</mat-label>
+            <mat-select #selectMarque (selectionChange)="filterOnMarque($event.value)"
+            >
+            <mat-option></mat-option>
+              <mat-option
+                *ngFor="let marque of allMarques"
+                [value]="marque">
+            {{marque}}</mat-option>
+            </mat-select>
+    </mat-form-field>
+    <!-- Réinitialisation des filtres -->
+    <button mat-raised-button color="primary" (click)="onReinit()">Réinitialiser</button>
+</div>
+
+<!-- Liste des Véhicules de Société -->
 <div class="container">
     <div class="row">
-        <!-- <app-single-vehicule-societe *ngFor="let vehiculeSociete of vSList$ | async"
-        [vehiculeSociete]="vehiculeSociete">
-        </app-single-vehicule-societe> -->
-        <ng-container *ngFor="let vehiculeSociete of vSList$ | async; let i = index">
+        <ng-container *ngFor="let vehiculeSociete of filteredList$ | async; let i = index">
             <div class="col-sm-4 mb-3">
                 <app-single-vehicule-societe [vehiculeSociete]="vehiculeSociete"></app-single-vehicule-societe>
             </div>
