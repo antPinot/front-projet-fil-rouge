@@ -8,6 +8,9 @@ import { NewReservationVehiculeSocieteComponent } from './components/new-reserva
 import { SingleReservationVehiculeComponent } from './components/single-reservation-vehicule/single-reservation-vehicule.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../core/material-module/material.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { MaterialModule } from '../core/material-module/material.module';
     CommonModule,
     ReservationVehiculeSocieteRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [
     ListReservationVehiculeSocieteComponent,

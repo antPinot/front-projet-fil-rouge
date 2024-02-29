@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationVehiculeService } from '../../../core/services/reservation-vehicule.service';
 import * as moment from 'moment';
-import { NgxMatDatetimePicker } from '@angular-material-components/datetime-picker';
 
 /**
  * 
@@ -68,7 +67,8 @@ export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
     this.reservationVehiculeEditForm = this.formBuilder.group({
       dateDepart: [moment(this.reservationVehiculeToEdit.dateDepart).format(), Validators.required],
       dateRetour: [moment(this.reservationVehiculeToEdit.dateRetour).format(), Validators.required],
-    })
+    },
+    {validators: [coherentDateValidator]})
 
     // Comportement à revoir éventuellement
     this.reservationVehiculeService.getAllVehiculeSociete().subscribe()
@@ -106,16 +106,23 @@ export class EditReservationVehiculeComponent implements OnInit, OnDestroy {
   }
 
   /** Soumission du formulaire */
-  onSubmitForm() {
-    this.reservationVehiculeToEdit.dateDepart = this.reservationVehiculeEditForm.value.dateDepart;
-    this.reservationVehiculeToEdit.dateRetour = this.reservationVehiculeEditForm.value.dateRetour;
+  onSubmitForm(){
+    let formattedDateDepart = moment(this.reservationVehiculeEditForm.value.dateDepart).format("DD/MM/YYYY HH:mm")
+    let formattedDateRetour = moment(this.reservationVehiculeEditForm.value.dateRetour).format("DD/MM/YYYY HH:mm")
+    this.reservationVehiculeToEdit.dateDepart = formattedDateDepart;
+    this.reservationVehiculeToEdit.dateRetour = formattedDateRetour;
     this.reservationVehiculeToEdit.vehiculeSociete = this.currentVehiculeSociete;
     this.reservationVehiculeToEdit.collaborateurId = this.reservationVehiculeToEdit.collaborateur?.id;
     this.reservationVehiculeToEdit.vehiculeSocieteId = this.reservationVehiculeToEdit.vehiculeSociete?.id;
     this.reservationVehiculeService.updateReservationVehiculeSociete(this.reservationVehiculeToEdit).pipe(
       tap(() => this.reservationVehiculeService.getReservationVehiculeSocieteByCollaborateur(this.collaborateurId, 'en-cours')),
-      tap(() => this.router.navigateByUrl('vehicule-societe/reservation/list'))
-    ).subscribe();
+      tap(() => this.router.navigateByUrl('vehicule-societe/reservation/list')),
+      catchError((err) => {
+        console.log(err)
+        return of(0);
+      })
+    ).subscribe(
+    );
   }
 
 }

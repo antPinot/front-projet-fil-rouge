@@ -48,23 +48,25 @@
         <div class="col">
             <div class="container">
                 <form [formGroup]="reservationVehiculeEditForm" class="form-group">
-                    <div>
-                        <mat-label for="dateDepart">Date de départ</mat-label>
-                        <input type="text" id="dateDepart" formControlName="dateDepart" matInput
-                            [ngxMatDatetimePicker]="dateDepartPicker" [min]="currentDate">
-                        <mat-datepicker-toggle matIconSuffix [for]="$any(dateDepartPicker)"></mat-datepicker-toggle>
-                        <ngx-mat-datetime-picker #dateDepartPicker [showSeconds]="false"></ngx-mat-datetime-picker>
-                        <div *ngIf="reservationVehiculeEditForm.get('dateDepart')?.hasError('required')"
-                            class="alert-message">Ce champ est requis</div>
-                    </div>
-                    <div>
-                        <mat-label for="dateRetour">Date de retour</mat-label>
-                        <input type="text" id="dateRetour" formControlName="dateRetour" matInput
-                            [ngxMatDatetimePicker]="dateRetourPicker">
-                        <mat-datepicker-toggle matIconSuffix [for]="$any(dateRetourPicker)"></mat-datepicker-toggle>
-                        <ngx-mat-datetime-picker #dateRetourPicker [showSeconds]="false"></ngx-mat-datetime-picker>
-                        <div *ngIf="reservationVehiculeEditForm.get('dateRetour')?.hasError('required')"
-                            class="alert-message danger">Ce champ est requis</div>
+                    <div class="d-flex flex-column align-items-start">
+                        <mat-form-field>
+                            <mat-label for="dateDepart">Date de départ</mat-label>
+                            <input type="text" id="dateDepart" formControlName="dateDepart" matInput
+                                [ngxMatDatetimePicker]="dateDepartPicker" [min]="currentDate">
+                            <mat-datepicker-toggle matIconSuffix [for]="$any(dateDepartPicker)"></mat-datepicker-toggle>
+                            <ngx-mat-datetime-picker #dateDepartPicker [showSeconds]="false"></ngx-mat-datetime-picker>
+                            <mat-error *ngIf="reservationVehiculeEditForm.get('dateDepart')?.hasError('required')"
+                                class="alert-message">Ce champ est requis</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label for="dateRetour">Date de retour</mat-label>
+                            <input type="text" id="dateRetour" formControlName="dateRetour" matInput
+                                [ngxMatDatetimePicker]="dateRetourPicker">
+                            <mat-datepicker-toggle matIconSuffix [for]="$any(dateRetourPicker)"></mat-datepicker-toggle>
+                            <ngx-mat-datetime-picker #dateRetourPicker [showSeconds]="false"></ngx-mat-datetime-picker>
+                            <mat-error *ngIf="reservationVehiculeEditForm.get('dateRetour')?.hasError('required')"
+                                class="alert-message danger">Ce champ est requis</mat-error>
+                        </mat-form-field>
                         <div *ngIf="reservationVehiculeEditForm.errors?.['minDate']" class="alert alert-danger">Entrez une
                             date de retour postérieure à la date de départ</div>
                     </div>
