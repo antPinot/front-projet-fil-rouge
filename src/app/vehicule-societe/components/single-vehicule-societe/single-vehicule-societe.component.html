@@ -1,13 +1,18 @@
-<div *ngIf="vehiculeSociete" class="container border">
-    <div>
-        <div>Immatriculation : {{vehiculeSociete.immatriculation}}</div>
-        <div>Marque : {{vehiculeSociete.marque}}</div>
-        <div>Modèle : {{vehiculeSociete.modele}}</div>
-        <div> Places : {{vehiculeSociete.places}}</div>
-        <div>Photo : <img src="{{vehiculeSociete.photo}}" alt="Photo" width="350" height="200"/></div>
-        <div>
-            <button (click)="onEdit()">Modifier</button><br/><br/>
-            <button (click)="onDelete(vehiculeSociete.id)">Supprimer</button>
+<mat-card *ngIf="vehiculeSociete" class="col-sm" >
+    <img src="{{vehiculeSociete.photo}}" alt="" class="h-25 w-100 rounded">
+    <mat-card-content >
+        <mat-list>
+            <mat-list-item><strong>Marque : </strong>{{vehiculeSociete.marque}}</mat-list-item>
+            <mat-list-item><strong>Modèle : </strong>{{vehiculeSociete.modele}}}</mat-list-item>
+            <mat-list-item><strong>Places : </strong>{{vehiculeSociete.places}}</mat-list-item>
+            <mat-list-item><strong>Immatriculation :
+                </strong>{{vehiculeSociete.immatriculation}}}</mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-footer class="container">
+        <div class="row">
+            <button mat-raised-button class="col-4 offset-md-1" color="primary" (click)="onEdit()">Modifier</button><br/><br/>
+            <button mat-raised-button class="col-4 offset-md-1" color="accent" (click)="onDelete(vehiculeSociete.id)">Supprimer</button>
         </div>
-    </div>
-</div>
+    </mat-card-footer>
+</mat-card>

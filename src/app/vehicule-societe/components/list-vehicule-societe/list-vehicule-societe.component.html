@@ -1,7 +1,17 @@
-<h1>Liste des véhicules de société</h1>
+<h1 class="d-flex flex-row justify-content-center">Liste des véhicules de société</h1>
 
-<app-single-vehicule-societe *ngFor="let vehiculeSociete of vSList$ | async" 
-[vehiculeSociete]="vehiculeSociete">
-</app-single-vehicule-societe>
+<div class="container">
+    <div class="row">
+        <!-- <app-single-vehicule-societe *ngFor="let vehiculeSociete of vSList$ | async"
+        [vehiculeSociete]="vehiculeSociete">
+        </app-single-vehicule-societe> -->
+        <ng-container *ngFor="let vehiculeSociete of vSList$ | async; let i = index">
+            <div class="col-sm-4 mb-3">
+                <app-single-vehicule-societe [vehiculeSociete]="vehiculeSociete"></app-single-vehicule-societe>
+            </div>
+            <div class="w-100 d-none d-sm-block d-md-none" *ngIf="(i + 1) % 3 === 0"></div>
+        </ng-container>
+    </div>
+</div>
 
 <div><button routerLink="/vehicule-societe/create">Ajout Vehicule Societe</button></div>

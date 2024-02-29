@@ -1,10 +1,10 @@
 <div *ngIf="reservationVehicule" class="container border border-dark rounded m-3 p-2">
     <div class="row">
         <div class="col">
-            Date de départ : {{reservationVehicule.dateDepart}}
+            Date de départ : {{formattedDateDepart}}
         </div>
         <div class="col">
-            Date de retour : {{reservationVehicule.dateRetour}}
+            Date de retour : {{formattedDateRetour}}
         </div>
         <div class="col">
             Immatriculation: {{reservationVehicule.vehiculeSociete?.immatriculation}}

@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
       return true;
     } else {
       console.log('Vous n\'êtes pas administrateur');
-      localStorage.getItem('access_token') ? this.router.navigateByUrl('/home') : this.router.navigateByUrl('/Login');
+      localStorage.getItem('access_token') ? this.router.navigateByUrl('/home') : this.router.navigateByUrl('/auth/login');
       return false;
     }
   }
