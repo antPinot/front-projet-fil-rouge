@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../core/material-module/material.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MaterialModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule
   ],
   exports: [
     NewVehiculeSocieteComponent,

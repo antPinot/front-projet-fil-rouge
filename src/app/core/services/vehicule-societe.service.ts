@@ -52,4 +52,8 @@ export class VehiculeSocieteService {
     )
   }
 
+  getAllCategories(): Observable<String[]>{
+    return this._http.get<String[]>('http://localhost:8080/rest/vehicule-societe/categories');
+  }
+
 }

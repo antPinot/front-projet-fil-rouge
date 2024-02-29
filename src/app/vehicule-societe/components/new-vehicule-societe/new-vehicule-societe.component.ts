@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
 import { VehiculeSociete } from '../../../core/models/vehicule-societe';
 import { VehiculeSocieteService } from '../../../core/services/vehicule-societe.service';
 
@@ -13,16 +14,19 @@ export class NewVehiculeSocieteComponent implements OnInit{
   vSForm!: FormGroup;
   vehiculeSocieteToCreate: VehiculeSociete = {}
 
+  allCategories!: String[]
+
   constructor(private builder: FormBuilder, private _vehiculeSocieteService: VehiculeSocieteService) { };
 
   ngOnInit() {
+    this._vehiculeSocieteService.getAllCategories().pipe(tap((categories) => this.allCategories = categories)).subscribe()
     this.vSForm = this.builder.group({
       immatriculation: [null, [Validators.required, Validators.pattern('[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}')]],
       marque: [null, Validators.required],
       modele: [null, Validators.required],
       places: [null, Validators.required],
       photo: [null, Validators.required],
-      disponible: [null, Validators.required],
+      disponible: [true, Validators.required],
       statut: [null, Validators.required],
       categorie: [null, Validators.required]
     })
