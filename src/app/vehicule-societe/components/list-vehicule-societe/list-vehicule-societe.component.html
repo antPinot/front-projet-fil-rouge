@@ -1,11 +1,11 @@
 <h1 class="d-flex flex-row justify-content-center">Liste des véhicules de société</h1>
 
 <!-- Filtres -->
-<div class="d-flex flex-row justify-content-around">
+<div class="d-flex flex-row justify-content-around alternative">
     <!-- Filtre par Marque -->
     <mat-form-field>
         <mat-label>Marque</mat-label>
-            <mat-select #selectMarque (selectionChange)="filterOnMarque($event.value)"
+            <mat-select #selectMarque 
             >
             <mat-option></mat-option>
               <mat-option
@@ -14,6 +14,20 @@
             {{marque}}</mat-option>
             </mat-select>
     </mat-form-field>
+    <!-- Filtre par Immatriculation -->
+    <mat-form-field>
+        <mat-label>Immatriculation</mat-label>
+            <mat-select #selectImmatriculation 
+            >
+            <mat-option></mat-option>
+              <mat-option
+                *ngFor="let immatriculation of allImmatriculations"
+                [value]="immatriculation">
+            {{immatriculation}}</mat-option>
+            </mat-select>
+    </mat-form-field>
+    <!-- Application du/des filtres -->
+    <button mat-raised-button color="accent" (click)="filter()">Filtrer</button>
     <!-- Réinitialisation des filtres -->
     <button mat-raised-button color="primary" (click)="onReinit()">Réinitialiser</button>
 </div>
@@ -28,6 +42,11 @@
             <div class="w-100 d-none d-sm-block d-md-none" *ngIf="(i + 1) % 3 === 0"></div>
         </ng-container>
     </div>
+    <!-- Ajouter un véhicule de Société -->
+    <div class="alternative d-flex flex-row justify-content-end">
+        <button mat-raised-button color="accent"routerLink="/vehicule-societe/create">Ajout Vehicule Societe</button>
+    </div>
 </div>
 
-<div><button routerLink="/vehicule-societe/create">Ajout Vehicule Societe</button></div>
+
+
