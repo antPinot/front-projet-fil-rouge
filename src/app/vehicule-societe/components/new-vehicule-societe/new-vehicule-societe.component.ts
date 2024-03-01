@@ -49,7 +49,7 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
         places: [null, Validators.required],
         photo: [null, Validators.required],
         disponible: [true, Validators.required],
-        statut: [null, Validators.required],
+        statut: [1, Validators.required],
         categorie: [null, Validators.required]
       })
     }
@@ -58,6 +58,7 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
   }
   
   onSubmit() {
+    console.log(this.vSForm.value.statut)
     this.vehiculeSocieteToCreate.immatriculation = this.vSForm.value.immatriculation;
     this.vehiculeSocieteToCreate.marque = this.vSForm.value.marque;
     this.vehiculeSocieteToCreate.modele = this.vSForm.value.modele;
@@ -66,7 +67,7 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
     this.vehiculeSocieteToCreate.disponible = this.vSForm.value.disponible;
     this.vehiculeSocieteToCreate.statut = this.vSForm.value.statut;
     this.vehiculeSocieteToCreate.categorie = this.vSForm.value.categorie;
-    this._vehiculeSocieteService.createOne(this.vehiculeSocieteToCreate).subscribe();
+    this.hasVehiculeToEdit ? console.log(this.vehiculeSocieteToEdit) : this._vehiculeSocieteService.createOne(this.vehiculeSocieteToCreate).subscribe(() => console.log(this.vehiculeSocieteToCreate));
     this.router.navigateByUrl('/vehicule-societe/list')
   }
 

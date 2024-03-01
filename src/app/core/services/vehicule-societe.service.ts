@@ -27,7 +27,7 @@ export class VehiculeSocieteService {
    */
   createOne(vS: VehiculeSociete): Observable<VehiculeSociete>{
     return this._http
-    .post<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe', vS)
+    .post<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe/createVehiculeSociete', vS)
   }
 
   /**
