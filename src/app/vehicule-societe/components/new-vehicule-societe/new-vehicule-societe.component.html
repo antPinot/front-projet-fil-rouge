@@ -1,6 +1,7 @@
-<h1 class="text-center mb-3">Créer un véhicule de service</h1>
+<h1 *ngIf="!hasVehiculeToEdit" class="text-center mb-3">Créer un véhicule de service</h1>
+<h1 *ngIf="hasVehiculeToEdit" class="text-center mb-3">Modification du véhicule</h1>
 <div style="height: 80svh;" class="container mt-3">
-  <form [formGroup]="vSForm" class="form-group">
+  <form *ngIf="vSForm" [formGroup]="vSForm" class="form-group">
       <div class="row justify-content-center">
         <mat-form-field class="col-6">
           <mat-label>Immatriculation</mat-label>
@@ -48,9 +49,9 @@
       </div>
       <div class="row justify-content-center">
         <mat-radio-group formControlName="statut" id="statut" class="col-6">
-          <mat-radio-button [checked]="true" value="1">En service</mat-radio-button>
-          <mat-radio-button [disabled]="true" value="0">En Réparation</mat-radio-button>
-          <mat-radio-button [disabled]="true" value="-1">Hors service</mat-radio-button>
+          <mat-radio-button [checked]="!hasVehiculeToEdit" value="1">En service</mat-radio-button>
+          <mat-radio-button [disabled]="!hasVehiculeToEdit" value="0">En Réparation</mat-radio-button>
+          <mat-radio-button [disabled]="!hasVehiculeToEdit" value="-1">Hors service</mat-radio-button>
         </mat-radio-group>
       </div>
       <div class="row justify-content-center">

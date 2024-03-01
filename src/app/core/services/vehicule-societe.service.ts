@@ -56,4 +56,8 @@ export class VehiculeSocieteService {
     return this._http.get<String[]>('http://localhost:8080/rest/vehicule-societe/categories');
   }
 
+  findCategorieNameByCategorie(categorie: string | undefined): any{
+    return this._http.get(`http://localhost:8080/rest/vehicule-societe/categorie?categorie=${categorie}`, {responseType: 'text'});
+  }
+
 }
