@@ -35,7 +35,7 @@ export class VehiculeSocieteService {
    */
   editOne(vS: VehiculeSociete): Observable<VehiculeSociete>{
     return this._http
-    .put<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe', vS);
+    .put<VehiculeSociete>('http://localhost:8080/rest/vehicule-societe/MAJVehiculeSociete', vS);
   }
   
 

@@ -13,7 +13,7 @@ import { VehiculeSocieteService } from '../../../core/services/vehicule-societe.
 export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
 
   vSForm!: FormGroup;
-  vehiculeSocieteToCreate: VehiculeSociete = {}
+  vehiculeSocieteToSubmit: VehiculeSociete = {}
 
   vehiculeSocieteToEdit:VehiculeSociete = this._vehiculeSocieteService.vehiculeSocieteToEdit
 
@@ -27,7 +27,8 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
     this.vehiculeSocieteToEdit != null ? this.hasVehiculeToEdit = Object.values(this.vehiculeSocieteToEdit).length != 0 : this.hasVehiculeToEdit = false;
     this._vehiculeSocieteService.getAllCategories().pipe(tap((categories) => this.allCategories = categories)).subscribe()
     if (this.hasVehiculeToEdit){
-      this._vehiculeSocieteService.findCategorieNameByCategorie(this.vehiculeSocieteToEdit.categorie).pipe(tap((categorieToDisplay) => {
+      this._vehiculeSocieteService.findCategorieNameByCategorie(this.vehiculeSocieteToEdit.categorie).pipe(tap((categorieToDisplay:string) => {
+        this.vehiculeSocieteToEdit.categorie = categorieToDisplay
         this.vSForm = this.builder.group({
           immatriculation: [this.vehiculeSocieteToEdit.immatriculation, [Validators.required, Validators.pattern('[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}')]],
           marque: [this.vehiculeSocieteToEdit.marque, Validators.required],
@@ -36,7 +37,7 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
           photo: [this.vehiculeSocieteToEdit.photo, Validators.required],
           disponible: [true, Validators.required],
           statut: [this.vehiculeSocieteToEdit.statut, Validators.required],
-          categorie: [categorieToDisplay, Validators.required]
+          categorie: [this.vehiculeSocieteToEdit.categorie, Validators.required]
         })
         
       })).subscribe()
@@ -58,16 +59,18 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
   }
   
   onSubmit() {
-    console.log(this.vSForm.value.statut)
-    this.vehiculeSocieteToCreate.immatriculation = this.vSForm.value.immatriculation;
-    this.vehiculeSocieteToCreate.marque = this.vSForm.value.marque;
-    this.vehiculeSocieteToCreate.modele = this.vSForm.value.modele;
-    this.vehiculeSocieteToCreate.places = this.vSForm.value.places;
-    this.vehiculeSocieteToCreate.photo = this.vSForm.value.photo;
-    this.vehiculeSocieteToCreate.disponible = this.vSForm.value.disponible;
-    this.vehiculeSocieteToCreate.statut = this.vSForm.value.statut;
-    this.vehiculeSocieteToCreate.categorie = this.vSForm.value.categorie;
-    this.hasVehiculeToEdit ? console.log(this.vehiculeSocieteToEdit) : this._vehiculeSocieteService.createOne(this.vehiculeSocieteToCreate).subscribe(() => console.log(this.vehiculeSocieteToCreate));
+    if (this.hasVehiculeToEdit ){
+      this.vehiculeSocieteToSubmit.id = this.vehiculeSocieteToEdit.id;
+    } 
+    this.vehiculeSocieteToSubmit.immatriculation = this.vSForm.value.immatriculation;
+    this.vehiculeSocieteToSubmit.marque = this.vSForm.value.marque;
+    this.vehiculeSocieteToSubmit.modele = this.vSForm.value.modele;
+    this.vehiculeSocieteToSubmit.places = this.vSForm.value.places;
+    this.vehiculeSocieteToSubmit.photo = this.vSForm.value.photo;
+    this.vehiculeSocieteToSubmit.disponible = this.vSForm.value.disponible;
+    this.vehiculeSocieteToSubmit.statut = this.vSForm.value.statut;
+    this.vehiculeSocieteToSubmit.categorie = this.vSForm.value.categorie;
+    this.hasVehiculeToEdit ? this._vehiculeSocieteService.editOne(this.vehiculeSocieteToSubmit).subscribe() : this._vehiculeSocieteService.createOne(this.vehiculeSocieteToSubmit).subscribe();
     this.router.navigateByUrl('/vehicule-societe/list')
   }
 
