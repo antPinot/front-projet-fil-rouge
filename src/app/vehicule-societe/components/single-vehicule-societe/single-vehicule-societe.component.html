@@ -1,4 +1,4 @@
-<mat-card *ngIf="vehiculeSociete" class="col-sm" >
+<mat-card *ngIf="vehiculeSociete" class="col-sm w-75" style="min-height: 700px;">
     <img src="{{vehiculeSociete.photo}}" alt="" class="h-25 w-100 rounded">
     <mat-card-content >
         <mat-list>
@@ -12,9 +12,9 @@
     </mat-card-content>
     <mat-card-footer class="container">
         <div class="row">
-            <button mat-raised-button class="col-4 offset-md-1" color="primary" (click)="onEdit()">Modifier</button><br/><br/>
+            <button mat-raised-button class="col-4 offset-md-2" color="primary" (click)="onEdit()">Modifier</button><br/><br/>
             <button mat-raised-button class="col-4 offset-md-1" color="accent" (click)="onDelete(vehiculeSociete.id)">Supprimer</button>
-            <button mat-raised-button class="col-4 offset-md-1" color="light" [routerLink]="['/vehicule-societe', vehiculeSociete.id, 'booking-list']">Liste des réservations</button>
+            <button mat-raised-button class="col-4 offset-md-4 mb-3" color="light" [routerLink]="['/vehicule-societe', vehiculeSociete.id, 'booking-list']">Liste des réservations</button>
         </div>
     </mat-card-footer>
 </mat-card>

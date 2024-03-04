@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationVehiculeService } from 'src/app/core/services/reservation-vehicule.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class BookingListComponent implements OnInit{
 
   displayedColumns: string[] = ['no', 'dateDebut', 'dateFin', 'responsable'];
 
-  constructor(private _activatedRoute: ActivatedRoute, private reservationVehiculeService: ReservationVehiculeService){
+  constructor(private _activatedRoute: ActivatedRoute, private reservationVehiculeService: ReservationVehiculeService, private router: Router){
   }
 
   ngOnInit(): void {
@@ -22,6 +22,10 @@ export class BookingListComponent implements OnInit{
       let vehiculeSocieteId: string = paramMap.get('id') as string;
       this.reservationVehiculeService.findReservationVehiculeSocieteByVehiculeId(vehiculeSocieteId).subscribe()
     });
+  }
+
+  backToList(){
+    this.router.navigateByUrl('/vehicule-societe/list')
   }
 
 }
