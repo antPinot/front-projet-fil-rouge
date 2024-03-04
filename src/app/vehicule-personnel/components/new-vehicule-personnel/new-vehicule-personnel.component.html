@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <form [formGroup]="vehiculePersonnelForm" class="form-group">
         <div>
             <label for="immatriculation">Immatriculation</label>
@@ -30,4 +30,63 @@
         <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()" [disabled]="vehiculePersonnelForm.invalid">Créer véhicule</button>
     </form>
     <button mat-raised-button color="primary" routerLink="../list" class="backList">Revenir à la liste de vos véhicules</button>
+</div> -->
+
+<button class=" mt-2 mx-2" mat-fab extended color="light" (click)="backToList()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>Précédent</button>
+<h1 *ngIf="!hasVehiculePersonnelToEdit" class="text-center mb-3">Saisir un véhicule personnel</h1>
+<h1 *ngIf="hasVehiculePersonnelToEdit" class="text-center mb-3">Modification d'un véhicule personnel</h1>
+<div style="height: 80svh;" class="container mt-3">
+  <form *ngIf="vehiculePersonnelForm" [formGroup]="vehiculePersonnelForm" class="form-group">
+      <div class="row justify-content-center">
+        <mat-form-field class="col-6">
+          <mat-label>Immatriculation</mat-label>
+          <input type="text" id="immatriculation" formControlName="immatriculation" placeholder="Ex : AA-123-BB" matInput>
+          <mat-error *ngIf="vehiculePersonnelForm.get('immatriculation')?.hasError('pattern')" class="alert-message">
+            Entrez une immatriculation au format AA-123-AA
+          </mat-error>
+          <mat-error *ngIf="vehiculePersonnelForm.get('immatriculation')?.hasError('required')" class="alert-message">
+            Veuillez entrer l'immatriculation
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row justify-content-center">
+        <mat-form-field class="col-6">
+          <mat-label>Marque</mat-label>
+          <input type="text" id="marque" formControlName="marque" placeholder="Ex : Renault" matInput>
+          <mat-error *ngIf="vehiculePersonnelForm.get('marque')?.hasError('required')" class="alert-message">
+            Veuillez saisir une marque
+        </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row justify-content-center">
+        <mat-form-field class="col-6">
+          <mat-label>Modèle</mat-label>
+          <input type="text" id="modele" formControlName="modele" placeholder="Ex : Clio" matInput>
+          <mat-error *ngIf="vehiculePersonnelForm.get('modele')?.hasError('required')" class="alert-message">
+            Veuillez saisir un modèle
+        </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row justify-content-center">
+        <mat-form-field class="col-6">
+        <mat-label>Nombre de places</mat-label>
+        <input type="text" id="places" formControlName="places" matInput>
+        <mat-error *ngIf="vehiculePersonnelForm.get('places')?.hasError('required')" class="alert-message">
+          Saisissez le nombre de places du véhicule
+        </mat-error>
+        </mat-form-field>
+      </div>
+        <div class="row justify-content-center">
+        <mat-form-field class="col-6">
+            <mat-label for="limitePlace">Limite de places</mat-label>
+            <input type="text" id="limitePlace" formControlName="limitePlace" matInput>
+            <mat-error *ngIf="vehiculePersonnelForm.get('limitePlace')?.hasError('required')" class="alert-message">Ce champ est requis</mat-error>
+            <mat-error *ngIf="vehiculePersonnelForm.errors?.['invalidLimitePlace']" class="alert-message">Entrez une limite de places inférieure au nombre de places</mat-error>
+        </mat-form-field>
+    </div>
+        <div class="alternative row justify-content-center">
+          <button *ngIf="!hasVehiculePersonnelToEdit" mat-raised-button class="col-6" color="accent" (click)="onSubmitForm()" [disabled]="vehiculePersonnelForm.invalid">Créer véhicule de société</button>
+          <button *ngIf="hasVehiculePersonnelToEdit" mat-raised-button class="col-6" color="accent" (click)="onSubmitForm()" [disabled]="vehiculePersonnelForm.invalid">Modifier véhicule de société</button>
+        </div>
+  </form>
 </div>

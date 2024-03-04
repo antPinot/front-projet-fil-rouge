@@ -1,6 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventEmitter } from '@angular/core';
 import { VehiculeSociete } from '../../../core/models/vehicule-societe';
 import { VehiculeSocieteService } from '../../../core/services/vehicule-societe.service';
 import { BehaviorSubject, tap } from 'rxjs';

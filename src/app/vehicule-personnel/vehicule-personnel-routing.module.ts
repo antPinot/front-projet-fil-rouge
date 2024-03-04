@@ -6,9 +6,9 @@ import { ListVehiculePersonnelComponent } from './components/list-vehicule-perso
 import { NewVehiculePersonnelComponent } from './components/new-vehicule-personnel/new-vehicule-personnel.component';
 
 const routes: Routes = [
-  {path: 'create', component: NewVehiculePersonnelComponent, canActivate: [AuthGuard]},
-  {path: 'list', component: ListVehiculePersonnelComponent, canActivate: [AuthGuard]},
-  {path: 'edit', component: EditVehiculePersonnelComponent, canActivate: [AuthGuard]},
+{path: 'create', component: NewVehiculePersonnelComponent, /*canActivate: [AuthGuard]*/},
+  {path: 'list', component: ListVehiculePersonnelComponent, /*canActivate: [AuthGuard]*/},
+{path: 'edit', component: EditVehiculePersonnelComponent, /*canActivate: [AuthGuard]*/},
 ];
 
 @NgModule({

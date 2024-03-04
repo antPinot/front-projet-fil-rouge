@@ -8,6 +8,9 @@ import { ListVehiculePersonnelComponent } from './components/list-vehicule-perso
 import { SingleVehiculePersonnelComponent } from './components/single-vehicule-personnel/single-vehicule-personnel.component';
 import { EditVehiculePersonnelComponent } from './components/edit-vehicule-personnel/edit-vehicule-personnel.component';
 import { MaterialModule } from '../core/material-module/material.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { MaterialModule } from '../core/material-module/material.module';
     CommonModule,
     VehiculePersonnelRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports :[NewVehiculePersonnelComponent,
     ListVehiculePersonnelComponent,

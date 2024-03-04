@@ -40,7 +40,7 @@ export class SingleVehiculePersonnelComponent implements OnInit{
 
   onEdit(){
     this.vehiculePersonnelService.vehiculePersonnelToEdit = this.vehiculePersonnel;
-    this.router.navigateByUrl('vehicule-personnel/edit');
+    this.router.navigateByUrl('vehicule-personnel/create');
   }
 
 }

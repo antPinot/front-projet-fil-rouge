@@ -1,4 +1,11 @@
-<app-single-vehicule-personnel *ngFor="let vehiculePersonnel of vehiculePersonnelList$ | async" [vehiculePersonnel]="vehiculePersonnel"></app-single-vehicule-personnel>
-<div>
-    <button mat-raised-button color="primary" routerLink="/vehicule-personnel/create">Ajouter un nouveau véhicule</button>
+<h1 class="text-center mb-3">Mes véhicules personnels</h1>
+<div class="d-flex flex-row justify-content-center">
+    <div class="container">
+        <app-single-vehicule-personnel *ngFor="let vehiculePersonnel of vehiculePersonnelList$ | async" [vehiculePersonnel]="vehiculePersonnel"></app-single-vehicule-personnel>
+        <div id="coucou" class="row justify-content-end">
+            <div class="col-3">
+                <button mat-raised-button color="primary" routerLink="/vehicule-personnel/create">Ajouter un nouveau véhicule</button>
+            </div>
+        </div>
+    </div>
 </div>
