@@ -27,6 +27,8 @@ export class CovoiturageService {
   /**Covoiturage à publier ( à envoyer au back-end) */
   covoiturageToPublish! : Covoiturage;
 
+  public covoituragesByVehiculePersonnel$ = new BehaviorSubject<Covoiturage[]>([]);
+
   /**utiliser httpclient */
   constructor(private _http:HttpClient) {}
   
@@ -98,6 +100,12 @@ createOne(covoiturage: Covoiturage): Observable<Covoiturage> {
         }
       })
     );
+  }
+
+  getCovoituragesEnCoursByVehiculePersonnelId(vehiculePersonnelId:string): Observable<Covoiturage[]>{
+    return this._http.get<Covoiturage[]>(`${this._baseUrl}/vehicule-personnel?vehiculePersonnelId=${vehiculePersonnelId}`).pipe(
+      tap((covoiturages) => this.covoituragesByVehiculePersonnel$.next(covoiturages))
+    )
   }
 
 

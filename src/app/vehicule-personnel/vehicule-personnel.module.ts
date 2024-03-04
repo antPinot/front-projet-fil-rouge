@@ -11,13 +11,15 @@ import { MaterialModule } from '../core/material-module/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { DeleteVehiculePersonnelComponent } from './components/delete-vehicule-personnel/delete-vehicule-personnel.component';
 
 
 @NgModule({
   declarations: [NewVehiculePersonnelComponent,
     ListVehiculePersonnelComponent,
     SingleVehiculePersonnelComponent,
-    EditVehiculePersonnelComponent],
+    EditVehiculePersonnelComponent,
+    DeleteVehiculePersonnelComponent],
 
   imports: [
     CommonModule,

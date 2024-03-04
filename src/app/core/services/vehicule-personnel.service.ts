@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { VehiculePersonnel } from '../models/vehicule-personnel';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { CovoiturageService } from './covoiturage.service';
 
 /**
  * 
@@ -20,7 +21,7 @@ export class VehiculePersonnelService {
   /** Liste des véhicules personnels d'un collaborateur */
   vehiculePersonnelListByCollaborateurId$ = new BehaviorSubject<VehiculePersonnel[]>([])
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private covoiturageService:CovoiturageService) { }
 
   /**
    * Requête POST de création d'un véhicule personnel du collaborateur connecté
@@ -55,13 +56,19 @@ export class VehiculePersonnelService {
       tap((vehiculePersonnel) => this.vehiculePersonnelListByCollaborateurId$.next(vehiculePersonnel)));
   }
 
+  checkVehiculePersonnelInCovoiturage(): boolean{
+    let isInCovoiturage: boolean = false;
+    this.covoiturageService.covoituragesByVehiculePersonnel$.value.length > 0 ? isInCovoiturage = true : isInCovoiturage = false
+    return isInCovoiturage
+  }
+
   /**
    * Requête DELETE de suppression d'un véhicule personnel du collaborateur connecté
    * 
    * @param vehiculePersonnelId en fonction de l'Id du véhicule personnel à supprimer
    * @returns 
    */
-  deleteVehiculePersonnel(vehiculePersonnelId: number): Observable<VehiculePersonnel> {
+  deleteVehiculePersonnel(vehiculePersonnelId: number | undefined): Observable<VehiculePersonnel> {
     return this.http.delete<VehiculePersonnel>(`http://localhost:8080/rest/vehicule-personnel/${vehiculePersonnelId}`).pipe(
       tap(() => this.vehiculePersonnelListByCollaborateurId$.next(
         this.vehiculePersonnelListByCollaborateurId$.value.filter(v => v.id != vehiculePersonnelId)

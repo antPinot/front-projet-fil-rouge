@@ -1,0 +1,11 @@
+<h1 class="text-center mb-3">Suppression d'un véhicule personnel</h1>
+
+<div class="container">
+    <p>Vous êtes sur le point de supprimer un véhicule personnel impliqué dans des covoiturages non effectués. La suppression du véhicule entraînera
+        la suppression desdits covoiturages. En êtes vous sûr(e)?
+    </p>
+    <div mat-dialog-actions class="alternative">
+        <button mat-button color="primary" mat-dialog-close >Précédent</button>
+        <button mat-button color="warn" mat-dialog-close (click)="onDelete()">Supprimer</button>
+    </div>
+</div>
