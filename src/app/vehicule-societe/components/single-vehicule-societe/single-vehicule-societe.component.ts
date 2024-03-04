@@ -25,8 +25,10 @@ export class SingleVehiculeSocieteComponent {
    * du véhicule concerné
    */
   onEdit(){
-    this._vehiculeSocieteService.vehiculeSocieteToEdit = this.vehiculeSociete;
-    this.router.navigateByUrl('vehicule-societe/create');
+    this._vehiculeSocieteService.findAllVehiculeSociete().pipe(tap(() => {
+      this._vehiculeSocieteService.vehiculeSocieteToEdit = this.vehiculeSociete;
+      this.router.navigateByUrl('vehicule-societe/create');
+    })).subscribe()
   }
 
   /**

@@ -29,7 +29,7 @@ export class ListVehiculeSocieteComponent {
 
   ngOnInit() {
     this._vehiculeSocieteService.findAllVehiculeSociete().pipe(tap(() => {
-      this.allMarques = this.vSList$.value.map((v) => v.marque)
+      this.allMarques = Array.from(new Set(this.vSList$.value.map((v) => v.marque)))
       this.allImmatriculations = this.vSList$.value.map((v) => v.immatriculation)
       this.filteredList$.next(this.vSList$.value)
     })).subscribe();
