@@ -1,3 +1,8 @@
 button{
     width: 150px;
 }
+
+#detailsButton{
+    width: 180px;
+    height: 45px;
+}

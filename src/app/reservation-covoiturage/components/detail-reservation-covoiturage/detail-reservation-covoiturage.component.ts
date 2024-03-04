@@ -43,6 +43,7 @@ export class DetailReservationCovoiturageComponent implements OnInit {
   /** Affecte le booléen reservable en fonction de l'url du component parent*/
   ngOnInit(): void {
     this.router.url == '/covoiturage/reservation/search' ? this.reservable = true : this.reservable = false;
+    // console.log(`${!this.reservable}, ${!this.isConsulted}, ${this.enCours},  ${this.annonceEnCours}`)
   }
 
   /** Méthode de réservation d'un covoiturage */

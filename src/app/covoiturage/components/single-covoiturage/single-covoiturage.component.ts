@@ -4,6 +4,7 @@ import { DetailReservationCovoiturageComponent } from 'src/app/reservation-covoi
 import { Covoiturage } from '../../../core/models/covoiturage';
 import { CovoiturageService } from '../../../core/services/covoiturage.service';
 import { CovoiturageListService } from 'src/app/core/services/covoiturage-list.service';
+import { ReservationCovoiturageService } from 'src/app/core/services/reservation-covoiturage.service';
 
 @Component({
   selector: 'app-single-covoiturage',
@@ -22,7 +23,7 @@ export class SingleCovoiturageComponent {
 
   enCours : boolean = this.covoiturageListService.enCours;
 
-  constructor(private covoiturageService: CovoiturageService, private dialog: MatDialog, private covoiturageListService : CovoiturageListService) { }
+  constructor(private covoiturageService: CovoiturageService, private dialog: MatDialog, private covoiturageListService : CovoiturageListService, private reservationCovoiturageService:ReservationCovoiturageService) { }
 
 
   @Input()
@@ -30,10 +31,10 @@ export class SingleCovoiturageComponent {
 
 
   ngOnInit(): void {
-    if (this.covoituragePersonnel.nbPersonnes != null){
-      this.covoituragePersonnel.nbPersonnes > 0 ? this.hasPeople = true: this.hasPeople = false
+    /**S'il y a plus d'un passager (i.e. s'il y a d'autres passagers hormis le conducteur) il n'est plus possible de modifier le covoiturage*/
+    if (this.covoituragePersonnel.collaborateurs != null){
+      this.covoituragePersonnel.collaborateurs?.length > 0 ? this.hasPeople = true: this.hasPeople = false
     }
-    
   }
 
 
@@ -58,6 +59,17 @@ export class SingleCovoiturageComponent {
       }
     });
   }
+
+  displayDetailsForConsulting(){
+    this.reservationCovoiturageService.isConsulted = true;
+    this.displayDetails()
+  }
+
+  displayDetailsForCancel(){
+    this.reservationCovoiturageService.isConsulted = false;
+    this.displayDetails()
+  }
+
   /**
    * 
    * @param covoiturage 

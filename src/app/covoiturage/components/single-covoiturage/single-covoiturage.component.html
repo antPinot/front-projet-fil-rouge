@@ -50,7 +50,7 @@
         mat-raised-button
         color="primary"
         [routerLink]="['/covoiturage', covoituragePersonnel.id, 'edit']"
-        *ngIf="!hasPeople"
+        *ngIf="!hasPeople && enCours"
         class="row"
       >
         Editer
@@ -59,12 +59,12 @@
         class="row mt-3"
         mat-raised-button
         color="warn"
-        (click)="displayDetails()"
+        (click)="displayDetailsForCancel()"
         *ngIf="enCours"
       >
         Supprimer
       </button>
-      <button *ngIf="!enCours" class="row" mat-raised-button color="primary" (click)="displayDetails()">Afficher les détails</button>
+      <button *ngIf="!enCours" class="row" mat-raised-button color="primary" (click)="displayDetailsForConsulting()" id="detailsButton">Afficher les détails</button>
     </div>
   </div>
 </div>

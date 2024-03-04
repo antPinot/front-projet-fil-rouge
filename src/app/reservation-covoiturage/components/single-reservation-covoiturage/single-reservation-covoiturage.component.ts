@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { CovoiturageListService } from 'src/app/core/services/covoiturage-list.service';
 import { Covoiturage } from '../../../core/models/covoiturage';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReservationCovoiturageService } from '../../../core/services/reservation-covoiturage.service';
@@ -29,7 +30,7 @@ export class SingleReservationCovoiturageComponent implements OnInit {
   /** Booléen qui permet de gérer l'affichage du bouton de réservation */
   reservable!: boolean
 
-  constructor(private dialog: MatDialog, private reservationCovoiturageService: ReservationCovoiturageService, private authService: AuthService) { }
+  constructor(private dialog: MatDialog, private reservationCovoiturageService: ReservationCovoiturageService, private covoiturageListService:CovoiturageListService, private authService: AuthService) { }
 
   /** Rend impossible à réserver les covoiturages auxquels participe le collaborateur */
   ngOnInit(): void {
@@ -61,13 +62,15 @@ export class SingleReservationCovoiturageComponent implements OnInit {
     },)
   }
 
-  displayeDetailsForConsulting(){
+  displayDetailsForConsulting(){
     this.reservationCovoiturageService.isConsulted = true;
+    this.covoiturageListService.enCours = false;
     this.displayDetails()
   }
 
   displayDetailsForCancel(){
     this.reservationCovoiturageService.isConsulted = false;
+    this.covoiturageListService.enCours = true;
     this.displayDetails()
   }
 

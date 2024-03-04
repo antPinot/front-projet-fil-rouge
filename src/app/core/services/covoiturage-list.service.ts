@@ -7,20 +7,14 @@ import { Covoiturage } from '../models/covoiturage';
   providedIn: 'root'
 })
 export class CovoiturageListService {
-
-
-  private _baseUrl = 'http://localhost:8080/rest/covoiturage-list';  
+  // private _baseUrl = 'http://localhost:8080/rest/covoiturage-list';  
 
   covoiturageListByOrganisateurId$ = new BehaviorSubject<Covoiturage[]>([]);
   
   enCours!: boolean;
   
-
   constructor(private http:HttpClient) { }
 
-
-
-  
   /**
    * Requête GET de recherche d'un véhicule personnel
    * 
