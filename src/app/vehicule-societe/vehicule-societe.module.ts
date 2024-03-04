@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   exports: [
     NewVehiculeSocieteComponent,

@@ -1,3 +1,4 @@
+<button class=" mt-2 mx-2" mat-fab extended color="light" (click)="backToList()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>Précédent</button>
 <h1 *ngIf="!hasVehiculeToEdit" class="text-center mb-3">Créer un véhicule de service</h1>
 <h1 *ngIf="hasVehiculeToEdit" class="text-center mb-3">Modification du véhicule</h1>
 <div style="height: 80svh;" class="container mt-3">
@@ -73,7 +74,8 @@
           >
         </mat-form-field>
         <div class="alternative row justify-content-center">
-          <button mat-raised-button class="col-6" color="accent" (click)="onSubmit()">Créer véhicule de societe</button>
+          <button *ngIf="!hasVehiculeToEdit" mat-raised-button class="col-6" color="accent" (click)="onSubmit()">Créer véhicule de société</button>
+          <button *ngIf="hasVehiculeToEdit" mat-raised-button class="col-6" color="accent" (click)="onSubmit()">Modifier véhicule de société</button>
         </div>
       </div>
   </form>

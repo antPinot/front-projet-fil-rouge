@@ -39,7 +39,6 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
           statut: [this.vehiculeSocieteToEdit.statut, Validators.required],
           categorie: [this.vehiculeSocieteToEdit.categorie, Validators.required]
         })
-        
       })).subscribe()
       
     } else {
@@ -54,8 +53,6 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
         categorie: [null, Validators.required]
       })
     }
-
-    
   }
   
   onSubmit() {
@@ -71,6 +68,10 @@ export class NewVehiculeSocieteComponent implements OnInit, OnDestroy{
     this.vehiculeSocieteToSubmit.statut = this.vSForm.value.statut;
     this.vehiculeSocieteToSubmit.categorie = this.vSForm.value.categorie;
     this.hasVehiculeToEdit ? this._vehiculeSocieteService.editOne(this.vehiculeSocieteToSubmit).subscribe() : this._vehiculeSocieteService.createOne(this.vehiculeSocieteToSubmit).subscribe();
+    this.backToList()
+  }
+
+  backToList(){
     this.router.navigateByUrl('/vehicule-societe/list')
   }
 
