@@ -37,7 +37,7 @@
     <div class="row">
         <ng-container *ngFor="let vehiculeSociete of filteredList$ | async; let i = index">
             <div class="col-sm-4 mb-3">
-                <app-single-vehicule-societe [vehiculeSociete]="vehiculeSociete"></app-single-vehicule-societe>
+                <app-single-vehicule-societe [filteredList]="filteredList$" [vehiculeSociete]="vehiculeSociete"></app-single-vehicule-societe>
             </div>
             <div class="w-100 d-none d-sm-block d-md-none" *ngIf="(i + 1) % 3 === 0"></div>
         </ng-container>

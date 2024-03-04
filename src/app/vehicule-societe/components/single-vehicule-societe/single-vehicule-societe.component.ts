@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventEmitter } from '@angular/core';
 import { VehiculeSociete } from '../../../core/models/vehicule-societe';
 import { VehiculeSocieteService } from '../../../core/services/vehicule-societe.service';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Component({
   selector: 'app-single-vehicule-societe',
@@ -14,6 +16,9 @@ export class SingleVehiculeSocieteComponent {
 
   @Input()
   vehiculeSociete!: VehiculeSociete
+  
+  @Input()
+  filteredList!: BehaviorSubject<VehiculeSociete[]>
 
   /**
    * Méthode de modification pour un véhicule de société au moment du click sur le bouton "Modifier"
@@ -30,7 +35,7 @@ export class SingleVehiculeSocieteComponent {
    */
   onDelete(idVs?: number) {
     if (idVs) {
-      this._vehiculeSocieteService.deleteOne(idVs).subscribe();
+      this._vehiculeSocieteService.deleteOne(idVs).pipe(tap(() => this.filteredList.next(this._vehiculeSocieteService.vehiculesSociete$.value))).subscribe();
     }
   }
 

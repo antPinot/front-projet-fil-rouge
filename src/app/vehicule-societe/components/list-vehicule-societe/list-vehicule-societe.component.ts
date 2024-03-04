@@ -67,6 +67,9 @@ export class ListVehiculeSocieteComponent {
     }));
   }
 
+  /**
+   * Réinitialisation du/des filtre(s) de recherche
+   */
   onReinit(){
     this.selectMarque.value = null
     this.selectImmatriculation.value = null
