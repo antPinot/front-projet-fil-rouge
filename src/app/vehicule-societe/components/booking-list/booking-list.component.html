@@ -1,0 +1,33 @@
+<h1 class="text-center mb-3">Récapitulatif des réservations du véhicule</h1>
+
+<div class="container" style="width: 80%;">
+    <table mat-table [dataSource]="reservationsVehicule" class="mat-elevation-z8">
+    
+        <!-- Colonne N° -->
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let reservationVehicule; let i = index"> {{i + 1}} </td>
+        </ng-container>
+    
+        <!-- Colonne Date de début -->
+        <ng-container matColumnDef="dateDebut">
+          <th mat-header-cell *matHeaderCellDef>Date de début</th>
+          <td mat-cell *matCellDef="let reservationVehicule"> {{reservationVehicule.dateDepart}} </td>
+        </ng-container>
+    
+        <!-- Colonne Date de fin -->
+        <ng-container matColumnDef="dateFin">
+          <th mat-header-cell *matHeaderCellDef>Date de fin</th>
+          <td mat-cell *matCellDef="let reservationVehicule"> {{reservationVehicule.dateRetour}} </td>
+        </ng-container>
+    
+          <!-- Colonne Responsable -->
+      <ng-container matColumnDef="responsable">
+        <th mat-header-cell *matHeaderCellDef>Responsable</th>
+        <td mat-cell *matCellDef="let reservationVehicule"> {{reservationVehicule.collaborateur.nom}} {{reservationVehicule.collaborateur.prenom}} </td>
+      </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

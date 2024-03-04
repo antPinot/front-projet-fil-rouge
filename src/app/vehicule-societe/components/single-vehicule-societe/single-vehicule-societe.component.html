@@ -14,6 +14,7 @@
         <div class="row">
             <button mat-raised-button class="col-4 offset-md-1" color="primary" (click)="onEdit()">Modifier</button><br/><br/>
             <button mat-raised-button class="col-4 offset-md-1" color="accent" (click)="onDelete(vehiculeSociete.id)">Supprimer</button>
+            <button mat-raised-button class="col-4 offset-md-1" color="light" [routerLink]="['/vehicule-societe', vehiculeSociete.id, 'booking-list']">Liste des réservations</button>
         </div>
     </mat-card-footer>
 </mat-card>

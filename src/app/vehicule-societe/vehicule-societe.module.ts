@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { BookingListComponent } from './components/booking-list/booking-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     ListVehiculeSocieteComponent,
     SingleVehiculeSocieteComponent,
     DetailVehiculeSocieteComponent,
-    EditVehiculeSocieteComponent
+    EditVehiculeSocieteComponent,
+    BookingListComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   exports: [
     NewVehiculeSocieteComponent,

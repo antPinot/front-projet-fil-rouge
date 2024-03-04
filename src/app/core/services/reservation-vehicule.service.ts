@@ -110,5 +110,16 @@ export class ReservationVehiculeService {
     return this.http.put<ReservationVehiculeSociete>(`http://localhost:8080/rest/reservation-vehicule/MAJReservation/${reservationVehiculeSociete.id}`, reservationVehiculeSociete);
   }
 
+  /**
+   * Requête GET récupérant la liste de toutes les réservations de véhicules de société effectuées pour un véhicule
+   * 
+   * @param vehiculeSocieteId 
+   * @returns 
+   */
+  findReservationVehiculeSocieteByVehiculeId(vehiculeSocieteId: string): Observable<ReservationVehiculeSociete[]>{
+    return this.http.get<ReservationVehiculeSociete[]>(`http://localhost:8080/rest/reservation-vehicule/allReservationsForVehicule?vehiculeId=${vehiculeSocieteId}`).pipe(
+      tap((rvs) => this.listReservationVehiculeAdmin$.next(rvs))
+    )
+  }
 
 }
